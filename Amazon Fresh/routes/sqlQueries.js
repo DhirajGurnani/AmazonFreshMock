@@ -1,3 +1,9 @@
+exports.getSampleQuery = function() {
+	return "select * from employee";
+};
+
+
+
 /**
  *  Query for getting password for a given email
  */
