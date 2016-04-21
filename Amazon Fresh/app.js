@@ -20,8 +20,13 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
+app.use('/',function(req, res) {
+  // Use res.sendfile, as it streams instead of reading the file into memory.
+  res.sendfile(__dirname + '/public/index.html');
+});
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -31,6 +36,27 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
+/*************** Start Backend API *****************/
+/*************** Authentication API *****************/
+//app.post('/signup', twittercore.signUp);
+
+
+/*************** Farmers API *****************/
+
+
+/*************** Customers API *****************/
+
+
+/*************** Admin API *****************/
+
+
+/*************** Products API *****************/
+
+
+/*************** Trips API *****************/
+
+
+/*************** End Backend API *****************/
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
