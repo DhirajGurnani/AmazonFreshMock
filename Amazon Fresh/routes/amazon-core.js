@@ -8,7 +8,7 @@ var dbHelper = require('./db-helper');
 var sqlQueryList = require('./sqlQueries');
 var encryption = require('./encryption-helper');
 
-exports.sample = function() {
+exports.sample = function(request, response) {
 	try {
 		if(request.session) {
 			if(request.session.profile) {
