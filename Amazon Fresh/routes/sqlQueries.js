@@ -130,3 +130,55 @@ exports.getQueryForHashTagEntryCreation = function(hashtag) {
 exports.getQueryForHashTagTweetsCreation = function(tweetid, hashid) {
 	return "Insert into HashTagTweets (tweetid, hashid) values ('" + tweetid + "','" + hashid + "')";
 };
+
+exports.createproduct = function(product_name,price,description) 
+			{
+	return "Insert into products (product_name, price, description) values ('"
+			+ product_name
+			+ "','"
+			+ price
+			+ "','"
+			+ description
+			 "')";
+};
+
+exports.updateproduct = function(productname,price,description) {
+	return "UPDATE product set product_name = '" + productname + "' , price = '" + productname + "', decription = '" + productname + "' where product_id = '" + product_id + "'";
+};
+
+exports.listallproducts = function() {
+	return "select * from products";
+};
+
+exports.listparticularproduct = function(product_id) {
+	return "select * from product where product_id = '" + product_id + "'";
+};
+
+exports.productratings = function(product_id) {
+	return "select rating from products pro inner join Ratings rat  on pro.product_id = rat.product_id where product_id = '" + product_id + "'";
+};
+
+exports.deleteproduct = function(puid) {
+	return "delete from product where product_id = '" + product_id + "'";
+};
+
+exports.productreviews = function(product_id) {
+	return "select review from products pro inner join Ratings rat  on pro.product_id = rat.product_id where product_id = '" + product_id + "'";
+};
+
+exports.listproductsbycategoryid = function(category_id) {
+	return "select * from product where category_id = '" + category_id + "'";
+};
+
+exports.listproductsbysubcategoryid = function(subcategory_id) {
+	return "select * from product where subcategory_id = '" + subcategory_id + "'";
+};
+
+exports.deletecustomer = function(puid) {
+	return "delete from Users where puid = '" + puid + "'";
+};
+
+exports.listallcustomers = function() {
+	return "select * from users";
+};
+
