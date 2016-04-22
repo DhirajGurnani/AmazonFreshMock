@@ -3,10 +3,10 @@ CREATE DATABASE `amazondb`;
 
 USE `amazondb`;
 
-DROP USER IF EXISTS 'amazondbadmin'@'localhost';
+#DROP USER 'amazondbadmin'@'localhost';
 
-CREATE USER 'amazondbadmin'@'localhost' IDENTIFIED BY 'marias@1234';
-GRANT ALL PRIVILEGES on amazondb.* TO 'amazondbadmin'@'localhost';
+#CREATE USER 'amazondbadmin'@'%' IDENTIFIED BY 'marias@1234';
+#GRANT ALL PRIVILEGES on amazondb.* TO 'amazondbadmin'@'%';
 
 ####
 # Structure for table Users
@@ -44,6 +44,32 @@ FOREIGN KEY (`puid`) REFERENCES `Users`(`puid`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ####
+# Structure for table ProductCategory
+####
+CREATE TABLE `ProductCategory`(
+`category_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(64) NOT NULL,
+`description` VARCHAR(128) NOT NULL,
+`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`category_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+####
+# Structure for table ProductSubCategory
+####
+CREATE TABLE `ProductSubCategory`(
+`category_id` INT(10) UNSIGNED NOT NULL,
+`subcategory_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(64) NOT NULL,
+`description` VARCHAR(128) NOT NULL,
+`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`subcategory_id`),
+FOREIGN KEY (`category_id`) REFERENCES `ProductCategory`(`category_id`) ON DELETE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+####
 # Structure for table Products
 ####
 CREATE TABLE `Products`(
@@ -53,10 +79,14 @@ CREATE TABLE `Products`(
 `price` VARCHAR(10) NOT NULL,
 `description` VARCHAR(256),
 `status` ENUM('approved','pending','blocked'),
+`category_id` INT(10) UNSIGNED NOT NULL,
+`subcategory_id` INT(10) UNSIGNED NOT NULL,
 `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (`product_id`, `puid`),
-FOREIGN KEY (`puid`) REFERENCES `Users`(`puid`) ON DELETE CASCADE
+FOREIGN KEY (`puid`) REFERENCES `Users`(`puid`) ON DELETE CASCADE,
+FOREIGN KEY (`category_id`) REFERENCES `ProductCategory`(`category_id`) ON DELETE CASCADE,
+FOREIGN KEY (`subcategory_id`) REFERENCES `ProductSubCategory`(`subcategory_id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ####
@@ -163,16 +193,18 @@ FOREIGN KEY (`billing_id`) REFERENCES `Billing`(`billing_id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
-#  Trigger to auto generate consolidateReport record for each new scenario
+#  Trigger to Auto-update a billing record info for every location update until delivered
 #
 DELIMITER $$
 CREATE TRIGGER on_trip_location_update_create
 AFTER UPDATE 
 ON Trips FOR EACH ROW 
-BEGIN
-   #Auto-update a billing record info for every location update until delivered
+BEGIN #Auto-update a billing record info for every location update until delivered
    UPDATE Billing SET current_location = concat(current_location, '#', New.truck_location) where billing_id in (select billing_id
    from TripInfo where trip_id = New.trip_id) and status != 'delivered';
 END $$
 
+###
+# This enables us to update or delete records without specifying a key (ex. primary key) in the where clause.
+###
 SET SQL_SAFE_UPDATES = 0;
