@@ -2,10 +2,11 @@ var mysql = require('mysql');
 
 var pool      =    mysql.createPool({
     connectionLimit : 600,
-    host     : 'localhost',
-    user     : 'twitteradmin',
+    host     : '54.187.39.124',
+    user     : 'amazondbadmin',
     password : 'marias@1234',
-    database : 'twitterdb'
+    port	 : 3306,
+    database : 'amazondb'
 });
 
 exports.getConnection = function(success,failure) {

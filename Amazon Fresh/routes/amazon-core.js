@@ -11,22 +11,27 @@ var encryption = require('./encryption-helper');
 exports.sample = function(request, response) {
 	try {
 		if(request.session) {
+			var driverId =request.param("driverId");
+			var truckId = request.param("truckId");
+			var location = request.param("location");
+			var adminId = request.param("adminId");
+			var comment = request.param("comment");
 			if(request.session.profile) {
-				var sqlQuery = sqlQueryList.getSampleQuery();
+				var sqlQuery = sqlQueryList.getTripId(driverId,truckId,location,adminId,comment);
 				dbHelper.executeQuery(
 						sqlQuery, 
-						function() {
+						function(result) {
 							//	success callback
 							response.send({
 								"status" : 200, //or 201 for creation,
-								"message" : "random" // or id for creation and data for get
+								"message" : result // or id for creation and data for get
 							});
 						}, 
-						function(){
+						function(error){
 							//  failure callback
 							response.send({
 								"status" : 400, 
-								"errmsg" : "random" 
+								"errmsg" : error 
 							});
 						});
 			}
