@@ -1,8 +1,55 @@
-exports.getSampleQuery = function() {
-	return "select * from employee";
+exports.getTripId = function(driverId,truckId,location,adminId,comment){
+	var timestamp = new Date().getTime();
+	return "insert into Trips(driver_id,truck_id,truck_location,admin_id,comment) values (" +
+			  driverId +","
+			+ truckId +",'"
+			+ location+"','"
+			+ adminId+"','"
+			+ comment+"');"			
+};
+
+exports.updateTripInfoQuery = function(tripId,billId){
+	return "insert into TripInfo (trip_id,billing_id) values ("+
+	tripId+","+
+	billId+");"
+};
+
+exports.updateTruck=function(truckId){
+	return "update Trucks set status ='in_delivery' where truck_id = "+truckId+";"
+};
+exports.updateTruckAvailable=function(truckId){
+	return "update Trucks set status ='available' where truck_id = "+truckId+";"
+};
+exports.updateDriver=function(driverId){
+	return "update Drivers set status = 'in_delivery' where driver_id ="+driverId+";"
+};
+exports.updateDriverAvailable=function(driverId){
+	return "update Drivers set status = 'available' where driver_id ="+driverId+";"
 };
 
 
+
+exports.updateBillingQuery = function(driverId,billId){
+	return "update Billing set status = 'transit',driver_id="+
+	driverId+" where billing_id ="+
+	billId+";"
+};
+
+exports.getTripQuery = function(tripId){
+	return "Select * from Trips where trip_id ="+tripId+";"
+};
+
+exports.deleteTrips=function(tripId){
+	return "delete from Trips where trip_id ="+tripId+";"
+};
+
+exports.deleteTripInfo=function(tripId){
+	return "delete from TripInfo where trip_id ="+tripId+";"
+};
+
+exports.getSampleQuery = function() {
+	return "select * from employee";
+};
 
 /**
  *  Query for getting password for a given email

@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , trips = require('./routes/trips')
   , http = require('http')
   , path = require('path');
 
@@ -54,7 +55,8 @@ app.get('/users', user.list);
 
 
 /*************** Trips API *****************/
-
+app.post('/api/admin/trips/createTrip',trips.createTrip);
+app.post('/api/admin/trips/deleteTrip',trips.deleteTrip);
 
 /*************** End Backend API *****************/
 
