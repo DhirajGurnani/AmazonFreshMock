@@ -47,6 +47,40 @@ exports.deleteTripInfo=function(tripId){
 	return "delete from TripInfo where trip_id ="+tripId+";"
 };
 
+exports.getAllTrips=function(){
+	return "select * from Trips;"
+};
+
+exports.getAllPendingTrips=function(){
+	return "select * from Trips LEFT JOIN Drivers on Drivers.driver_id=Trips.driver_id where Drivers.status = 'in_delivery';"
+};
+exports.sqlQueryRegister=function(puid,first_name,last_name,birthday,address,location,state,zipcode,phone,role,status){
+	
+	return "insert into User_profiles (puid,status,last_name,birthday,address,location,state,zipcode,phone,role,first_name) VALUES ('" +
+			+puid+"','"
+			+status+"','"
+			+last_name+"','"
+			+birthday+"','"
+			+address+"','"
+			+location+"','"
+			+state+"','"
+			+zipcode+"','"
+			+phone+"','"
+			+role+"','"
+			+first_name+"');"	
+};
+exports.sqlUserRegister=function(email,password){
+	return "insert into Users (email,password) values ('"+email+"','"+password+"');"
+};
+
+exports.sqlAvailableTruck = function(){
+	return "select * from Trucks where status = 'available' ;"
+};
+
+exports.sqlAvailableDriver = function(){
+	return "select * from Drivers where status ='available' ;"
+};
+
 exports.getSampleQuery = function() {
 	return "select * from employee";
 };

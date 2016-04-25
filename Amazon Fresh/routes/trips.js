@@ -1,5 +1,10 @@
 /**
  * http://usejsdoc.org/
+ * 
+ * @Author :: Vimal Nair 
+ * 
+ * @Module :: Trip
+ * 
  */
 var dbHelper = require('./mysql-db-helper');
 var sqlQueryList = require('./sqlQueries');
@@ -7,8 +12,8 @@ var sqlQueryList = require('./sqlQueries');
 exports.createTrip = function(request,response){
 	try {
 		
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				/*
 				 * Variable Decleration for Trips
 				 */
@@ -69,7 +74,7 @@ exports.createTrip = function(request,response){
 								"errmsg" : error 
 							});
 						});
-			}		
+			}/*	
 			else {
 				response.send({
 	        		"status": 403,
@@ -85,6 +90,7 @@ exports.createTrip = function(request,response){
 		}
 		
 	} 
+	*/
 		catch (err) {
 		response.send({
 			"status" : 500,
@@ -193,6 +199,180 @@ exports.deleteTrip = function(request,response){
 		
 		}
 	} 
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+exports.getTrips = function(request,response){
+	try {
+		
+		if(request.session) {
+			if(request.session.profile) {
+				var sqlGetTrip = sqlQueryList.getAllTrips();
+				dbHelper.executeQuery(
+						sqlGetTrip, 
+						function(success) {
+							response.send({
+								"status" : 200, //or 201 for creation,
+								"message" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} 
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+exports.getPendingTrips = function(request,response){
+	try {		
+		if(request.session) {
+			if(request.session.profile) {
+				var sqlGetPendingTrip = sqlQueryList.getAllPendingTrips();
+				dbHelper.executeQuery(
+						sqlGetPendingTrip, 
+						function(success) {
+							response.send({
+								"status" : 200, //or 201 for creation,
+								"message" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} 
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+exports.availableTrucks = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var sqlAvailableTruck = sqlQueryList.sqlAvailableTruck();
+				dbHelper.executeQuery(
+						sqlAvailableTruck, 
+						function(success) {
+							response.send({
+								"status" : 200, //or 201 for creation,
+								"message" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+exports.availableDrivers = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var sqlAvailableDriver = sqlQueryList.sqlAvailableDriver();
+				dbHelper.executeQuery(
+						sqlAvailableDriver, 
+						function(success) {
+							response.send({
+								"status" : 200, //or 201 for creation,
+								"message" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
 		catch (err) {
 		response.send({
 			"status" : 500,

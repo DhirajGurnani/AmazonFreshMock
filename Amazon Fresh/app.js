@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , trips = require('./routes/trips')
+  , authentication = require('./routes/authentication')
   , http = require('http')
   , path = require('path');
 
@@ -38,6 +39,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 /*************** Start Backend API *****************/
+
 /*************** Authentication API *****************/
 //app.post('/signup', twittercore.signUp);
 
@@ -52,11 +54,15 @@ app.get('/users', user.list);
 
 
 /*************** Products API *****************/
-
+app.post('/api/register',authentication.signup);
 
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);
 app.post('/api/admin/trips/deleteTrip',trips.deleteTrip);
+app.get('/api/admin/trips/getTrips',trips.getTrips);
+app.get('/api/admin/trips/getPendingTrips',trips.getPendingTrips);
+app.get('/api/admin/trips/availableDrivers',trips.availableDrivers);
+app.get('/api/admin/trips/availableTrucks',trips.availableTrucks);
 
 /*************** End Backend API *****************/
 
