@@ -12,7 +12,7 @@ exports.connect = function(url, callback) {
 		},
 		server : {
 			auto_reconnect : true,
-			poolSize : 500,
+			poolSize : 90,
 			socketOptions : {
 				connectTimeoutMS : 5000
 			}

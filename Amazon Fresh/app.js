@@ -11,11 +11,16 @@ var express = require('express')
   , customer = require('./routes/customer')
   , product = require('./routes/product')
   , admin = require('./routes/admin')
+  , farmers = require('./routes/farmer')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , random = require('./routes/random');
 
 var app = express();
 
+var busboy = require('connect-busboy'); //middleware for form/file upload
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulation
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -25,11 +30,30 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
-app.use('/',function(req, res) {
+app.use('/',function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
-  res.sendfile(__dirname + '/public/index.html');
+	if(request.session) {
+		if(request.session.profile) {
+			if(request.session.profile.role === 'customer') {
+				res.sendfile(__dirname + '/public/home.html');
+			}
+			else if(request.session.profile.role === 'admin') {
+				res.sendfile(__dirname + '/public/admin.html');
+			}
+			else if(request.session.profile.role === 'farmer') {
+				res.sendfile(__dirname + '/public/farmer.html');
+			}
+		}
+		else {
+			res.sendfile(__dirname + '/public/index.html');
+		}
+	}
+	else {
+		res.sendfile(__dirname + '/public/index.html');
+	}
 });
 
 
@@ -48,7 +72,16 @@ app.get('/users', user.list);
 
 
 /*************** Farmers API *****************/
-
+/*****Farmers*****/
+app.get('/api/farmers', farmers.getFarmers);
+app.get('/api/farmers/:puid', farmers.getFarmerByPuid);
+app.post('/api/farmers/:puid/update', farmers.updateFarmer);
+app.post('/api/farmers/:puid/delete', farmers.deleteFarmerByPuid);
+app.post('/postvideo', farmers.postVideo);
+app.get('/video', farmers.getVideo);
+app.get('/video/get', random.getVideo);
+app.post('/video/post', random.postVideo);
+/*****Farm Info*****/
 
 /*************** Customers API *****************/
 app.post('/api/customers/:puid/update',customer.updatecustomer);
