@@ -1,6 +1,6 @@
-var dbHelper = require('./db-helper');
+var dbHelper = require('./mysql-db-helper');
 var sqlQueryList = require('./sqlQueries');
-var encryption = require('./encryption-helper');
+
 
 //createproduct
 
