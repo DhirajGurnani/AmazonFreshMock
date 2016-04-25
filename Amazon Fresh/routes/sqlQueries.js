@@ -213,53 +213,61 @@ exports.getQueryForHashTagTweetsCreation = function(tweetid, hashid) {
 };
 
 exports.createproduct = function(product_name,price,description) 
-			{
-	return "Insert into products (product_name, price, description) values ('"
-			+ product_name
-			+ "','"
-			+ price
-			+ "','"
-			+ description
-			 "')";
+{
+
+return "Insert into Products (product_name, price, description) values ('"
++ product_name
++ "','"
++ price
++ "','"
++ description +
+ "')";
 };
 
-exports.updateproduct = function(productname,price,description) {
-	return "UPDATE product set product_name = '" + productname + "' , price = '" + productname + "', decription = '" + productname + "' where product_id = '" + product_id + "'";
+exports.updateproduct = function(productname,price,description,product_id) {
+return "UPDATE Products set product_name = '" + productname + "' , price = '" + price + "', description = '" + description + "' where product_id = '" + product_id + "'";
 };
 
 exports.listallproducts = function() {
-	return "select * from products";
+return "select * from Products";
 };
 
-exports.listparticularproduct = function(product_id) {
-	return "select * from product where product_id = '" + product_id + "'";
+exports.showparticularproducts = function(product_id) {
+return "select * from Products where product_id = '" + product_id + "'";
 };
 
 exports.productratings = function(product_id) {
-	return "select rating from products pro inner join Ratings rat  on pro.product_id = rat.product_id where product_id = '" + product_id + "'";
+return "select rating from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
 };
 
-exports.deleteproduct = function(puid) {
-	return "delete from product where product_id = '" + product_id + "'";
+exports.deleteproduct = function(product_id) {
+return "delete from Products where product_id = '" + product_id + "'";
 };
 
 exports.productreviews = function(product_id) {
-	return "select review from products pro inner join Ratings rat  on pro.product_id = rat.product_id where product_id = '" + product_id + "'";
+return "select reviews from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
 };
 
 exports.listproductsbycategoryid = function(category_id) {
-	return "select * from product where category_id = '" + category_id + "'";
+return "select * from Products where category_id = '" + category_id + "'";
 };
 
-exports.listproductsbysubcategoryid = function(subcategory_id) {
-	return "select * from product where subcategory_id = '" + subcategory_id + "'";
+exports.listproductsbysubcategoryid = function(category_id,subcategory_id) {
+return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "'";
 };
 
 exports.deletecustomer = function(puid) {
-	return "delete from Users where puid = '" + puid + "'";
+return "delete from User_profiles where puid = '" + puid + "'";
 };
 
-exports.listallcustomers = function() {
-	return "select * from users";
+exports.updatecustomer = function(firstname,lastname,birthday,address,location,state,zipcode,phone,puid) {
+return "UPDATE User_profiles set first_name = '" + firstname + "' , last_name = '" + lastname + "', birthday = '" + birthday + "' , address = '" + address + "' , location = '" + location + "' , state = '" + state + "' , zipcode = '" + zipcode + "' , phone = '" + phone + "'  where puid = '" + puid + "'";
 };
 
+exports.approvefarmer = function(puid) {
+return "UPDATE User_profiles set status = 'active' where role = 'farmer' and puid = '" + puid + "'";
+};
+
+exports.approveproduct = function(product_id) {
+return "UPDATE Products set status = 'approved' where  product_id = '" + product_id + "'";
+};

@@ -1,29 +1,24 @@
+
 var dbHelper = require('./mysql-db-helper');
 var sqlQueryList = require('./sqlQueries');
 
-//Update Customer:
 
-exports.updatecustomer = function(request, response) {
+//approve farmer
+
+
+exports.approvefarmer = function(request, response) {
 	try {
 		if(request.session) {
 			if(request.session.profile) {
-				var firstname = request.body.first_name;
-				var lastname = request.body.last_name;
-				var birthday = request.body.birthday;
-				var address = request.body.address;
-				var location = request.body.location;
-				var state = request.body.state;
-				var zipcode = request.body.zipcode;
-				var phone = request.body.phone;				
-				var puid = request.session.puid;
-				var sqlQuery = sqlQueryList.updatecustomer(firstname,lastname,birthday,address,location,state,zipcode,phone,puid);
+				var puid = request.body.puid;
+				var sqlQuery = sqlQueryList.approvefarmer(puid);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
 							//	success callback
-							response.send({
-								"status" : 200
-								
+							response.send({"status" : 200,
+									"message": "Succesfully approved farmer!!"
+									//sets the farmer status to active which was initially pending
 							})},
 						function(error){
 							//  failure callback
@@ -54,25 +49,30 @@ exports.updatecustomer = function(request, response) {
 	}
 };
 
-//Delete Customer
+//approve product
+//not sure of this let me know if any chage is required
 
-exports.deletecustomer = function(request, response) {
+exports.approveproduct = function(request, response) {
 	try {
 		if(request.session) {
 			if(request.session.profile) {
-				var puid = request.param("puid");
-				var sqlQuery = sqlQueryList.deletecustomer(puid);
+				//var puid = request.body.puid;
+				var product_id = request.body.product_id;
+				var sqlQuery = sqlQueryList.approveproduct(product_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
 							//	success callback
-							response.send({
-								"status" : 200,
-								"message" :"Customer deleted successfully!!"
-								
+							response.send({"status" : 200,
+									"message": "Succesfully approved product!!"
+									//sets the product status to approve which was initially pending
 							})},
 						function(error){
-							
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Failed to Approve product!!" 
+							});
 						});
 			}
 			else {
@@ -95,4 +95,6 @@ exports.deletecustomer = function(request, response) {
 		});
 	}
 };
+
+
 

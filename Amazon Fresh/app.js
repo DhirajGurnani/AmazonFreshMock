@@ -8,6 +8,9 @@ var express = require('express')
   , user = require('./routes/user')
   , trips = require('./routes/trips')
   , authentication = require('./routes/authentication')
+  , customer = require('./routes/customer')
+  , product = require('./routes/product')
+  , admin = require('./routes/admin')
   , http = require('http')
   , path = require('path');
 
@@ -48,13 +51,26 @@ app.get('/users', user.list);
 
 
 /*************** Customers API *****************/
-
+app.post('/api/customers/:puid/update',customer.updatecustomer);
+app.post('/api/customer/:puid/delete',customer.deletecustomer);
 
 /*************** Admin API *****************/
+app.post('/api/admin/approveFarmer',admin.approvefarmer);
+app.post('/api/admin/approveProduct',admin.approveproduct);
 
 
 /*************** Products API *****************/
 app.post('/api/register',authentication.signup);
+app.post('/api/product/create',product.createproduct);
+app.get('/api/products',product.listallproducts);
+app.get('/api/product/:product_id',product.showparticularproducts);
+app.post('/api/product/:categoryid',product.listproductsbycategoryid);
+app.post('/api/product/:categoryid/:subcategoryid',product.listproductsbysubcategoryid);
+app.post('api/product/:product_id/update',product.updateproduct);
+app.get('/api/product/:product_id/ratings',product.productratings);
+app.get('/api/product/:product_id/reviews',product.productreview);
+app.post('/api/product/:product_id/delete',product.deleteproduct);
+
 
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);
