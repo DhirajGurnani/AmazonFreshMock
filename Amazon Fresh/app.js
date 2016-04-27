@@ -66,7 +66,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.get('/', routes.index);
 //app.get('/users', user.list);
 
+
+
 /*************** Start Backend API *****************/
+/*************** General API *****************/
+app.get('/api/zipcode/:zip', function(request, response) {
+	
+    var containsObject = function(array, object, success, failure) {
+    	for(var index = 0; index < array.length; index++) {
+    		if(array[index] == object) {
+				success();
+			}
+    	}
+    	failure();
+    };
+	
+	var zipCodes = [ 94089, 95002, 95013, 95050, 95054, 95110, 95111, 95112, 95113, 
+	                 95116, 95118, 95119, 95120, 95121, 95122, 95123, 95126, 95129, 
+	                 95130, 95131, 95134, 95135, 95136, 95138, 95139, 95140, 95148];
+	
+	containsObject(
+			zipCodes, 
+			request.params.zip, 
+			function() {
+				response.send({
+					"status" : 200,
+					"availability" : true
+				});
+			}, function() {
+				response.send({
+					"status" : 200,
+					"availability" : false
+				});
+			});
+});
 
 /*************** Authentication API *****************/
 //app.post('/signup', twittercore.signUp);

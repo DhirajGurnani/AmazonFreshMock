@@ -16,7 +16,18 @@ customerApp.config([ '$routeProvider', '$locationProvider', function($routeProvi
 
 customerApp.controller('mainController', function($scope, $http) {
 	$scope.checkForZipCode = function() {
-		window.location = "/home";
+		var zipCodeResponse = $http.get('/api/zipcode/' + $scope.zipcode);
+		zipCodeResponse.success(function(data) {
+			if(data.status === 200) {
+				if(data.availability === true) {
+					window.location = "/home";
+				}
+				else {
+					alert("not found");
+				}
+			}
+		});
+		
 	};
 });
 
