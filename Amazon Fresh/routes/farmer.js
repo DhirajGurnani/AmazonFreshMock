@@ -9,12 +9,38 @@ var mongodb = require('mongodb');
 var fs = require('fs');
 var http = require('http');
 var util = require('util');
-//var mongoURL = "mongodb://localhost:27017/amazondb";
-//var mongoDbHelper = require('./mongo-db-helper');
 
-//var busboy = require('connect-busboy'); //middleware for form/file upload
-//var path = require('path');     //used for file path
-//var fs = require('fs-extra');       //File System - for file manipulation
+exports.postVideoForFarmer = function() {
+	
+};
+
+exports.getVideo2 = function(request, response) {
+    console.log("Uploading: ");
+    console.log("request: " + JSON.stringify(request.files));
+    mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
+        var bucket = new mongodb.GridFSBucket(db, {
+        	  chunkSizeBytes: 1024,
+        	  bucketName: 'videos'
+        	});
+        fs.createReadStream(request.files.sairam.path).
+        pipe(bucket.openUploadStream(request.files.sairam.name)).
+        on('error', function(error) {
+            if(error) {
+            	response.send({
+            		"status" : 500,
+            		"errmsg" : "Error: Cannot upload video: " + error
+            	});
+            }
+        }).
+        on('finish', function() {
+            console.log('done!');
+            response.send({
+        		"status" : 200,
+        		"message" : "Video uploaded successfully"
+        	});
+        });
+    });
+};
 
 exports.postVideo = function(request, response) {
     console.log("Uploading: ");
@@ -57,14 +83,14 @@ exports.getVideo = function(request, response) {
       	});
 
         bucket.openDownloadStreamByName('saibaba.mp4').
-        pipe(response).
+        pipe(fs.createWriteStream('./public/video')).
         on('error', function(error) {
-            assert.ifError(error);
+            //assert.ifError(error);
             response.send("error");
         }).
         on('finish', function() {
             console.log('done!');
-            //response.send("done");
+            response.send("done");
             //process.exit(0);
         });
     });

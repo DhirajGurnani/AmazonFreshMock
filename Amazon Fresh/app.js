@@ -26,7 +26,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 app.use(app.router);
 app.use('/',function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
@@ -52,7 +52,7 @@ app.use('/',function(request, response) {
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/index.html');
+		response.sendfile(__dirname + '/public/video.html');
 	}
 });
 
