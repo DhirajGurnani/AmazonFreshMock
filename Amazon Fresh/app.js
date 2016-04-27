@@ -15,6 +15,15 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , random = require('./routes/random');
+/*
+ * Session Management and Session Store using Passport JS
+ * */
+var mongoSessionURL = "mongodb://localhost:27017/login";
+var expressSessions = require("express-session");
+var mongoStore = require("connect-mongo")(expressSessions);
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+require('./routes/passport')(passport);
 
 var app = express();
 
@@ -26,7 +35,25 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+
 app.use(express.static(__dirname + '/public'));
+
+
+/*Session Data
+ * */
+app.use(express.cookieParser());
+app.use(expressSessions({
+  secret: "CMPE273_passport",
+  resave: false,
+  saveUninitialized: false,
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 6 * 1000,
+  store: new mongoStore({
+    url: mongoSessionURL
+  })
+}));
+app.use(passport.initialize());
+
 app.use(app.router);
 app.use('/',function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
@@ -102,7 +129,42 @@ app.get('/api/zipcode/:zip', function(request, response) {
 });
 
 /*************** Authentication API *****************/
-//app.post('/signup', twittercore.signUp);
+app.post('/login', function(req, res, next) {
+	  passport.authenticate('login', function(err, user, info) {
+	    if(err) {
+	      return next(err);
+	    }
+
+	    if(!user) {
+	      return res.redirect('/');
+	    }
+
+	    req.logIn(user, {session:false}, function(err) {
+	      if(err) {
+	        return next(err);
+	      }
+	      console.log(req.session);
+	      req.session.profile=user;
+	      console.log("session initilized");
+	      return res.send({profile:user});
+	    })
+	  })(req, res, next);
+	});
+
+	app.get('/login', isAuthenticated, function(req, res) {
+		console.log(req.session);
+		return res.send({user:req.session.username});
+	});
+
+	function isAuthenticated(req, res, next) {
+	  if(req.session.user) {
+	     console.log(req.session.user);
+	     return next();
+	  }
+	  console.log(req.session);
+	  res.redirect('/');
+	};
+
 
 
 /*************** Farmers API *****************/

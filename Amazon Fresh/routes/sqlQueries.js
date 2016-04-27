@@ -84,6 +84,13 @@ exports.sqlAvailableDriver = function(){
 exports.getSampleQuery = function() {
 	return "select * from employee";
 };
+exports.loginCheck = function(username){
+	console.log(username);
+	return "select * from Users where email='"+username+"';";
+};
+exports.getProfile = function(puid){
+	return "select * from User_profiles where puid = '"+puid+"';";
+}
 
 /**
  *  Query for getting password for a given email
