@@ -18,10 +18,6 @@ var express = require('express')
 
 var app = express();
 
-var busboy = require('connect-busboy'); //middleware for form/file upload
-var path = require('path');     //used for file path
-var fs = require('fs-extra');       //File System - for file manipulation
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -30,40 +26,45 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(busboy());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 app.use(app.router);
 app.use('/',function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
 	if(request.session) {
 		if(request.session.profile) {
 			if(request.session.profile.role === 'customer') {
-				res.sendfile(__dirname + '/public/home.html');
+				console.log("role == customer: ");
+				response.sendfile(__dirname + '/public/index.html');
 			}
 			else if(request.session.profile.role === 'admin') {
-				res.sendfile(__dirname + '/public/admin.html');
+				console.log("role == admin: ")
+				response.sendfile(__dirname + '/public/admin.html');
 			}
 			else if(request.session.profile.role === 'farmer') {
-				res.sendfile(__dirname + '/public/farmer.html');
+				console.log("role == farmer: ");
+				response.sendfile(__dirname + '/public/farmer.html');
 			}
 		}
 		else {
-			res.sendfile(__dirname + '/public/index.html');
+			console.log("No Profile: ");
+			response.sendfile(__dirname + '/public/index.html');
 		}
 	}
 	else {
-		res.sendfile(__dirname + '/public/index.html');
+		console.log("NO session: ");
+		response.sendfile(__dirname + '/public/index.html');
 	}
 });
-
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.use(express.static(path.join(__dirname, 'public')));
+
+//app.get('/', routes.index);
+//app.get('/users', user.list);
 
 /*************** Start Backend API *****************/
 

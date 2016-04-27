@@ -7,6 +7,8 @@ var sqlQueryList = require('./sqlQueries');
 var mongo = require("./mongo");
 var mongodb = require('mongodb');
 var fs = require('fs');
+var http = require('http');
+var util = require('util');
 //var mongoURL = "mongodb://localhost:27017/amazondb";
 //var mongoDbHelper = require('./mongo-db-helper');
 
@@ -17,47 +19,54 @@ var fs = require('fs');
 exports.postVideo = function(request, response) {
     console.log("Uploading: ");
     console.log("request: " + JSON.stringify(request.files));
-
     mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
-        var bucket = new mongodb.GridFSBucket(db);
+        var bucket = new mongodb.GridFSBucket(db, {
+        	  chunkSizeBytes: 1024,
+        	  bucketName: 'videos'
+        	});
         fs.createReadStream(request.files.sairam.path).
         pipe(bucket.openUploadStream(request.files.sairam.name)).
         on('error', function(error) {
             if(error) {
             	response.send({
             		"status" : 500,
-            		"message" : ""
+            		"errmsg" : "Error: Cannot upload video: " + error
             	});
             }
         }).
         on('finish', function() {
             console.log('done!');
-            response.send({});
-            //process.exit(0);
+            response.send({
+        		"status" : 200,
+        		"message" : "Video uploaded successfully"
+        	});
         });
     });
 };
 
 exports.getVideo = function(request, response) {
+	//response.setHeader('Content-disposition', 'filename=' + 'saibaba.mp4');
+	response.setHeader('Content-type', 'video/mp4');
+	//response.setHeader('Content-Length', 1024);
+	//response.setHeader("Content-Range", "bytes "+off+"-"+to+"/"+data.length)
+	//response.setHeader('Accept-Ranges' , 'bytes 0-40707512/40707513');
     mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
+    	var bucket = new mongodb.GridFSBucket(db, {
+      	  	chunkSizeBytes: 1024,
+    		bucketName: 'videos'
+      	});
 
-    	var cursor = db.fs.chunks.find({filename: "9.jpg"});
-    	console.log(cursor);
-    	response.send("done");
-        /*var bucket = new mongodb.GridFSBucket(db, {
-            chunkSizeBytes: 1024,
-            bucketName: 'songs'
-        });
-
-        bucket.openDownloadStreamByName('meistersinger.mp3').
-        pipe(fs.createWriteStream('./output.mp3')).
+        bucket.openDownloadStreamByName('saibaba.mp4').
+        pipe(response).
         on('error', function(error) {
             assert.ifError(error);
+            response.send("error");
         }).
         on('finish', function() {
             console.log('done!');
-            process.exit(0);
-        });*/
+            //response.send("done");
+            //process.exit(0);
+        });
     });
 };
 

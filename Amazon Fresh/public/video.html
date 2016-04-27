@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+	<script>
+		var app = angular.module("videoapp", []);
+		app.controller("myCtrl", function($scope, $http) {
+			//$scope.Your_URL = './output.mp4';
+			//$scope.Your_URL = 'http://localhost:3000/video';
+		});
+	</script>
+	<div ng-app="videoapp" ng-controller="myCtrl">
+		<!-- <video width="600" height="600" controls>
+			<source ng-src="{{Your_URL}}" type="video/mp4">
+		</video> -->
+		<!--  <div clss="embed-responsive embed-responsive-4by3">
+			<iframe class="embed-responsive-item" ng-src="{{Your_URL}}"></iframe>
+		</div> -->
+		<video controls>    
+            <source src="http://localhost:3000/video" type="video/mp4" />
+        </video controls>
+	</div>
+	<!-- <img src="http://localhost:3000/video" width="600" height="600"> -->
+</body>
+</html>

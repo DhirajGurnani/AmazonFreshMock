@@ -11,13 +11,14 @@ var fs = require('fs');
 
 exports.getVideo = function(request, response) {
 	var readstream = gfs.createReadStream({
-		filename : 'LinusTorvalds_2016-480p.mp4'
+		filename : '9.jpg'
 	});
 	readstream.on('error', function(err) {
 		console.log('An error occurred!', err);
 		throw err;
 	});
 	readstream.pipe(response);
+	response.send("done");
 };
 
 exports.postVideo = function(request, response) {

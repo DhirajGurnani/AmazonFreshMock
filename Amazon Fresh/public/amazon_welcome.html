@@ -1,52 +1,66 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Amazon Welcome</title>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	  <style>
-		#panel {background-color:#f2f2f2; margin-top:200px; margin-bottom:200px; margin-left:300px; margin-right:300px; padding-bottom:40px}
-		#wall {background-image:url(http://blog.phantomforest.com/wp-content/uploads/2014/05/Fruits-and-vegetables-hd-wallpapers.jpg); background-repeat:no-repeat}
-	  </style>
-   </head>
-   <body>
-		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
-			<div class="container-fluid" style="color:white">
-               <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
-			   Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
-			</div>
-		</nav>
-		<br/><br/>
-		<div class="row" id="wall">
-			<div class="panel-body" id="panel" style="opacity:0.9; background-color:#ffffff">
-				<h3 style="text-align:center">AmazonFresh Delivers Groceries and More to Your Door</h3>
-				<br/><br/>
-				<div class="col-sm-8">
-					<p>> Next-day and early morning delivery</p>
-					<p>> Huge selection, from milk to electronics</p>
-					<p>> Discover products from neighborhood shops and restaurants</p>
-				</div>
-				<div class="col-sm-4">
-					<form method="POST">
-						<p>Check your zip code to see if we deliver to your area:</p>
-						<input type="number" class="form-control"><br/>
-						<button class="btn btn-primary" type="submit" style="color:white; background-color:green">Check</button>
-					</form>
-				</div>
-			</div>
+
+<style>
+#panel {
+	background-color: #f2f2f2;
+	margin-top: 200px;
+	margin-bottom: 200px;
+	margin-left: 300px;
+	margin-right: 300px;
+	padding-bottom: 40px
+}
+
+#wall {
+	background-image:
+		url(http://blog.phantomforest.com/wp-content/uploads/2014/05/Fruits-and-vegetables-hd-wallpapers.jpg);
+	background-repeat: no-repeat
+}
+</style>
+<nav class="navbar navbar-default navbar-fixed-top"
+	style="background-color: #484848; padding: 10px">
+	<div class="container-fluid" style="color: white">
+		<a href=""><img
+			src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
+			alt="Amazon logo"> </a> Already an AmazonFresh customer? <a
+			href="#" style="color: white"><u>Sign in</u></a>
+	</div>
+</nav>
+<br />
+<br />
+<div class="row" id="wall">
+	<div class="panel-body" id="panel"
+		style="opacity: 0.9; background-color: #ffffff">
+		<h3 style="text-align: center">AmazonFresh Delivers Groceries and
+			More to Your Door</h3>
+		<br />
+		<br />
+		<div class="col-sm-8">
+			<p>> Next-day and early morning delivery</p>
+			<p>> Huge selection, from milk to electronics</p>
+			<p>> Discover products from neighborhood shops and restaurants</p>
 		</div>
+		<div class="col-sm-4">
+			<p>Check your zip code to see if we deliver to your area:</p>
+			<input type="number" class="form-control"><br />
+			<button class="btn btn-primary" ng-click="checkForZipCode()"
+				style="color: white; background-color: green">Check</button>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="panel-body"
+		style="background-color: #333333; padding-left: 40px">
 		<div class="row">
-			<div class="panel-body" style="background-color:#333333;padding-left:40px">
-				<div class="row">
-					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
-					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
-				</div>
-				<div style="color:white">
-				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
-				</div>
+			<div class="col-sm-2" style="color: white">
+				Help<br>Conditions of use<br>Privacy Policy
+			</div>
+			<div class="col-sm-10" style="color: white">
+				About<br>Carriers
 			</div>
 		</div>
-   </body>
-</html>
+		<div style="color: white">
+			<br /> &copy 2007-2016 AmazonFresh, LLC or its affiliates All items
+			sold by and ship from AmazonFresh unless otherwise specified.<br />
+			<br />
+		</div>
+	</div>
+</div>
