@@ -82,7 +82,7 @@ exports.getVideo = function(request, response) {
     		bucketName: 'videos'
       	});
 
-        bucket.openDownloadStreamByName('google.mp4').
+        bucket.openDownloadStreamByName('saibaba.mp4').
         pipe(response).
         on('error', function(error) {
             //assert.ifError(error);
