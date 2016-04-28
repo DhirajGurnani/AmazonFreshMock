@@ -209,6 +209,7 @@ app.get('/api/admin/trips/getTrips',trips.getTrips);
 app.get('/api/admin/trips/getPendingTrips',trips.getPendingTrips);
 app.get('/api/admin/trips/availableDrivers',trips.availableDrivers);
 app.get('/api/admin/trips/availableTrucks',trips.availableTrucks);
+app.get('/api/admin/trips/getBills',trips.getBills);
 
 /*************** End Backend API *****************/
 

@@ -40,8 +40,16 @@ adminApp.controller('createController', function($scope, $http) {
 			console.log(truck.message);
 		});
 	};
+	var getBillDetails = function() {
+		var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
+		getBillDetailsResponse.success(function(bill){
+			$scope.bills = bill.message;
+			console.log(bill.message);
+		});
+	};
 	getTruckDetails();
 	getDriverDetails();
+	getBillDetails();
 	
 });
 

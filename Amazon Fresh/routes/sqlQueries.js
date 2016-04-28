@@ -51,6 +51,10 @@ exports.getAllTrips=function(){
 	return "select * from Trips;"
 };
 
+exports.sqlGetBills=function(){
+	return "select * from Billing where status = 'placed';"
+};
+
 exports.getAllPendingTrips=function(){
 	return "select * from Trips LEFT JOIN Drivers on Drivers.driver_id=Trips.driver_id where Drivers.status = 'in_delivery';"
 };
