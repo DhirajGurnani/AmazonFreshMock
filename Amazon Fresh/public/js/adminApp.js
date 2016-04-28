@@ -33,8 +33,16 @@ adminApp.controller('createController', function($scope, $http) {
 			$scope.drivers = driver.message;
 		});
 	};
+	var getTruckDetails = function() {
+		var getTruckDetailsResponse = $http.get('/api/admin/trips/availableTrucks');
+		getTruckDetailsResponse.success(function(truck){
+			$scope.trucks = truck.message;
+			console.log(truck.message);
+		});
+	};
+	getTruckDetails();
 	getDriverDetails();
-	console.log($scope.selectedDriver);
+	
 });
 
 adminApp.controller('pendingController', function($scope, $http) {
