@@ -2,24 +2,75 @@
 <html>
 <head>
 <title>Amazon Admin</title>
-<base href="/" >
-	<script	type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	
-	<script	type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.4.8/angular-sanitize.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-	
-	<script src="js/adminApp.js"></script>
-	
-	<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<script	type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<base href="/">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.4.8/angular-sanitize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+
+<script src="js/adminApp.js"></script>
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body ng-app="admin" bgcolor="#E9F5FC">
+	<nav class="navbar navbar-default navbar-fixed-top"
+		style="background-color: #484848; padding: 10px">
+		<div class="container-fluid">
+			<a href=""><img
+				src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
+				alt="Amazon logo"></a>
+				<br>
+		</div>
+	</nav>
+	<br />
+	<br /></br>
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<ul class="nav nav-tabs" style="background-color: #FFF000;">
+			<li role="presentation"><a href="/">Create Trips</a></li>
+			<li role="presentation"><a href="/pendingTrips">Pending Trips</a></li>
+			<li role="presentation"><a href="/completedTrips">Completed Trips</a></li>
+			<li role="presentation"><a href="/analyseTrips">Admin Analysis</a></li>
+			<li role="presentation"><a href="/trackingTrips">Admin Tracking</a></li>
+		</ul>
+		<div class="col-sm-1"></div>
+	</div>
 	<div ng-view>
 		<div ui-view="">
-			<div id="wrapper" class="">
+			<div id="wrapper" class=""></div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<div class="row">
+		<div class="panel-body"
+			style="background-color: #333333; padding-left: 40px">
+			<div class="row">
+				<div class="col-sm-2" style="color: white">
+					Help<br>Conditions of use<br>Privacy Policy
+				</div>
+				<div class="col-sm-10" style="color: white">
+					About<br>Carriers
+				</div>
+			</div>
+			<div style="color: white">
+				<br /> &copy 2007-2016 AmazonFresh, LLC or its affiliates All items
+				sold by and ship from AmazonFresh unless otherwise specified.<br />
+				<br />
 			</div>
 		</div>
 	</div>

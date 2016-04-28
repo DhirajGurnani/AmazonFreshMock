@@ -75,12 +75,12 @@ app.use('/',function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/customer.html');
+			response.sendfile(__dirname + '/public/admin.html');
 		}
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/customer.html');
+		response.sendfile(__dirname + '/public/admin.html');
 	}
 });
 
