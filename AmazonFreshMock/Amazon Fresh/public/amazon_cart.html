@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Amazon Cart</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <style>
+		#panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+	  </style>
+   </head>
+   <body>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:4px">
+			<div class="container-fluid" style="color:white">
+               <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+			   Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
+			   <ul class="nav navbar-nav pull-right">
+					<li class="nav-item">
+						<a class="nav-link" href="#" style="color:white"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+					</li>
+                </ul>
+			</div>
+		</nav>
+		<br/><br/><br/><br/>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="dropdown" style="padding-left:15px">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#484848">Shop <span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li><a href="#"><strong>fruits</strong><br>Check out your fruits</a></li><br>
+								<li><a href="#"><strong>Vegetables</strong><br>Fresh Vegeies every day</a></li><br>
+								<li><a href="#"><strong>Dairy</strong><br>A healthy Dairy for healthy heart</a></li><br>
+								<li><a href="#"><strong>Meat</strong><br>Meats of all kinds</a></li> 	<br>
+								<li><a href="#"><strong>Others</strong><br>We have a solution for you</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
+							<span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
+								<button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row" style="margin-left:15px; margin-right:15px">
+					<h3>Shopping Cart</h3><br/>
+					<div>
+						<div class="col-sm-8"></div>
+						<div class="col-sm-2">Price</div>
+						<div class="col-sm-2"><span class="pull-right">Quantity</span></div>
+					</div>
+					<br/>
+					<div class="panel-body" style="border-style:ridge">
+						<div class="col-sm-2">
+							<img src="https://images-na.ssl-images-amazon.com/images/I/71hH3zqDmbL._SR280,280_.jpg" alt="image from DB" style="width:60px; height:80px">
+						</div>
+						<div class="col-sm-6" style="text-align:left">
+							<span style="font-size:12"><a href="#" style="color:blue"><b>Product Name</b></a></span> by<br/>
+							<span>Product Supplier</span><br/>
+							<span style="color:green">In Stock</span><br/>
+							<span>Ships in Certified Frustration-Free Packaging</span><br/>
+							<span>Eligible for FREE Shipping</span>
+						</div>
+						<div class="col-sm-2" style="color:red">
+							<span>$11</span>
+						</div>
+						<div class="col-sm-2">
+							<select name="quantity" class="pull-right">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					<br/>
+					<h4 class="pull-right"><b>Subtotal: <span style="color:red">$11</b></span></h4>
+				</div>
+				<br/><br/><br/>
+			</div>
+			<div class="col-sm-3">
+				<br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>
+				<h4><strong>Great News, We deliver to your area</strong></h4><br/>
+				<div class="panel-body" style="background-color:#f2f2f2; margin-right:10px">
+					<h3><b>Order Summary</b></h3><br/>
+					<span><b>Subtotal: <span class="pull-right">$11</span></b></span><br/>
+					<span><b>Estimated Shipping: <span class="pull-right">$3</span></b></span><br/>
+					<span><b>Estimated Tax: <span class="pull-right">$3</span></b></span><br/>
+					<span><b>Estimated Total: <span class="pull-right" style="color:red">$17</span></b></span><br/><br/>
+					<button type="submit" class="form-control" style="background-color:green; color:white">Proceed to checkout</button><br/>
+				</div>
+				</br>
+				<p>Not a Prime Fresh member?<a href="#" style="color:blue"><u>Start your 30-day FREE trial today</u></a></p>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+		</div>
+   </body>
+</html>

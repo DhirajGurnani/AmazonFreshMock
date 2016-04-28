@@ -1,0 +1,224 @@
+{ [Function]
+  MongoError: { [Function: MongoError] create: [Function] },
+  Admin: 
+   { [Function]
+     define: 
+      { name: 'Admin',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] } },
+  MongoClient: 
+   { [Function: MongoClient]
+     define: 
+      { name: 'MongoClient',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] },
+     connect: [Circular] },
+  Db: 
+   { [Function]
+     super_: 
+      { [Function: EventEmitter]
+        EventEmitter: [Circular],
+        usingDomains: false,
+        defaultMaxListeners: 10,
+        init: [Function],
+        listenerCount: [Function] },
+     define: 
+      { name: 'Db',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] },
+     SYSTEM_NAMESPACE_COLLECTION: 'system.namespaces',
+     SYSTEM_INDEX_COLLECTION: 'system.indexes',
+     SYSTEM_PROFILE_COLLECTION: 'system.profile',
+     SYSTEM_USER_COLLECTION: 'system.users',
+     SYSTEM_COMMAND_COLLECTION: '$cmd',
+     SYSTEM_JS_COLLECTION: 'system.js' },
+  Collection: 
+   { [Function]
+     define: 
+      { name: 'Collection',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] } },
+  Server: 
+   { [Function]
+     super_: 
+      { [Function: EventEmitter]
+        EventEmitter: [Circular],
+        usingDomains: false,
+        defaultMaxListeners: 10,
+        init: [Function],
+        listenerCount: [Function] },
+     define: 
+      { name: 'Server',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] } },
+  ReplSet: 
+   { [Function]
+     super_: 
+      { [Function: EventEmitter]
+        EventEmitter: [Circular],
+        usingDomains: false,
+        defaultMaxListeners: 10,
+        init: [Function],
+        listenerCount: [Function] },
+     define: 
+      { name: 'ReplSet',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] } },
+  Mongos: 
+   { [Function]
+     super_: 
+      { [Function: EventEmitter]
+        EventEmitter: [Circular],
+        usingDomains: false,
+        defaultMaxListeners: 10,
+        init: [Function],
+        listenerCount: [Function] },
+     define: 
+      { name: 'Mongos',
+        object: [Circular],
+        stream: false,
+        instrumentations: [Object] } },
+  ReadPreference: 
+   { [Function]
+     isValid: [Function],
+     PRIMARY: 'primary',
+     PRIMARY_PREFERRED: 'primaryPreferred',
+     SECONDARY: 'secondary',
+     SECONDARY_PREFERRED: 'secondaryPreferred',
+     NEAREST: 'nearest' },
+  GridStore: 
+   { [Function: GridStore]
+     define: 
+      { name: 'Gridstore',
+        object: [Circular],
+        stream: true,
+        instrumentations: [Object] },
+     DEFAULT_ROOT_COLLECTION: 'fs',
+     DEFAULT_CONTENT_TYPE: 'binary/octet-stream',
+     IO_SEEK_SET: 0,
+     IO_SEEK_CUR: 1,
+     IO_SEEK_END: 2,
+     exist: [Function],
+     list: [Function],
+     read: [Function],
+     readlines: [Function],
+     unlink: [Function] },
+  Chunk: { [Function] DEFAULT_CHUNK_SIZE: 261120 },
+  Logger: 
+   { [Function]
+     reset: [Function],
+     currentLogger: [Function],
+     setCurrentLogger: [Function],
+     filter: [Function],
+     setLevel: [Function] },
+  Cursor: 
+   { [Function]
+     super_: 
+      { [Function: Readable]
+        ReadableState: [Function: ReadableState],
+        super_: [Object],
+        _fromList: [Function: fromList] },
+     define: 
+      { name: 'Cursor',
+        object: [Circular],
+        stream: true,
+        instrumentations: [Object] },
+     INIT: 0,
+     OPEN: 1,
+     CLOSED: 2,
+     GET_MORE: 3 },
+  GridFSBucket: 
+   { [Function: GridFSBucket]
+     super_: 
+      { [Function: EventEmitter]
+        EventEmitter: [Circular],
+        usingDomains: false,
+        defaultMaxListeners: 10,
+        init: [Function],
+        listenerCount: [Function] } },
+  Binary: 
+   { [Function: Binary]
+     BUFFER_SIZE: 256,
+     SUBTYPE_DEFAULT: 0,
+     SUBTYPE_FUNCTION: 1,
+     SUBTYPE_BYTE_ARRAY: 2,
+     SUBTYPE_UUID_OLD: 3,
+     SUBTYPE_UUID: 4,
+     SUBTYPE_MD5: 5,
+     SUBTYPE_USER_DEFINED: 128,
+     Binary: [Circular] },
+  Code: { [Function: Code] Code: [Circular] },
+  Map: { [Function: Map] Map: [Circular] },
+  DBRef: { [Function: DBRef] DBRef: [Circular] },
+  Double: { [Function: Double] Double: [Circular] },
+  Long: 
+   { [Function: Long]
+     fromInt: [Function],
+     fromNumber: [Function],
+     fromBits: [Function],
+     fromString: [Function],
+     INT_CACHE_: { '0': [Object], '1': [Object], '-1': [Object] },
+     TWO_PWR_16_DBL_: 65536,
+     TWO_PWR_24_DBL_: 16777216,
+     TWO_PWR_32_DBL_: 4294967296,
+     TWO_PWR_31_DBL_: 2147483648,
+     TWO_PWR_48_DBL_: 281474976710656,
+     TWO_PWR_64_DBL_: 18446744073709552000,
+     TWO_PWR_63_DBL_: 9223372036854776000,
+     ZERO: Long { _bsontype: 'Long', low_: 0, high_: 0 },
+     ONE: Long { _bsontype: 'Long', low_: 1, high_: 0 },
+     NEG_ONE: Long { _bsontype: 'Long', low_: -1, high_: -1 },
+     MAX_VALUE: Long { _bsontype: 'Long', low_: -1, high_: 2147483647 },
+     MIN_VALUE: Long { _bsontype: 'Long', low_: 0, high_: -2147483648 },
+     TWO_PWR_24_: Long { _bsontype: 'Long', low_: 16777216, high_: 0 },
+     Long: [Circular] },
+  MinKey: { [Function: MinKey] MinKey: [Circular] },
+  MaxKey: { [Function: MaxKey] MaxKey: [Circular] },
+  ObjectID: 
+   { [Function: ObjectID]
+     index: 2847853,
+     createPk: [Function: createPk],
+     createFromTime: [Function: createFromTime],
+     createFromHexString: [Function: createFromHexString],
+     isValid: [Function: isValid],
+     ObjectID: [Circular],
+     ObjectId: [Circular] },
+  ObjectId: 
+   { [Function: ObjectID]
+     index: 2847853,
+     createPk: [Function: createPk],
+     createFromTime: [Function: createFromTime],
+     createFromHexString: [Function: createFromHexString],
+     isValid: [Function: isValid],
+     ObjectID: [Circular],
+     ObjectId: [Circular] },
+  Symbol: { [Function: Symbol] Symbol: [Circular] },
+  Timestamp: 
+   { [Function: Timestamp]
+     fromInt: [Function],
+     fromNumber: [Function],
+     fromBits: [Function],
+     fromString: [Function],
+     INT_CACHE_: { '0': [Object], '1': [Object], '-1': [Object] },
+     TWO_PWR_16_DBL_: 65536,
+     TWO_PWR_24_DBL_: 16777216,
+     TWO_PWR_32_DBL_: 4294967296,
+     TWO_PWR_31_DBL_: 2147483648,
+     TWO_PWR_48_DBL_: 281474976710656,
+     TWO_PWR_64_DBL_: 18446744073709552000,
+     TWO_PWR_63_DBL_: 9223372036854776000,
+     ZERO: Timestamp { _bsontype: 'Timestamp', low_: 0, high_: 0 },
+     ONE: Timestamp { _bsontype: 'Timestamp', low_: 1, high_: 0 },
+     NEG_ONE: Timestamp { _bsontype: 'Timestamp', low_: -1, high_: -1 },
+     MAX_VALUE: Timestamp { _bsontype: 'Timestamp', low_: -1, high_: 2147483647 },
+     MIN_VALUE: Timestamp { _bsontype: 'Timestamp', low_: 0, high_: -2147483648 },
+     TWO_PWR_24_: Timestamp { _bsontype: 'Timestamp', low_: 16777216, high_: 0 },
+     Timestamp: [Circular] },
+  connect: [Circular],
+  instrument: [Function] }
