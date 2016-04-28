@@ -48,9 +48,9 @@ adminApp.controller('createController', function($scope, $http) {
 adminApp.controller('pendingController', function($scope, $http) {
 	var getPendingTrips = function() {
 		var getPendingTripsResponse = $http.get('api/admin/trips/getPendingTrips');
-		getPendingTripsResponse.success(function(pendingTrips){
-			$scope.pTrips = pendingTrips.message;
-			console.log(pendingTrips.message);
+		getPendingTripsResponse.success(function(pTrips){
+			$scope.pendingTrips = pTrips.message;
+			console.log(pTrips.message);
 		});
 	}
 	getPendingTrips();
