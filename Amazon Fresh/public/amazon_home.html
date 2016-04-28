@@ -1,325 +1,250 @@
-<style>
-   #panel {
-   background-color: #f2f2f2;
-   margin-top: 100px;
-   margin-bottom: 75px;
-   padding-left: 40px;
-   padding-bottom: 70px
-   }
-</style>
-<nav class="navbar navbar-default navbar-fixed-top"
-   style="background-color: #484848; padding: 10px">
-   <div class="container-fluid" style="color: white">
-      <a href="">
-      	<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a> Already an AmazonFresh customer? <a href="#" style="color: white"><u>Sign in</u>
-      </a>
-   </div>
-</nav>
-<br />
-<br />
-<br />
-<div class="row">
-   <div class="col-sm-9">
-      <div class="row">
-         <div class="dropdown col-sm-3" style="padding-left: 15px">
-            <button class="btn btn-primary dropdown-toggle" type="button"
-               data-toggle="dropdown"
-               style="background-color: #484848; margin-left: 10px">
-            Shop <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-               <li><a href="#"><strong>fruits</strong><br>Check out
-                  your fruits</a>
-               </li>
-               <br>
-               <li><a href="#"><strong>Vegetables</strong><br>Fresh
-                  Vegeies every day</a>
-               </li>
-               <br>
-               <li><a href="#"><strong>Dairy</strong><br>A healthy
-                  Dairy for healthy heart</a>
-               </li>
-               <br>
-               <li><a href="#"><strong>Meat</strong><br>Meats of all
-                  kinds</a>
-               </li>
-               <br>
-               <li><a href="#"><strong>Others</strong><br>We have a
-                  solution for you</a>
-               </li>
-            </ul>
-         </div>
-         <div class="input-group col-sm-9">
-            <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height: 50px"> 
-            <span class="btn input-group-addon btn" id="basic-addon1" style="background-color: #484848">
-            	<button type="button" class="btn btn-default" style="color: white; background-color: #484848">Go</button>
-            </span>
-         </div>
-      </div>
-      <div class="row">
-         <br />
-         <div class="container col-sm-9" style="margin-left: 10px">
-            <style>
-               .carousel-inner>.item>img, .carousel-inner>.item>a>img {
-               width: 100%;
-               margin: auto;
-               right-padding: 0px;
-               }
-            </style>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-               <!-- Indicators -->
-               <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                  <li data-target="#myCarousel" data-slide-to="3"></li>
-               </ol>
-               <!-- Wrapper for slides -->
-               <div class="carousel-inner" role="listbox" id="slides">
-                  <div class="item active">
-                     <img
-                        src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/TCG/Q1/021015_TCG_ZipLaunch_Generic._V330194894_.jpg"
-                        alt="Chania" width="60" height="45">
-                  </div>
-                  <div class="item">
-                     <img
-                        src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review10._V325041030_.jpg"
-                        alt="Chania" width="60" height="45">
-                  </div>
-                  <div class="item">
-                     <img
-                        src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review5._V324775003_.jpg"
-                        alt="Flower" width="60" height="45">
-                  </div>
-                  <div class="item">
-                     <img
-                        src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_ShopComfortably._V325819920_.jpg"
-                        alt="Flower" width="60px" height="45">
-                  </div>
-               </div>
-               <!-- Left and right controls -->
-               <a class="left carousel-control" href="#myCarousel" role="button"
-                  data-slide="prev"> <span
-                  class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-               <span class="sr-only">Previous</span>
-               </a> <a class="right carousel-control" href="#myCarousel" role="button"
-                  data-slide="next"> <span
-                  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-               <span class="sr-only">Next</span>
-               </a>
-            </div>
-         </div>
-      </div>
-      <h4 style="margin-left: 15px">
-         <br />Shop our best Produce
-      </h4>
-      <div class="row">
-         <div class="col-sm-2" style="margin-left: 10px; text-align: center">
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/I/81apRlvQUrL._SR100,100_.jpg"><br />
-            <a href=""><u>Organic Bananas</u></a><br />
-            <p>1.98$</p>
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
-         </div>
-         <div class="col-sm-2" style="margin-left: 10px; text-align: center">
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/I/91BCkMnPAhL._SR100,100_.jpg"><br />
-            <a href=""><u>Organic Strawberries</u></a><br />
-            <p>5.99$</p>
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
-         </div>
-         <div class="col-sm-2" style="margin-left: 10px; text-align: center">
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/I/81u0TBolABL._SR100,100_.jpg"><br />
-            <a href=""><u>Hass Avocado</u></a><br />
-            <p>1.50$</p>
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
-         </div>
-         <div class="col-sm-2" style="margin-left: 10px; text-align: center">
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/I/61Aqo-ejqKL._SR100,100_.jpg"><br />
-            <a href=""><u>Lime, One medium</u></a><br />
-            <p>0.69$</p>
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
-         </div>
-         <div class="col-sm-2" style="margin-left: 10px; text-align: center">
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/I/81Pi5FnoTZL._SR100,100_.jpg"><br />
-            <a href=""><u>Yellow Onion, One large</u></a><br />
-            <p>0.99$</p>
-            <img
-               src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
-         </div>
-      </div>
-      <h4 style="margin-left: 15px">
-         <br />Browse Categories
-      </h4>
-      <div class="row">
-         <div class="col-sm-3" style="margin-left: 10px">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Fruit._V326631904_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">FRESH FRUITS >></a><br /> <a
-                     href="" style="color: grey">Apples</a><br /> <a href=""
-                     style="color: grey">Bananas</a><br /> <a href=""
-                     style="color: grey">Melons</a><br /> <a href=""
-                     style="color: grey">Grapes</a><br /> <a href=""
-                     style="color: grey">Pears</a><br /> <a href="">Shop all ></a>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Vegetable._V326631906_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">FRESH VEGETABLES >></a><br /> <a
-                     href="" style="color: grey">Brinjal</a><br /> <a href=""
-                     style="color: grey">Aloe</a><br /> <a href="" style="color: grey">Carrot</a><br />
-                  <a href="" style="color: grey">Tomatoes</a><br /> <a href=""
-                     style="color: grey">Onion</a><br /> <a href="">Shop all ></a>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_IceCream._V326631932_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">DAIRY PRODUCTS >></a><br /> <a
-                     href="" style="color: grey">Milk</a><br /> <a href=""
-                     style="color: grey">Yogurt</a><br /> <a href=""
-                     style="color: grey">Butter</a><br /> <a href=""
-                     style="color: grey">Cheese</a><br /> <a href=""
-                     style="color: grey">Icecream</a><br /> <a href="">Shop all ></a>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-sm-3" style="margin-left: 10px">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Meat._V326631933_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">FRESH MEAT >></a><br /> <a href=""
-                     style="color: grey">Chicken</a><br /> <a href=""
-                     style="color: grey">Beef</a><br /> <a href="" style="color: grey">Fish</a><br />
-                  <a href="" style="color: grey">Crabs</a><br /> <a href=""
-                     style="color: grey">Lamb</a><br /> <a href="">Shop all ></a>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Bakery._V326631932_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">BREAD & BAKERY >></a><br /> <a
-                     href="" style="color: grey">Bread</a><br /> <a href=""
-                     style="color: grey">Cake</a><br /> <a href="" style="color: grey">Pasteries</a><br />
-                  <a href="" style="color: grey">Tortias</a><br /> <a href=""
-                     style="color: grey">Donut</a><br /> <a href="">Shop all ></a>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading"
-                  style="margin: 0; background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Cereal._V326631907_.jpg)">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-               </div>
-               <div class="panel-body">
-                  <a href="" style="color: grey">BREAKFAST >></a><br /> <a href=""
-                     style="color: grey">Cereals</a><br /> <a href=""
-                     style="color: grey">Oatmeal</a><br /> <a href=""
-                     style="color: grey">Toaster</a><br /> <a href=""
-                     style="color: grey">Juices</a><br /> <a href=""
-                     style="color: grey">Instant Drinks</a><br /> <a href="">Shop
-                  all ></a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="col-sm-3">
-      <br />
-      <span>You are browsing <a href="#" style="color: blue"><u>Northern
-      California</u></a></span><br />
-      <br />
-      <h4>
-         <strong>Great News, We deliver to your area</strong>
-      </h4>
-      <br />
-      <p>AmazonFresh is available exclusively to Prime Fresh members in
-         eligible zip codes.
-      </p>
-      <br />
-      <button type="submit" class="form-control"
-         style="background-color: green; color: white">Sign in with
-      Amazon account</button>
-      <br />
-      <p>
-         Not a Prime Fresh member?<a href="#" style="color: blue"><u>Start
-         your 30-day FREE trial today</u></a>
-      </p>
-   </div>
-</div>
-<br />
-<div class="row">
-   <div class="panel-body"
-      style="background-color: #333333; padding-left: 40px">
-      <div class="row">
-         <div class="col-sm-2" style="color: white">
-            Help<br>Conditions of use<br>Privacy Policy
-         </div>
-         <div class="col-sm-10" style="color: white">
-            About<br>Carriers
-         </div>
-      </div>
-      <div style="color: white">
-         <br /> &copy 2007-2016 AmazonFresh, LLC or its affiliates All items
-         sold by and ship from AmazonFresh unless otherwise specified.<br />
-         <br />
-      </div>
-   </div>
-</div>
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Amazon Home</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <style>
+		#panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+	  </style>
+   </head>
+   <body>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:4px">
+			<div class="container-fluid" style="color:white">
+               <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+			   Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
+			   <ul class="nav navbar-nav pull-right">
+					<li class="nav-item">
+						<a class="nav-link" href="#" style="color:white"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+					</li>
+                </ul>
+			</div>
+		</nav>
+		<br/><br/><br/><br/>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="dropdown col-sm-3" style="padding-left:15px">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#484848; margin-left:10px">Shop <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#"><strong>fruits</strong><br>Check out your fruits</a></li><br>
+							<li><a href="#"><strong>Vegetables</strong><br>Fresh Vegeies every day</a></li><br>
+							<li><a href="#"><strong>Dairy</strong><br>A healthy Dairy for healthy heart</a></li><br>
+							<li><a href="#"><strong>Meat</strong><br>Meats of all kinds</a></li> 	<br>
+							<li><a href="#"><strong>Others</strong><br>We have a solution for you</a></li>
+						</ul>
+					</div>
+					<div class="input-group col-sm-9">
+						<input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
+						<span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
+							<button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
+						</span>
+					</div>
+				</div>
+				<div class="row">
+					<br/>
+					<div class="container col-sm-9" style="margin-left:10px">
+						<style>
+						.carousel-inner > .item > img,
+						.carousel-inner > .item > a > img {
+						width: 100%;
+						margin: auto;
+						right-padding: 0px;
+						}
+						</style>
+						<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+								<li data-target="#myCarousel" data-slide-to="1"></li>
+								<li data-target="#myCarousel" data-slide-to="2"></li>
+								<li data-target="#myCarousel" data-slide-to="3"></li>
+							</ol>
+						<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox" id="slides">
+								<div class="item active">
+									<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/TCG/Q1/021015_TCG_ZipLaunch_Generic._V330194894_.jpg" alt="Chania" width="60" height="45">
+								</div>
+								<div class="item">
+									<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review10._V325041030_.jpg" alt="Chania" width="60" height="45">
+								</div>
+								<div class="item">
+									<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review5._V324775003_.jpg" alt="Flower" width="60" height="45">
+								</div>
+								<div class="item">
+									<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_ShopComfortably._V325819920_.jpg" alt="Flower" width="60px" height="45">
+								</div>
+							</div>
+						<!-- Left and right controls -->
+							<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<h4 style="margin-left:15px"><br/>Shop our best Produce</h4>
+				<div class="row">
+					<div class="col-sm-2" style="margin-left:10px; text-align:center">
+						<img src="https://images-na.ssl-images-amazon.com/images/I/81apRlvQUrL._SR100,100_.jpg"><br/>
+						<a href=""><u>Organic Bananas</u></a><br/>
+						<p>1.98$</p>
+						<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
+					</div>
+					<div class="col-sm-2" style="margin-left:10px; text-align:center">
+						<img src="https://images-na.ssl-images-amazon.com/images/I/91BCkMnPAhL._SR100,100_.jpg"><br/>
+						<a href=""><u>Organic Strawberries</u></a><br/>
+						<p>5.99$</p>
+						<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
+					</div>
+					<div class="col-sm-2" style="margin-left:10px; text-align:center">
+						<img src="https://images-na.ssl-images-amazon.com/images/I/81u0TBolABL._SR100,100_.jpg"><br/>
+						<a href=""><u>Hass Avocado</u></a><br/>
+						<p>1.50$</p>
+						<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
+					</div>
+					<div class="col-sm-2" style="margin-left:10px; text-align:center">
+						<img src="https://images-na.ssl-images-amazon.com/images/I/61Aqo-ejqKL._SR100,100_.jpg"><br/>
+						<a href=""><u>Lime, One medium</u></a><br/>
+						<p>0.69$</p>
+						<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
+					</div>
+					<div class="col-sm-2" style="margin-left:10px; text-align:center">
+						<img src="https://images-na.ssl-images-amazon.com/images/I/81Pi5FnoTZL._SR100,100_.jpg"><br/>
+						<a href=""><u>Yellow Onion, One large</u></a><br/>
+						<p>0.99$</p>
+						<img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png">
+					</div>
+				</div>
+			
+				<h4 style="margin-left:15px"><br/>Browse Categories</h4>
+				<div class="row">
+					<div class="col-sm-3" style="margin-left:10px">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Fruit._V326631904_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">FRESH FRUITS >></a><br/>
+								<a href="" style="color:grey">Apples</a><br/>
+								<a href="" style="color:grey">Bananas</a><br/>
+								<a href="" style="color:grey">Melons</a><br/>
+								<a href="" style="color:grey">Grapes</a><br/>
+								<a href="" style="color:grey">Pears</a><br/>
+								<a href="">Shop all ></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Vegetable._V326631906_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">FRESH VEGETABLES >></a><br/>
+								<a href="" style="color:grey">Brinjal</a><br/>
+								<a href="" style="color:grey">Aloe</a><br/>
+								<a href="" style="color:grey">Carrot</a><br/>
+								<a href="" style="color:grey">Tomatoes</a><br/>
+								<a href="" style="color:grey">Onion</a><br/>
+								<a href="" >Shop all ></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_IceCream._V326631932_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">DAIRY PRODUCTS >></a><br/>
+								<a href="" style="color:grey">Milk</a><br/>
+								<a href="" style="color:grey">Yogurt</a><br/>
+								<a href="" style="color:grey">Butter</a><br/>
+								<a href="" style="color:grey">Cheese</a><br/>
+								<a href="" style="color:grey">Icecream</a><br/>
+								<a href="">Shop all ></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3" style="margin-left:10px">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Meat._V326631933_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">FRESH MEAT >></a><br/>
+								<a href="" style="color:grey">Chicken</a><br/>
+								<a href="" style="color:grey">Beef</a><br/>
+								<a href="" style="color:grey">Fish</a><br/>
+								<a href="" style="color:grey">Crabs</a><br/>
+								<a href="" style="color:grey">Lamb</a><br/>
+								<a href="">Shop all ></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Bakery._V326631932_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">BREAD & BAKERY >></a><br/>
+								<a href="" style="color:grey">Bread</a><br/>
+								<a href="" style="color:grey">Cake</a><br/>
+								<a href="" style="color:grey">Pasteries</a><br/>
+								<a href="" style="color:grey">Tortias</a><br/>
+								<a href="" style="color:grey">Donut</a><br/>
+								<a href="">Shop all ></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="panel panel-default">
+							<div class="panel-heading" style="margin:0; background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/TilesQ3/Gateway_Cereal._V326631907_.jpg)">
+								<br/><br/><br/><br/><br/>
+							</div>
+							<div class="panel-body">
+								<a href="" style="color:grey">BREAKFAST >></a><br/>
+								<a href="" style="color:grey">Cereals</a><br/>
+								<a href="" style="color:grey">Oatmeal</a><br/>
+								<a href="" style="color:grey">Toaster</a><br/>
+								<a href="" style="color:grey">Juices</a><br/>
+								<a href="" style="color:grey">Instant Drinks</a><br/>
+								<a href="">Shop all ></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>
+				<h4><strong>Great News, We deliver to your area</strong></h4><br/>
+				<p>AmazonFresh is available exclusively to Prime Fresh members in eligible zip codes.</p><br/>
+				<button type="submit" class="form-control" style="background-color:green; color:white">Sign in with Amazon account</button><br/>
+				<p>Not a Prime Fresh member?<a href="#" style="color:blue"><u>Start your 30-day FREE trial today</u></a></p>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+		</div>
+   </body>
+</html>
