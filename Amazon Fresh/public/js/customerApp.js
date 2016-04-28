@@ -7,8 +7,14 @@ customerApp.config([ '$routeProvider', '$locationProvider', function($routeProvi
 	$routeProvider.when('/', {
 		templateUrl : 'amazon_welcome.html',
 		controller : 'mainController'
+	}).when('/login',{
+		templateUrl : 'amazon_login.html',
+		controller : 'loginController'
 	}).when('/home', {
 		templateUrl : 'amazon_home.html',
+		controller : 'homeController'
+	}).when('/signup', {
+		templateUrl : 'amazon_signup.html',
 		controller : 'homeController'
 	});
 	$locationProvider.html5Mode(true);
@@ -31,7 +37,39 @@ customerApp.controller('mainController', function($scope, $http) {
 });
 
 customerApp.controller('homeController', function($scope, $http) {
-	$scope.checkForZipCode = function() {
-		window.location = "/home";
+	$scope.go_to_loginpage = function(){
+		//alert("login");
+		//console.log("in home");
+		window.location = "/login";
+	};
+	$scope.go_to_product_cayegory = function(){
+		//alert("login");
+		//console.log("in home");
+		window.location = "/login";
+	};
+
+});
+
+customerApp.controller('loginController', function($scope, $http) {
+	$scope.go_to_signup = function(){
+		window.location = "/signup";
+	};
+	$scope.checklogin = function(){
+		//alert("went");
+		$http({
+			method : 'POST',
+			url : '/api/login',
+			data : {"username" : $scope.email,
+					"password" : $scope.password},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			alert(data+"success");
+		}).error(function(data){
+			
+			alert(data);
+		});
+		
 	};
 });

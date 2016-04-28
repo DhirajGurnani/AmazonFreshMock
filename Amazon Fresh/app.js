@@ -39,6 +39,7 @@ app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 //app.use(express.static(__dirname + '/public'));
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 /*Session Data
  * */
@@ -75,12 +76,12 @@ app.use('/',function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/admin.html');
+			response.sendfile(__dirname + '/public/customer.html');
 		}
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/admin.html');
+		response.sendfile(__dirname + '/public/customer.html');
 	}
 });
 
@@ -89,7 +90,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 //app.get('/', routes.index);
 //app.get('/users', user.list);
@@ -130,7 +130,7 @@ app.get('/api/zipcode/:zip', function(request, response) {
 });
 
 /*************** Authentication API *****************/
-app.post('/login', function(req, res, next) {
+app.post('/api/login', function(req, res, next) {
 	  passport.authenticate('login', function(err, user, info) {
 	    if(err) {
 	      return next(err);
@@ -142,17 +142,21 @@ app.post('/login', function(req, res, next) {
 
 	    req.logIn(user, {session:false}, function(err) {
 	      if(err) {
+	    	  console.log("err");
 	        return next(err);
 	      }
+	      console.log(err);
 	      console.log(req.session);
 	      req.session.profile=user;
 	      console.log("session initilized");
-	      return res.send({profile:user});
+	      console.log(user);
+	      return res.send("user");
+	      
 	    })
 	  })(req, res, next);
 	});
 
-	app.get('/login', isAuthenticated, function(req, res) {
+	app.get('/api/login', isAuthenticated, function(req, res) {
 		console.log(req.session);
 		return res.send({user:req.session.username});
 	});
