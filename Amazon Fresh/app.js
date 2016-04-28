@@ -36,7 +36,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 //app.use(express.static(__dirname + '/public'));
 
 
@@ -62,7 +62,7 @@ app.use('/',function(request, response) {
 		if(request.session.profile) {
 			if(request.session.profile.role === 'customer') {
 				console.log("role == customer: ");
-				response.sendfile(__dirname + '/public/index.html');
+				response.sendfile(__dirname + '/public/customer.html');
 			}
 			else if(request.session.profile.role === 'admin') {
 				console.log("role == admin: ")
@@ -75,12 +75,12 @@ app.use('/',function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/video.html');
+			response.sendfile(__dirname + '/public/customer.html');
 		}
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/video.html');
+		response.sendfile(__dirname + '/public/customer.html');
 	}
 });
 
