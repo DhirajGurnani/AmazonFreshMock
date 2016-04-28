@@ -210,8 +210,8 @@ exports.deleteTrip = function(request,response){
 exports.getTrips = function(request,response){
 	try {
 		
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				var sqlGetTrip = sqlQueryList.getAllTrips();
 				dbHelper.executeQuery(
 						sqlGetTrip, 
@@ -229,6 +229,7 @@ exports.getTrips = function(request,response){
 							});
 						});
 			}
+	/*
 			else {
 				response.send({
 	        		"status": 403,
@@ -244,6 +245,7 @@ exports.getTrips = function(request,response){
 		}
 		
 	} 
+	*/
 		catch (err) {
 		response.send({
 			"status" : 500,
@@ -253,8 +255,8 @@ exports.getTrips = function(request,response){
 };
 exports.getPendingTrips = function(request,response){
 	try {		
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				var sqlGetPendingTrip = sqlQueryList.getAllPendingTrips();
 				dbHelper.executeQuery(
 						sqlGetPendingTrip, 
@@ -271,7 +273,7 @@ exports.getPendingTrips = function(request,response){
 								"errmsg" : error 
 							});
 						});
-			}
+			}/*
 			else {
 				response.send({
 	        		"status": 403,
@@ -286,7 +288,7 @@ exports.getPendingTrips = function(request,response){
 	    	});
 		}
 		
-	} 
+	} */
 		catch (err) {
 		response.send({
 			"status" : 500,
