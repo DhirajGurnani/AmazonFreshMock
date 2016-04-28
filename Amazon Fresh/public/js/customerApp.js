@@ -27,7 +27,6 @@ customerApp.controller('mainController', function($scope, $http) {
 				}
 			}
 		});
-		
 	};
 });
 
