@@ -3,7 +3,6 @@
 		<b>Create New Trips</b>
 	</h3>
 	<div class="row" style="text-align: center">
-		<form method="POST" action="#">
 			<h3>Select the billed orders</h3>
 			<input type="checkbox" name="bill" value="112"> Order 112<br />
 			<input type="checkbox" name="bill" value="113"> Order 113<br />
@@ -12,14 +11,13 @@
 			<h3>Select the Driver</h3>
 			<select ng-model="selectedDriver">
 				<option value="">Select</option>
-    			<option ng-repeat="driver in drivers" value="{{driver.driver_id}}">{{driver.name}}</option>
+    			<option ng-repeat="driver in drivers" value="{{driver.driver_id}}">{{"Name: "+driver.name+"; Phone: "+driver.phone}}</option>
 			</select> <br /> <br />
 			<h3>Select the Truck</h3>
-			<select ng-model="truck">
-				<option value="112">Truck 112</option>
-				<option value="113">Truck 113</option>
-				<option value="114">Truck 114</option>
-			</select> <br /> <br /> <br /> <br /> <input type="submit" value="Submit">
-		</form>
+			<select ng-model="selectedTruck">
+				<option value="">Select</option>
+    			<option ng-repeat="truck in trucks" value="{{truck.truck_id}}">{{"Name: "+truck.name+"; Number: "+truck.truck_no}}</option>
+			</select> <br /> <br /> <br />
+			<button type="button" ng-click="createTrip()">Submit</button>
 	</div>
 </div>
