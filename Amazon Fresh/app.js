@@ -37,7 +37,7 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 //app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
 
 /*Session Data
@@ -75,7 +75,7 @@ app.use('/',function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/index.html');
+			response.sendfile(__dirname + '/public/video.html');
 		}
 	}
 	else {

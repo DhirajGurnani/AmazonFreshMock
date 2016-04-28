@@ -82,8 +82,8 @@ exports.getVideo = function(request, response) {
     		bucketName: 'videos'
       	});
 
-        bucket.openDownloadStreamByName('saibaba.mp4').
-        pipe(fs.createWriteStream('./public/video')).
+        bucket.openDownloadStreamByName('google.mp4').
+        pipe(response).
         on('error', function(error) {
             //assert.ifError(error);
             response.send("error");
