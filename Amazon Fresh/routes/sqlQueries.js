@@ -291,3 +291,21 @@ return "UPDATE User_profiles set status = 'active' where role = 'farmer' and pui
 exports.approveproduct = function(product_id) {
 return "UPDATE Products set status = 'approved' where  product_id = '" + product_id + "'";
 };
+
+exports.getQueryForBillingCreation = function(customer_id, address, location, state, zipcode, phone, total_price, delivery_date, delivery_id, status) {
+	return "insert into Billing(customer_id, address, location, state, zipcode, phone, total_price, delivery_date, delivery_id, status) " +
+			"values('" + customer_id+  "','"  + address+  "','"  + location+  "','"  + state+  "','"  + zipcode+  "','"  + phone+  "','"  + total_price+  "','"  + delivery_date+  "','"  + delivery_id+  "','"  + status + "')";
+};
+
+exports.getQueryForBillingInfoCreation = function(billing_id, product_id, quantity) {
+	return "insert into BillingInfo(billing_id, product_id, quantity) " +
+			"values(" + billing_id + "," + product_id + "," + quantity + ")";
+};
+
+exports.getFarmerProfileByProductId = function(product_id) {
+	return "select * from User_profiles where puid = (select puid from products where product_id = " + product_id + ")";
+};
+
+exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
+	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
+};
