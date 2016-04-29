@@ -63,7 +63,7 @@ adminApp.controller('createController', function($scope, $http) {
 		$http({
 			method : 'POST',
 			url : '/api/admin/trips/createTrip',
-			data : {"billing_id" : billingIds, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"123", "comments":"Created trip"},
+			data : {"billing_id" : billingIds, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"100001", "comments":"Created trip"},
 			headers : {
 					'Content-Type' : 'application/json'
 			}
@@ -93,6 +93,25 @@ adminApp.controller('pendingController', function($scope, $http) {
 		});
 	}
 	getPendingTrips();
+	
+	$scope.tripDelete = function(trip_Id){
+		$http({
+			method : 'POST',
+			url : '/api/admin/trips/deleteTrip',
+			data : {"trip_id" : trip_Id},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			console.log('success read');
+			if(data.status === 200) {
+				console.log('Success');
+				window.location = '/pendingTrips';
+			}
+			else {				
+			}
+		});
+	}
 });
 
 adminApp.controller('completedController', function($scope, $http) {
