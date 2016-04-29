@@ -60,27 +60,27 @@ app.use('/',function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
 	if(request.session) {
 		if(request.session.profile) {
-			if(request.session.profile.role === 'customer') {
+			if(request.session.profile[0].role === 'customer') {
 				console.log("role == customer: ");
 				response.sendfile(__dirname + '/public/customer.html');
 			}
-			else if(request.session.profile.role === 'admin') {
+			else if(request.session.profile[0].role === 'admin') {
 				console.log("role == admin: ")
 				response.sendfile(__dirname + '/public/admin.html');
 			}
-			else if(request.session.profile.role === 'farmer') {
+			else if(request.session.profile[0].role === 'farmer') {
 				console.log("role == farmer: ");
 				response.sendfile(__dirname + '/public/farmer.html');
 			}
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/admin.html');
+			response.sendfile(__dirname + '/public/customer.html');
 		}
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/admin.html');
+		response.sendfile(__dirname + '/public/customer.html');
 	}
 });
 

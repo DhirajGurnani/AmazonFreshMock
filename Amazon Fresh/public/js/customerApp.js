@@ -1,3 +1,4 @@
+
 /**
  * New node file
  */
@@ -13,11 +14,15 @@ customerApp.config([ '$routeProvider', '$locationProvider',
 				templateUrl : 'amazon_login.html',
 				controller : 'loginController'
 			}).when('/home', {
+				
 				templateUrl : 'amazon_home.html',
 				controller : 'homeController'
 			}).when('/doSignup', {
 				templateUrl : 'amazon_signup.html',
 				controller : 'signupController'
+			}).when('/product_category', {
+				templateUrl : 'amazon_product_category.html',
+				controller : 'product_categoryController'
 			});
 			$locationProvider.html5Mode(true);
 		} ]);
@@ -35,6 +40,13 @@ customerApp.controller('mainController', function($scope, $http) {
 			}
 		});
 	};
+	$scope.go_to_loginpage = function() {
+		// alert("login");
+		// console.log("in home");
+		window.location = "/doLogin";
+	};
+
+	
 });
 
 customerApp.controller('homeController', function($scope, $http) {
@@ -44,10 +56,17 @@ customerApp.controller('homeController', function($scope, $http) {
 		window.location = "/doLogin";
 	};
 	$scope.go_to_product_cayegory = function() {
+		 //alert("login");
+		// console.log("in home");
+		
+		window.location = "/product_category";
+	};
+	$scope.logout_from_account = function() {
 		// alert("login");
 		// console.log("in home");
 		window.location = "/doLogin";
 	};
+
 
 });
 
@@ -71,8 +90,10 @@ customerApp.controller('loginController', function($scope, $http) {
 		}).success(function(data) {
 			console.log("success");
 			console.log(data + "success");
-
-			window.location == "/home";
+			alert(data);
+			window.location = "/home";
+			
+			
 		}).error(function(data) {
 			console.log("failure");
 			console.log(data);
@@ -83,18 +104,28 @@ customerApp.controller('loginController', function($scope, $http) {
 });
 
 customerApp.controller('signupController', function($scope, $http) {
-	$scope.go_to_signup = function() {
-		window.location = "/doSignup";
+	$scope.go_to_loginpage = function() {
+		//alert("signup");
+		window.location = "/doLogin";
 	};
-
-	$scope.checklogin = function() {
-		// alert("went");
+	$scope.go_to_signup_operation = function() {
+//		alert("aaya");
 		$http({
 			method : 'POST',
-			url : 'api/login',
+			url : 'api/register',
 			data : {
-				"username" : $scope.email,
-				"password" : $scope.password
+				"first_name" : $scope.firstname,
+				"last_name" : $scope.lastname,
+				"email" : $scope.email,
+				"birthday" : $scope.birthday,
+				"address" : $scope.address,
+				"location" : $scope.location,
+				"state" : $scope.state,
+				"zipcode" : $scope.zipcode,
+				"phone" : $scope.phone,
+				"role" : $scope.role,
+				"password" : $scope.password,
+				"status" : "pending"
 			},
 			headers : {
 				'Content-Type' : 'application/json'
@@ -102,13 +133,22 @@ customerApp.controller('signupController', function($scope, $http) {
 		}).success(function(data) {
 			console.log("success");
 			console.log(data + "success");
-
-			window.location == "/home";
+//			alert(data);
+			window.location = "/doLogin";
+			
+			
 		}).error(function(data) {
 			console.log("failure");
 			console.log(data);
 			// alert(data+"fail");
 		});
-
+	
 	};
+
+
+});
+
+customerApp.controller('product_categoryController', function($scope, $http) {
+	
+
 });
