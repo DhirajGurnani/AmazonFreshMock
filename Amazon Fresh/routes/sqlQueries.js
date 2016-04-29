@@ -1,6 +1,6 @@
 exports.getTripId = function(driverId,truckId,location,adminId,comment){
 	var timestamp = new Date().getTime();
-	return "insert into Trips(driver_id,truck_id,truck_location,admin_id,comment) values (" +
+	return "insert into Trips(driver_id,truck_id,truck_location,admin_id,comments) values (" +
 			  driverId +","
 			+ truckId +",'"
 			+ location+"','"

@@ -28,6 +28,7 @@ exports.createTrip = function(request,response){
 				 * Queries for Updating Trips,TripInfo,Driver, Truck
 				 */
 				var sqlQueryTrip  = sqlQueryList.getTripId(driverId,truckId,location,adminId,comment);
+				console.log(sqlQueryTrip);
 				var sqlQueryTruck = sqlQueryList.updateTruck(truckId);
 				var sqlQueryDriver = sqlQueryList.updateDriver(driverId);
 				dbHelper.executeQuery(
