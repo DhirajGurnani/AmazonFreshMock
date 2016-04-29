@@ -2,22 +2,32 @@
 	<h3 style="text-align: center">
 		<b>Create New Trips</b>
 	</h3>
+	<br/><br/>
 	<div class="row" style="text-align: center">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-4" style="margin-left:5px; text-align:left">
 			<h3>Select the billed orders</h3>
-			<input type="checkbox" name="bill" value="112"> Order 112<br />
-			<input type="checkbox" name="bill" value="113"> Order 113<br />
-			<input type="checkbox" name="bill" value="114"> Order 114<br />
-			<br /> <br />
+			<div ng-repeat="bill in bills">
+				<input type="checkbox" ng-model="bill.checked" value="{{bill.billing_id}}">{{"Bill Id= "+bill.billing_id+"; Address= "+bill.address+"; Location= "+bill.location}}<br/>
+			</div>
+		</div>
+		<div class="col-sm-3">
 			<h3>Select the Driver</h3>
 			<select ng-model="selectedDriver">
 				<option value="">Select</option>
     			<option ng-repeat="driver in drivers" value="{{driver.driver_id}}">{{"Name: "+driver.name+"; Phone: "+driver.phone}}</option>
-			</select> <br /> <br />
+			</select> <br />
+		</div>
+		<div class="col-sm-3">
 			<h3>Select the Truck</h3>
 			<select ng-model="selectedTruck">
 				<option value="">Select</option>
     			<option ng-repeat="truck in trucks" value="{{truck.truck_id}}">{{"Name: "+truck.name+"; Number: "+truck.truck_no}}</option>
-			</select> <br /> <br /> <br />
-			<button type="button" ng-click="createTrip()">Submit</button>
+			</select> <br />
+		</div>
+	</div>
+	<br/>
+	<div class="row" style="text-align:center">
+		<button type="button" class="btn btn-primary" ng-click="tripCreate()">Submit</button>
 	</div>
 </div>

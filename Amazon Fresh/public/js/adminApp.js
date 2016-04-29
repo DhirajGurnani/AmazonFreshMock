@@ -43,10 +43,41 @@ adminApp.controller('createController', function($scope, $http) {
 	var getBillDetails = function() {
 		var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
 		getBillDetailsResponse.success(function(bill){
-			$scope.bills = bill.message;
-			console.log(bill.message);
+			console.log(bill);
+			$scope.bills = bill.bills;
+			console.log(bill);
 		});
 	};
+	$scope.tripCreate = function(){
+		
+		var billingIds = [];
+		for(var index = 0; index < $scope.bills.length; index++) {
+			if($scope.bills[index].checked) {
+				billingIds.push($scope.bills[index].billing_id)
+			}
+		}
+		
+		console.log($scope.bills[0].checked);
+		console.log($scope.selectedDriver);
+		console.log($scope.selectedTruck);
+		$http({
+			method : 'POST',
+			url : '/api/admin/trips/createTrip',
+			data : {"billing_id" : billingIds, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"123", "comments":"Created trip"},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			console.log('success read');
+			if(data.status === 200) {
+				console.log('Success');
+				window.location = '/';
+			}
+			else {				
+			}
+		});
+	};
+	
 	getTruckDetails();
 	getDriverDetails();
 	getBillDetails();
