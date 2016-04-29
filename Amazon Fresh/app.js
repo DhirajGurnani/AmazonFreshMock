@@ -165,11 +165,14 @@ app.post('/api/login', function(req, res, next) {
 	  console.log(req.session);
 	  res.redirect('/');
 	};
-
-
+	
 app.post('/api/logout',function(request,response){
 	request.session.destroy();
 	response.redirect('/');
+});
+
+app.get('/api/getSessionInfo',function(request,response){
+	response.send(request.session);
 });
 /*************** Farmers API *****************/
 /*****Farmers*****/
