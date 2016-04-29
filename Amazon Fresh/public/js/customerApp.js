@@ -23,6 +23,9 @@ customerApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/product_category', {
 				templateUrl : 'amazon_product_category.html',
 				controller : 'product_categoryController'
+			}).when('/go_customer_profile', {
+				templateUrl : 'amazon_customer_profile.html',
+				controller : 'product_categoryController'
 			});
 			$locationProvider.html5Mode(true);
 		} ]);
@@ -65,6 +68,14 @@ customerApp.controller('homeController', function($scope, $http) {
 		// alert("login");
 		// console.log("in home");
 		window.location = "/doLogin";
+	};$scope.go_to_homepage = function() {
+		// alert("login");
+		// console.log("in home");
+		window.location = "/home";
+	};$scope.go_to_customer_profile = function() {
+		// alert("login");
+		// console.log("in home");
+		window.location = "/go_customer_profile";
 	};
 
 

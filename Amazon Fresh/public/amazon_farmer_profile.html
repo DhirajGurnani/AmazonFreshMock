@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Amazon Home</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <style>
+		#panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+		.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+	  </style>
+   </head>
+   <body>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
+			<div class="container-fluid" style="color:white">
+               <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+			   Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
+			</div>
+		</nav>
+		<br/><br/><br/>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="dropdown col-sm-3" style="padding-left:15px">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#484848; margin-left:10px">Shop <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#"><strong>fruits</strong><br>Check out your fruits</a></li><br>
+							<li><a href="#"><strong>Vegetables</strong><br>Fresh Vegeies every day</a></li><br>
+							<li><a href="#"><strong>Dairy</strong><br>A healthy Dairy for healthy heart</a></li><br>
+							<li><a href="#"><strong>Meat</strong><br>Meats of all kinds</a></li> 	<br>
+							<li><a href="#"><strong>Others</strong><br>We have a solution for you</a></li>
+						</ul>
+					</div>
+					<div class="input-group col-sm-9">
+						<input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
+						<span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
+							<button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
+						</span>
+					</div>
+				</div>
+				
+					<br/>
+					<div class="row" style="margin-left:2px;">
+					
+					<div class="col-sm-1">
+					<form action="/editprofile" method="get">
+<strong>Firstname:</strong><br><br>
+<strong>Lastname:</strong><br><br>
+<strong>Birthday:</strong><br><br>
+<strong>Address:</strong><br><br>
+<strong>Location:</strong><br><br>
+<strong>State:</strong><br><br>
+<strong>Zipcode:</strong><br><br>
+<strong>Phone:</strong><br><br>
+<strong>Status:</strong><br><br>
+<strong>Created at:</strong><br><br>
+<strong>Updated at:</strong><br><br>
+<input type ="submit" value ="Edit">
+					</div>
+					<div class="col-sm-2">
+					
+					Dhiraj<br><br>
+					Gurnani<br><br>
+					20-10-1993<br><br>
+					33 South 3rd street<br><br>
+					San Jose<br><br>
+					CA<br><br>
+					95113<br><br>
+					8034799713<br><br>
+					Active<br><br>
+					12-04-2016<br><br>
+					24-04-2016<br><br>
+										
+					</div>
+					<div class="col-sm-9">
+					<h4>Farmer's Photos</h4>
+							<div class = "row">
+   
+   <div class = "col-sm-6 col-md-3">
+ <div style="margin-left:85%"><button type="button" class="btn btn-danger">
+ 		<span class="glyphicon glyphicon-remove"></span></button>
+   </div>
+      <a href = "#" class = "thumbnail">
+         <img src = "https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/TCG/Q1/021015_TCG_ZipLaunch_Generic._V330194894_.jpg" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+   <div style="margin-left:85%"><button type="button" class="btn btn-danger">
+ 		<span class="glyphicon glyphicon-remove"></span></button>
+   </div>
+ 
+      <a href = "#" class = "thumbnail">
+         <img src = "https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review10._V325041030_.jpg" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+ <div style="margin-left:85%"><button type="button" class="btn btn-danger">
+ 		<span class="glyphicon glyphicon-remove"></span></button>
+   </div>
+      <a href = "#" class = "thumbnail">
+         <img src = "https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_Review5._V324775003_.jpg" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+ <div style="margin-left:85%"><button type="button" class="btn btn-danger">
+ 		<span class="glyphicon glyphicon-remove"></span></button>
+   </div>
+      <a href = "#" class = "thumbnail">
+         <img src = "https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/Gateway/Unrecognized_TCG_ShopComfortably._V325819920_.jpg" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+</div>
+						<span class="btn btn-info btn-file">
+ 						   <div style="font-size:15px;">
+        <span class="glyphicon glyphicon-plus"></span>
+        </div> Click here to upload pictures of farm	
+ 						    <input type="file">
+						</span>
+					
+						<br><br><br>
+
+		<video controls>
+		<source src="./12.mp4" type="video/mp4">
+		</video controls>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+
+<br/>
+		<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+		</div>
+   </body>
+</html>
