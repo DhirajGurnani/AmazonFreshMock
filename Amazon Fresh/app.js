@@ -167,7 +167,10 @@ app.post('/api/login', function(req, res, next) {
 	};
 
 
-
+app.post('/api/logout',function(request,response){
+	request.session.destroy();
+	response.redirect('/');
+});
 /*************** Farmers API *****************/
 /*****Farmers*****/
 app.get('/api/farmers', farmers.getFarmers);
