@@ -13,7 +13,9 @@ exports.updateTripInfoQuery = function(tripId,billId){
 	tripId+","+
 	billId+");"
 };
-
+exports.getBillId = function(tripId){
+	return "select billing_id from TripInfo where trip_id = "+tripId+";";
+};
 exports.updateTruck=function(truckId){
 	return "update Trucks set status ='in_delivery' where truck_id = "+truckId+";"
 };
@@ -34,6 +36,13 @@ exports.updateBillingQuery = function(driverId,billId){
 	driverId+" where billing_id ="+
 	billId+";"
 };
+
+exports.billUpdateQuery = function(billId){
+	return "update Billing set status = 'placed' where billing_id ="+
+	billId+";"
+};
+
+
 
 exports.getTripQuery = function(tripId){
 	return "Select * from Trips where trip_id ="+tripId+";"

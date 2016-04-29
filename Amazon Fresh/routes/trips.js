@@ -103,8 +103,8 @@ exports.createTrip = function(request,response){
 
 exports.deleteTrip = function(request,response){
 	try {
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				/*
 				 * Variable Decleration for Trips
 				 */
@@ -114,6 +114,7 @@ exports.deleteTrip = function(request,response){
 				var billId;
 				var adminId;
 				var comment;
+				var bills;
 				var tripId = request.body.trip_id;
 				/*
 				 * Queries for Updating Trips,TripInfo,Driver, Truck
@@ -133,8 +134,25 @@ exports.deleteTrip = function(request,response){
 								var sqlQueryTruck  = sqlQueryList.updateTruckAvailable(truckId);
 								console.log(sqlQueryDriver);
 								console.log(sqlQueryTruck);
-								
-								
+								var getBillId = sqlQueryList.getBillId(tripId);
+								dbHelper.executeQuery(
+										getBillId,function(success){											
+											console.log(success.length);
+											for (var i = 0; i< success.length;i++)
+												{
+												var temp =success[i].billing_id;
+												var billUpdateQuery = sqlQueryList.billUpdateQuery(temp);
+												dbHelper.executeQuery(
+														billUpdateQuery,function(success){
+															console.log("success");
+														},function(error){														
+														});			
+												}
+											
+										},function(error){
+									
+								}); 
+					
 								var deleteTrips = sqlQueryList.deleteTrips(tripId);
 								var deleteTripInfo = sqlQueryList.deleteTripInfo(tripId);
 								dbHelper.executeQuery(sqlQueryTruck,function(success){
@@ -169,8 +187,10 @@ exports.deleteTrip = function(request,response){
 										"errMessage":error
 									})
 
-								});								
+								});
+										
 							}
+							
 							response.send({
 								"status" : 200, //or 201 for creation,
 								"message": "Delete Sucessful"
@@ -185,6 +205,7 @@ exports.deleteTrip = function(request,response){
 							});
 						});
 			}	
+			/*
 			else {
 				response.send({
 	        		"status": 403,
@@ -200,6 +221,7 @@ exports.deleteTrip = function(request,response){
 		
 		}
 	} 
+	*/
 		catch (err) {
 		response.send({
 			"status" : 500,
