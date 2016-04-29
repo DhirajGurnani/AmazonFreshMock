@@ -2,7 +2,6 @@
 		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
 			<div class="container-fluid" style="color:white">
                <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
-			   Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
 			</div>
 		</nav>
 <br>
@@ -80,20 +79,20 @@
 <strong>Status:</strong><br><br>
 <strong>Created at:</strong><br><br>
 <strong>Updated at:</strong><br><br>
-<input type ="submit" value ="Edit">
-</div>
+				<button ng-click="edit_customer_profile();"  class="btn" style="color:white; background-color:#808080">Edit</button>
+	</div>
 <div class="col-sm-3">
-Dhiraj<br><br>
-Gurnani<br><br>
-20-10-1993<br><br>
-33 South 3rd street<br><br>
-San Jose<br><br>
-CA<br><br>
-95113<br><br>
-8034799713<br><br>
-Active<br><br>
-12-04-2016<br><br>
-24-04-2016<br><br>
+{{first_name}}<br><br>
+{{last_name}}<br><br>
+{{birthday}}<br><br>
+{{address}}<br><br>
+{{location}}<br><br>
+{{state}}<br><br>
+{{zipcode}}<br><br>
+{{phone}}<br><br>
+{{status}}<br><br>
+{{created_at}}<br><br>
+{{updated}}<br><br>
 
 </div>
 </form>
