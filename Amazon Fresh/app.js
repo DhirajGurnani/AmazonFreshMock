@@ -10,12 +10,13 @@ var express = require('express')
   , customer = require('./routes/customer')
   , product = require('./routes/product')
   , admin = require('./routes/admin')
-  
+  , billing = require('./routes/billing')
   , farmers = require('./routes/farmer')
   , http = require('http')
   , path = require('path')
   , random = require('./routes/random');
 
+var https = require('https');
 /*
  * Session Management and Session Store using Passport JS
  * */
@@ -56,7 +57,7 @@ app.use(expressSessions({
 app.use(passport.initialize());
 
 app.use(app.router);
-app.use('/',function(request, response) {
+app.use('/', function(request, response) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
 	if(request.session) {
 		if(request.session.profile) {
@@ -80,7 +81,7 @@ app.use('/',function(request, response) {
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/customer.html');
+		response.sendfile(__dirname + '/public/admin.html');
 	}
 });
 
@@ -127,6 +128,40 @@ app.get('/api/zipcode/:zip', function(request, response) {
 					"availability" : false
 				});
 			});
+});
+
+app.post('/api/convertToLatLng', function(request, response) {
+
+    var options = {
+        host: 'maps.googleapis.com',
+        path: '/maps/api/geocode/json?address=' +
+            encodeURIComponent(request.body.address.trim()) +
+            encodeURIComponent(request.body.location.trim()) +
+            encodeURIComponent(request.body.state.trim()) +
+            encodeURIComponent(request.body.zipcode.trim()) +
+            '&key=AIzaSyAedFlNKrewiALWjKTQfNHB6Y7yjRbDaoU'
+    };
+
+    https.get(options, function(res) {
+        res.setEncoding('utf8');
+        var body = '';
+        res.on('data', function(chunk) {
+            console.log('BODY: ' + chunk);
+            body += chunk;
+        });
+        res.on('end', function() {
+            console.log("body: " + body)
+
+            var parsedBody = JSON.parse(body);
+            var geometry = parsedBody.results[0].geometry;
+
+            response.send({
+                "status": 200,
+                "geometry": geometry
+            });
+        });
+    }).end();
+
 });
 
 /*************** Authentication API *****************/
@@ -185,6 +220,11 @@ app.post('/postvideo', farmers.postVideo);
 app.get('/video', farmers.getVideo);
 app.get('/video/get', random.getVideo);
 app.post('/video/post', random.postVideo);
+app.get('/api/farmers/:puid/video', farmers.getVideoForFarmerByPuid);
+app.post('/api/farmers/:puid/video', farmers.postVideoForFarmerByPuid);
+app.get('/api/farmers/:puid/images', farmers.getImageUrlsForFarmerByPuid);
+app.get('/api/farmers/images/:imageName', farmers.getImageByImageUrl);
+app.post('/api/farmers/:puid/images', farmers.postImagesForFarmerByPuid);
 /*****Farm Info*****/
 
 /*************** Customers API *****************/
@@ -218,6 +258,8 @@ app.get('/api/admin/trips/availableDrivers',trips.availableDrivers);
 app.get('/api/admin/trips/availableTrucks',trips.availableTrucks);
 app.get('/api/admin/trips/getBills',trips.getBills);
 
+/*************** Billing API *****************/
+app.post('/api/billing/create', billing.createNewBill);
 
 /*************** End Backend API *****************/
 

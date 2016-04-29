@@ -27,6 +27,69 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 ]);
 
 adminApp.controller('createController', function($scope, $http) {
+	var routes = [];
+	var myCenter;
+	var index = 0;
+	var map;
+
+	var getRouteData = function(bill, success) {
+        $http({
+            method: 'POST',
+            url: '/api/convertToLatLng',
+            data: {
+                "address": bill.address,
+                "location": bill.location,
+                "state": bill.state,
+                "zipcode": bill.zipcode
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            var latLng = {};
+            latLng.lat = data.geometry.location.lat;
+            latLng.lng = data.geometry.location.lng;
+            latLng.billing_id = bill.billing_id;
+            success(latLng);
+        });
+    };
+
+	var initialize = function() {
+	    var mapProp = {
+	        center: myCenter,
+	        zoom: 14,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+	    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+	    var markers = [];
+	    routes.forEach(function(oneroute) {
+	    	myCenter = new google.maps.LatLng(oneroute.lat, oneroute.lng);
+	        var marker = new google.maps.Marker({
+	            position: myCenter,
+	            animation:google.maps.Animation.BOUNCE,
+	            label : oneroute.billing_id,
+	            map: map
+	        });
+	        markers.push(marker);
+	    });
+	};
+
+	$scope.loadCustomerDataInMap = function() {
+	    var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
+	    getBillDetailsResponse.success(function(bill) {
+	    	bill.bills.forEach(function(eachBill) {
+	    		getRouteData(eachBill, function(latlng) {
+	    			routes.push(latlng);
+	    			if(routes.length === bill.bills.length) {
+	    	    		console.log(JSON.stringify(routes));
+	    				myCenter = new google.maps.LatLng(routes[routes.length / 2].lat, routes[routes.length / 2].lng);
+	    				google.maps.event.addDomListener(window, 'load', initialize);
+	    			}
+	    		});
+	    	});
+	    });
+	};
+
 	var getDriverDetails = function() {
 		var getDriverDetailsResponse = $http.get('/api/admin/trips/availableDrivers');
 		getDriverDetailsResponse.success(function(driver){
@@ -37,15 +100,12 @@ adminApp.controller('createController', function($scope, $http) {
 		var getTruckDetailsResponse = $http.get('/api/admin/trips/availableTrucks');
 		getTruckDetailsResponse.success(function(truck){
 			$scope.trucks = truck.message;
-			console.log(truck.message);
 		});
 	};
 	var getBillDetails = function() {
 		var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
 		getBillDetailsResponse.success(function(bill){
-			console.log(bill);
 			$scope.bills = bill.bills;
-			console.log(bill);
 		});
 	};
 	$scope.tripCreate = function(){
@@ -56,10 +116,6 @@ adminApp.controller('createController', function($scope, $http) {
 				billingIds.push($scope.bills[index].billing_id)
 			}
 		}
-		
-		console.log($scope.bills[0].checked);
-		console.log($scope.selectedDriver);
-		console.log($scope.selectedTruck);
 		$http({
 			method : 'POST',
 			url : '/api/admin/trips/createTrip',
@@ -68,20 +124,16 @@ adminApp.controller('createController', function($scope, $http) {
 					'Content-Type' : 'application/json'
 			}
 		}).success(function(data) {
-			console.log('success read');
 			if(data.status === 200) {
-				console.log('Success');
 				window.location = '/';
 			}
 			else {				
 			}
 		});
 	};
-	
 	getTruckDetails();
 	getDriverDetails();
 	getBillDetails();
-	
 });
 
 adminApp.controller('pendingController', function($scope, $http) {

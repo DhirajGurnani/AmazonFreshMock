@@ -8,6 +8,7 @@ var connection;
 exports.executeQuery = function(queryString, successCallBack, failureCallBack) {
 	connection = mysql.getConnection(function(connection) {
 		connection.query(queryString, function(error, rows, fields) {
+			console.log("query: " + queryString);
 			if (!error) {
 				console.log("Response obtained for query: " 
 						+ queryString
