@@ -123,17 +123,19 @@ exports.postImagesForFarmerByPuid = function(request, response) {
 		dbHelper.doesExistInDb(farmers, {
 			"puid": request.params.puid
 		}, function() {
-			dbHelper.readOne(farmers, {"puid":request.params.puid}, function(data) {
+			dbHelper.readOne(farmers, {"puid":request.params.puid}, null, function(data) {
 				var imageID = uuid.v4() + ".png";
 				var farmerpuid = request.params.puid;
 				data[farmerpuid].images.push(imageID);
+				console.log(data);
 				//already present in db
+				
 				var searchData = {};
 				searchData.puid = request.params.puid;
 				var postData = {};
-				var imageKery = {};
-				imageKey = farmerpuid + ".images";
-				postData['$set'] = { imageKey: data};
+				var imageKey = {};
+				imageKey[farmerpuid] = data[farmerpuid];
+				postData['$set'] = imageKey;
 				dbHelper.updateCollection(farmers, searchData, postData, function() {
 					mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
 				        var bucket = new mongodb.GridFSBucket(db, {
