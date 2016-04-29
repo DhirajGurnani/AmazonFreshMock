@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top"
 		style="background-color: #484848; padding: 10px">
 		<div class="container-fluid">
-			<a href=""><img
+			<a href ng-click="go_to_homepage();"><img
 				src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
 				alt="Amazon logo"></a>
 		</div>
@@ -18,8 +18,8 @@
 				<br />
 			</h4>
 			E-mail <input type="email" class="form-control"
-				ng-model="email"> <br /> Password <input type="password"
-				class="form-control" ng-model="password"> <span
+				ng-model="email" required> <br /> Password <input type="password"
+				class="form-control" ng-model="password" required> <span
 				class="pull-right"><a href="" style="color: #4d9900"><u><small>Forgot
 							password?</small></u></a></span> <br />
 			<br />

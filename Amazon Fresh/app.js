@@ -172,6 +172,7 @@ app.post('/api/logout',function(request,response){
 });
 
 app.get('/api/getSessionInfo',function(request,response){
+	console.log(request.session);
 	response.send(request.session);
 });
 /*************** Farmers API *****************/

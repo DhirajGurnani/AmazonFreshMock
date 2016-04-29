@@ -5,19 +5,19 @@
 			<a href ng-click="go_to_homepage();"><img
 				src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
 				alt="Amazon logo">
-				<div ng-hide=true></a> Already an AmazonFresh customer? <a href
+				<div ng-hide="Loggedoff"></a> Already an AmazonFresh customer? <a href
 				ng-click="go_to_loginpage();" style="color: white"><u>Sign
 					in</u></a>
 		</div>
 		<ul class="nav navbar-nav pull-right">
 			<div class="row">
 				<div class="col-sm-8">
-					<div ng-hide=false>
+					<div ng-hide="Loggedin">
 						<div class="dropdown" style="padding-left: 15px">
 							<button class="btn btn-primary dropdown-toggle" type="button"
 								data-toggle="dropdown"
 								style="background-color: #484848; margin-left: 10px">
-								Dhiraj Gurnani <span class="caret"></span>
+								{{username}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
 								<li><a href ng-click="go_to_customer_profile();"><strong>Profile</strong></a></li>
@@ -296,12 +296,12 @@
 		<p>AmazonFresh is available exclusively to Prime Fresh members in
 			eligible zip codes.</p>
 		<br />
-		<div ng-hide=true>
+		<p ng-hide="Loggedoff">
 		<button class="form-control" ng-click="go_to_loginpage();"
 			style="background-color: green; color: white">Sign in with
 			Amazon account</button>
 		<br />
-		</div>
+		</p>
 		<p>
 			Not a Prime Fresh member?<a href="#" style="color: blue"><u>Start
 					your 30-day FREE trial today</u></a>

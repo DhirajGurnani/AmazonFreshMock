@@ -25,7 +25,7 @@ customerApp.config([ '$routeProvider', '$locationProvider',
 				controller : 'product_categoryController'
 			}).when('/go_customer_profile', {
 				templateUrl : 'amazon_customer_profile.html',
-				controller : 'product_categoryController'
+				controller : 'customer_profileController'
 			});
 			$locationProvider.html5Mode(true);
 		} ]);
@@ -43,6 +43,11 @@ customerApp.controller('mainController', function($scope, $http) {
 			}
 		});
 	};
+	$scope.go_to_homepage = function() {
+		// alert("login");
+			// console.log("in home");
+			window.location = "/home";
+		};
 	$scope.go_to_loginpage = function() {
 		// alert("login");
 		// console.log("in home");
@@ -53,6 +58,26 @@ customerApp.controller('mainController', function($scope, $http) {
 });
 
 customerApp.controller('homeController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+	sessioninfo.success(function(data) {
+		/*/alert("aaya");
+		console.log(data);
+		alert(data.profile);
+		*/if(data.profile){
+			$scope.Loggedin = false;
+			$scope.Loggedoff = true;
+			$scope.username = data.profile[0].first_name;
+		//	alert("yes");
+			}else{
+
+				$scope.Loggedin = true;
+				$scope.Loggedoff = false;
+				
+			//	alert("no");
+			
+		}
+	});
+
 	$scope.go_to_loginpage = function() {
 		// alert("login");
 		// console.log("in home");
@@ -65,9 +90,25 @@ customerApp.controller('homeController', function($scope, $http) {
 		window.location = "/product_category";
 	};
 	$scope.logout_from_account = function() {
-		// alert("login");
-		// console.log("in home");
-		window.location = "/doLogin";
+		$http({
+			method : 'POST',
+			url : 'api/logout',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+/*			console.log("success");
+			console.log(data + "success");
+			alert(data);
+*/			window.location = "/doLogin";
+			
+			
+		}).error(function(data) {
+			console.log("failure");
+			console.log(data);
+			// alert(data+"fail");
+		});
+
 	};$scope.go_to_homepage = function() {
 		// alert("login");
 		// console.log("in home");
@@ -111,7 +152,11 @@ customerApp.controller('loginController', function($scope, $http) {
 			// alert(data+"fail");
 		});
 
-	};
+	};$scope.go_to_homepage = function() {
+		 //alert("login");
+			// console.log("in home");
+			window.location = "/home";
+		};
 });
 
 customerApp.controller('signupController', function($scope, $http) {
@@ -161,5 +206,11 @@ customerApp.controller('signupController', function($scope, $http) {
 
 customerApp.controller('product_categoryController', function($scope, $http) {
 	
+
+});
+
+
+customerApp.controller('customer_profileController', function($scope, $http) {
+
 
 });
