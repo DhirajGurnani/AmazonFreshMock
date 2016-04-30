@@ -76,7 +76,7 @@ app.use('/', function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/admin.html');
+			response.sendfile(__dirname + '/public/customer.html');
 		}
 	}
 	else {
@@ -241,8 +241,8 @@ app.post('/api/register',authentication.signup);
 app.post('/api/product/create',product.createproduct);
 app.get('/api/products',product.listallproducts);
 app.get('/api/product/:product_id',product.showparticularproducts);
-app.post('/api/product/:categoryid',product.listproductsbycategoryid);
-app.post('/api/product/:categoryid/:subcategoryid',product.listproductsbysubcategoryid);
+app.post('/api/product/category/:categoryid',product.listproductsbycategoryid);
+app.post('/api/product/category/:categoryid/subcategory/:subcategoryid',product.listproductsbysubcategoryid);
 app.post('api/product/:product_id/update',product.updateproduct);
 app.get('/api/product/:product_id/ratings',product.productratings);
 app.get('/api/product/:product_id/reviews',product.productreview);
