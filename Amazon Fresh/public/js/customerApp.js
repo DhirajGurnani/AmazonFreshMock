@@ -148,6 +148,12 @@ customerApp.controller('homeController', function($scope, $http) {
     $scope.go_to_customer_profile = function() {
         window.location = "/customer_profile";
     };
+    $scope.go_to_customer_orders = function(){
+    	window.location = "/customer_orders"
+    };
+    $scope.go_to_cart = function(){
+    	window.location = "/cart"
+    };
     $scope.logout_from_account = function() {
         $http({
             method: 'POST',
