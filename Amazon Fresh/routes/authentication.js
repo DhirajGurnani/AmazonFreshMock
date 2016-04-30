@@ -85,3 +85,48 @@ exports.signup = function(request,response){
 		});
 	}
 };
+
+exports.validEmail = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var email = request.body.email;
+				var sqlValidEmail = sqlQueryList.sqlValidEmail(email);
+				dbHelper.executeQuery(
+						sqlValidEmail, 
+						function(success) {
+							if(success.length>0)
+							response.send(true);
+							else
+							response.send(false);
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
