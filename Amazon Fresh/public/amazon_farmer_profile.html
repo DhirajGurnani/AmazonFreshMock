@@ -1,3 +1,4 @@
+
 <div id="wrapper" class="row ng-scope">
    <style>
       #panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
@@ -30,19 +31,21 @@
    <div class="row">
       <div class="col-sm-9">
          <div class="row">
-            <div class="dropdown col-sm-3" style="padding-left:15px">
+            <div class="dropdown col-sm-2" style="padding-left:15px">
             </div>
-            <div class="input-group col-sm-9">
+            <div class="input-group col-sm-8">
                <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
                <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
                <button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
                </span>
+               <button type="button" class="btn btn-default" style="color:white;background-color:#484848" ng-click="go_to_newproduct();">Create Product</button>
+            
+        
             </div>
-         </div>
+            
          <br/>
          <div class="row" style="margin-left:12px;">
             <div class="col-sm-1">
-               <form action="/editprofile" method="get">
                <strong>Firstname:</strong><br><br>
                <strong>Lastname:</strong><br><br>
                <strong>Birthday:</strong><br><br>
@@ -56,59 +59,61 @@
                <input type ="submit" value ="Edit">
             </div>
             <div class="col-sm-2">
-            {{first_name}}<br><br>
-{{last_name}}<br><br>
-{{birthday}}<br><br>
-{{address}}<br><br>
-{{location}}<br><br>
-{{state}}<br><br>
-{{zipcode}}<br><br>
-{{phone}}<br><br>
-{{created_at}}<br><br>
-{{updated}}<br><br>
-</div>
+               {{first_name}}<br><br>
+               {{last_name}}<br><br>
+               {{birthday}}<br><br>
+               {{address}}<br><br>
+               {{location}}<br><br>
+               {{state}}<br><br>
+               {{zipcode}}<br><br>
+               {{phone}}<br><br>
+               {{created_at}}<br><br>
+               {{updated}}<br><br>
+            </div>
             <div class="col-sm-9">
                <h4>Farmer's Photos</h4>
                <div class = "row">
                   <div class = "col-sm-6 col-md-3">
-                     <div style="margin-left:85%"><button type="button" class="btn btn-danger">
+                     <div ng-repeat="imageUrl in imageUrls">
+                     <div style="margin-left:85%"><button type="button" class="btn btn-danger" ng-click="remove_image();">
                         <span class="glyphicon glyphicon-remove"></span></button>
                      </div>
-                     <a href = "#" class = "thumbnail">
                      
-                     <div img src = url(image_urls[0]) alt = "Generic placeholder thumbnail">
+                     	<br>
+                     	<img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
+                     	<br>
                      </div>
-                     </a>
                   </div>
-                  <img src="http://localhost:3000/api/farmers/images/5a650c09-f971-4988-b6c8-9330889671fd.png" style="width:500px; height:500px">
+                  
                </div>
-               <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-               <span class="btn btn-info btn-file">
-                  <div style="font-size:15px;">
-                     <span class="glyphicon glyphicon-plus"></span>
-                  </div>
-                  Click here to select pictures of farm	
-                  <input type="file" accept="image/x-png" ng-model="image">
-               </span>
-               <button type="button" class="btn btn-primary" ng-click="upload_image();">Upload Pictures</button>
-               <br><br><br>
-               <video controls>
-               <source src="http://localhost:3000/api/farmers/100426/video" type="video/mp4">
-               </video controls>
             </div>
+            <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+            <span class="btn btn-info btn-file">
+               <div style="font-size:15px;">
+                  <span class="glyphicon glyphicon-plus"></span>
+               </div>
+               Click here to select pictures of farm	
+               <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)">
+            </span>
+            <button type="button" class="btn btn-primary" ng-click="upload_image();">Upload Pictures</button>
+            <br><br><br>
+            <video controls>
+            <source ng-src="{{videoUrls  | trustUrl}}" type="video/mp4">
+            </video controls>
          </div>
       </div>
    </div>
-   <br/>
-   <div class="row">
-      <div class="panel-body" style="background-color:#333333;padding-left:40px">
-         <div class="row">
-            <div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
-            <div class="col-sm-10" style="color:white"> About<br>Carriers</div>
-         </div>
-         <div style="color:white">
-            <br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
-         </div>
+</div>
+<br/>
+<div class="row">
+   <div class="panel-body" style="background-color:#333333;padding-left:40px">
+      <div class="row">
+         <div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+         <div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+      </div>
+      <div style="color:white">
+         <br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
       </div>
    </div>
+</div>
 </div>

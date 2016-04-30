@@ -8,12 +8,20 @@ farmerApp.config([ '$routeProvider', '$locationProvider',
 			$routeProvider.when('/', {
 				templateUrl : 'amazon_farmer_profile.html',
 				controller : 'mainController'
+			}).when('/go_to_newproduct', {
+				templateUrl : 'amazon_new_product.html',
+				controller : 'mainController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
 ]);
+farmerApp.filter("trustUrl", ['$sce', function ($sce) {
+    return function (recordingUrl) {
+        return $sce.trustAsResourceUrl(recordingUrl);
+    };
+}]);
 
-farmerApp.controller('mainController', function($scope, $http) {
+farmerApp.controller('mainController', function($scope, $http, $location) {
 	
 	var farmer_details = $http.get('/api/getsessioninfo');
 	farmer_details.success(function(data) {
@@ -37,18 +45,30 @@ farmerApp.controller('mainController', function($scope, $http) {
 			var puid = data.profile[0].puid;
 			var get_pictures = $http.get('/api/farmers/'+puid+'/images');
 			get_pictures.success(function(data){
-				alert(data);
-				console.log(data);
-				var urls = data.urls.length;
-				console.log(urls);
-				var urs = [ ];
-				for(i=0;i<urls;i++){
-					urs[i]=data.urls[i];
+//				alert(data);
+//				console.log('$location',$location.$$absUrl);
+//				console.log(data);
+				var imageUrls = [];
+				for(i = 0;i < data.urls.length; i++){
+					imageUrls[i]= $location.$$absUrl + data.urls[i];
 				}
-				$scope.no_of_image = urls;
-				$scope.image_urls = urs;
+	//			console.log(imageUrls);
+				$scope.imageUrls = imageUrls;
+			
 			});
-
+			$scope.videoUrls = $location.$$absUrl + 'api/farmers/'+puid+'/video';
+			/*var get_video = $http.get('/api/farmers/'+puid+'/video');
+			get_video.success(function(data){
+//				alert(data);
+			//	console.log('$location',$location.$$absUrl);
+				console.log(data);
+				var videoUrls = [];
+				for(i = 0;i < data.urls.length; i++){
+					imageUrls[i]= $location.$$absUrl + data.urls[i];
+				}
+				console.log(videoUrls);
+				$scope.videoUrls = videoUrls;
+			});*/
 		}
 	});
 
@@ -84,5 +104,10 @@ farmerApp.controller('mainController', function($scope, $http) {
 					});
 			});
 		
-	}; 
+	};
+	
+	$scope.go_to_newproduct = function(){
+		alert("aaya");
+		window.location="/go_to_newproduct";
+	}
 });
