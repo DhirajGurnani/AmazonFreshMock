@@ -1,12 +1,35 @@
 <div id="wrapper" class="row ng-scope">
-	<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:4px">
-      <div class="container-fluid" style="color:white">
-         <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
-         Already an AmazonFresh customer? <a href="#" style="color:white"><u>Sign in</u></a>
+   <nav class="navbar navbar-default navbar-fixed-top"
+      style="background-color: #484848; padding: 4px">
+      <div class="container-fluid" style="color: white">
+         <a href="" ng-click="go_to_homepage()"><img
+            src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
+            alt="Amazon logo"> </a> <span ng-hide="loggedIn">Already an
+         AmazonFresh customer? <a href="#" ng-click="go_to_loginpage()"
+            style="color: white"><u>Sign in</u></a>
+         </span>
          <ul class="nav navbar-nav pull-right">
             <li class="nav-item">
-               <a class="nav-link" href="#" style="color:white"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+               <a class="dropdown-toggle" href="#"
+                  ng-hide="loggedOff" data-toggle="dropdown"
+                  style="background-color: #484848; color: white">Hi,
+               {{username}} <span class="caret"></span>
+               </a>
+               <ul class="dropdown-menu" style="background-color: #484848;">
+                  <li><a href="#" ng-click="go_to_customer_profile()"
+                     style="background-color: #484848; color: white">Profile</a></li>
+                  <br />
+                  <li><a href="#"
+                     style="background-color: #484848; color: white">Orders</a></li>
+                  <br />
+                  <li><a href="#" ng-click="logout_from_account()"
+                     style="background-color: #484848; color: white">Sign Out</a></li>
+                  <br />
+               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="#"
+               style="color: white"><span
+               class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
          </ul>
       </div>
    </nav>
@@ -26,7 +49,11 @@
             <br>
          </ul>
       </div>
+<<<<<<< Updated upstream
       <div class="input-group col-sm-6">
+=======
+      <div class="input-group col-sm-7">
+>>>>>>> Stashed changes
          <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
             aria-describedby="basic-addon1"> 
          <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
@@ -35,68 +62,68 @@
       </div>
    </div>
    <div class="row">
-   	<div class="col-sm-8" style="margin-left: 40px">
-      <br/>
-      <h3>Category Description</h3>
-      <img src="http://suckhoevnn.com/wp-content/uploads/2016/03/Du%CC%80ng-nhi%C3%AA%CC%80u-tra%CC%81i-c%C3%A2y-t%C6%B0%C6%A1i1.jpeg" width="500" height="300">
-      <br/><br/>
-      <h3>Shop our best Products from here</h3>
-      <br/>
-      <div class="row">
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2016/Categories/Pages/Fruits/Q1/Fruit_Apples_tile_230x159._V286786236_.jpg)">
-                  <br/><br/><br/><br/><br/><br>
-                  <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>APPLES >></b></a></div>
+      <div class="col-sm-8" style="margin-left: 40px">
+         <br/>
+         <h3>Category Description</h3>
+         <img src="http://suckhoevnn.com/wp-content/uploads/2016/03/Du%CC%80ng-nhi%C3%AA%CC%80u-tra%CC%81i-c%C3%A2y-t%C6%B0%C6%A1i1.jpeg" width="500" height="300">
+         <br/><br/>
+         <h3>Shop our best Products from here</h3>
+         <br/>
+         <div class="row">
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2016/Categories/Pages/Fruits/Q1/Fruit_Apples_tile_230x159._V286786236_.jpg)">
+                     <br/><br/><br/><br/><br/><br>
+                     <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>APPLES >></b></a></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/CatPages/fruit/Fruit_Tile_Bananas._V350156870_.jpg)">
+                     <br/><br/><br/><br/><br/><br>
+                     <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>BANANAS >></b></a></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/CatPages/fruit/Fruit_Tile_Melons._V350156871_.jpg)">
+                     <br/><br/><br/><br/><br/><br>
+                     <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>MELONS >></b></a></div>
+                  </div>
                </div>
             </div>
          </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/CatPages/fruit/Fruit_Tile_Bananas._V350156870_.jpg)">
-                  <br/><br/><br/><br/><br/><br>
-                  <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>BANANAS >></b></a></div>
+         <div class="row">
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/CatPages/CatPage/Fruits/Q1/tile_grapes._V329742809_.jpg)">
+                     <br/><br/><br/><br/><br/><br>
+                     <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>GRAPES >></b></a></div>
+                  </div>
                </div>
             </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2014/CatPages/fruit/Fruit_Tile_Melons._V350156871_.jpg)">
-                  <br/><br/><br/><br/><br/><br>
-                  <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>MELONS >></b></a></div>
+            <div class="col-sm-3">
+               <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/CatPages/CatPage/Fruits/Q4/tile_pears._V290593255_.jpg)">
+                     <br/><br/><br/><br/><br/><br>
+                     <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>PEARS >></b></a></div>
+                  </div>
                </div>
             </div>
          </div>
       </div>
-      <div class="row">
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/CatPages/CatPage/Fruits/Q1/tile_grapes._V329742809_.jpg)">
-                  <br/><br/><br/><br/><br/><br>
-                  <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>GRAPES >></b></a></div>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-3">
-            <div class="panel panel-default">
-               <div class="panel-heading" style="background-image:url(https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/CatPages/CatPage/Fruits/Q4/tile_pears._V290593255_.jpg)">
-                  <br/><br/><br/><br/><br/><br>
-                  <div style="opacity:0.6; background-color:#ffffff"><a href="#" style="color:black"><b>PEARS >></b></a></div>
-               </div>
-            </div>
-         </div>
+      <div class="col-sm-3">
+         <br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>
+         <h4><strong>Great News, We deliver to your area</strong></h4>
+         <br/>
+         <p>AmazonFresh is available exclusively to Prime Fresh members in eligible zip codes.</p>
+         <br/>
+         <button type="button" ng-click="go_to_loginpage()" ng-hide="loggedIn" class="form-control" style="background-color: green; color: white">Sign in with Amazon account</button><br/>
+         <p>Not a Prime Fresh member?<a href="#" style="color:blue"><u>Start your 30-day FREE trial today</u></a></p>
       </div>
-   </div>
-   <div class="col-sm-3">
-      <br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>
-      <h4><strong>Great News, We deliver to your area</strong></h4>
       <br/>
-      <p>AmazonFresh is available exclusively to Prime Fresh members in eligible zip codes.</p>
-      <br/>
-      <button type="submit" class="form-control" style="background-color:green; color:white">Sign in with Amazon account</button><br/>
-      <p>Not a Prime Fresh member?<a href="#" style="color:blue"><u>Start your 30-day FREE trial today</u></a></p>
-   </div>
-   <br/>
    </div>
    <div class="row">
       <div class="panel-body" style="background-color:#333333;padding-left:40px">
