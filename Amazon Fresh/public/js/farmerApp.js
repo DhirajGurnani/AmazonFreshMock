@@ -10,7 +10,7 @@ farmerApp.config([ '$routeProvider', '$locationProvider',
 				controller : 'mainController'
 			}).when('/go_to_newproduct', {
 				templateUrl : 'amazon_new_product.html',
-				controller : 'mainController'
+				controller : 'newProductController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
@@ -25,10 +25,7 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
 	
 	var farmer_details = $http.get('/api/getsessioninfo');
 	farmer_details.success(function(data) {
-		/*/alert("aaya");
-		console.log(data);
-		alert(data.profile);
-		*/if(data.profile){
+		if(data.profile){
 			$scope.Loggedin = false;
 			$scope.Loggedoff = true;
 			$scope.first_name = data.profile[0].first_name;
@@ -45,30 +42,13 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
 			var puid = data.profile[0].puid;
 			var get_pictures = $http.get('/api/farmers/'+puid+'/images');
 			get_pictures.success(function(data){
-//				alert(data);
-//				console.log('$location',$location.$$absUrl);
-//				console.log(data);
 				var imageUrls = [];
 				for(i = 0;i < data.urls.length; i++){
 					imageUrls[i]= $location.$$absUrl + data.urls[i];
 				}
-	//			console.log(imageUrls);
 				$scope.imageUrls = imageUrls;
-			
 			});
 			$scope.videoUrls = $location.$$absUrl + 'api/farmers/'+puid+'/video';
-			/*var get_video = $http.get('/api/farmers/'+puid+'/video');
-			get_video.success(function(data){
-//				alert(data);
-			//	console.log('$location',$location.$$absUrl);
-				console.log(data);
-				var videoUrls = [];
-				for(i = 0;i < data.urls.length; i++){
-					imageUrls[i]= $location.$$absUrl + data.urls[i];
-				}
-				console.log(videoUrls);
-				$scope.videoUrls = videoUrls;
-			});*/
 		}
 	});
 
@@ -77,14 +57,10 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
 		filesInfo = files;
 	};
 	
-	
 	$scope.upload_image = function(){
 		var farmer_details = $http.get('/api/getsessioninfo');
 		farmer_details.success(function(data) {
 			var puid = data.profile[0].puid;
-			
-			console.log(filesInfo[0]);
-			
 			var reqData = new FormData();
 			reqData.append("image", filesInfo[0]);
 			$http({
@@ -103,11 +79,72 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
 						// console.log(pack(data.buildInfo));
 					});
 			});
-		
 	};
-	
 	$scope.go_to_newproduct = function(){
-		alert("aaya");
 		window.location="/go_to_newproduct";
 	}
 });
+
+
+farmerApp.controller('newProductController', function($scope, $http, $location) {
+	
+	var categoryResponse = $http.get('/api/product/category/get');
+	categoryResponse.success(function(categoryData) {
+		$scope.categories = categoryData.category;
+		console.log($scope.categories);
+	});
+	
+	$scope.updateSubCategory = function() {
+		if($scope.selectedCategory !== null || $scope.selectedCategory !== undefined) {
+			var subCategoryResponse = $http.get('/api/product/category/' + $scope.selectedCategory + '/subcategory');
+			subCategoryResponse.success(function(subCategoryData) {
+				$scope.subCategories = subCategoryData.subcategory;
+				console.log($scope.subCategories);
+			});
+		}
+	};
+	
+	$scope.createNewProduct = function(){
+		var farmer_details = $http.get('/api/getsessioninfo');
+		farmer_details.success(function(data) {
+			var puid = data.profile[0].puid;
+		
+		console.log($scope.selectedCategory);
+		//alert("aaya");
+		
+		var dattaaaa = {
+				"product_name":$scope.product_name,
+				"quantity":$scope.product_quantity,
+				"puid": puid,
+				"price":$scope.product_price,
+				"description":$scope.message,
+				"category_id":$scope.selectedCategory,
+				"subcategory_id":$scope.selectedSubCategory
+			};
+		
+		console.log(dattaaaa);
+		$http({
+			method : 'POST',
+			url : '/api/product/create',
+			data : {
+				"product_name":$scope.product_name,
+				"quantity":$scope.product_quantity,
+				"puid": puid,
+				"price":$scope.product_price,
+				"description":$scope.message,
+				"category_id":$scope.selectedCategory,
+				"subcategory_id":$scope.selectedSubCategory
+			},
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+//			transformRequest : angular.identity
+		}).success(
+		function(data) {
+			 console.log(data);
+			 alert(data);
+		});
+		});
+	}
+});
+

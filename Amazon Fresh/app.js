@@ -76,12 +76,12 @@ app.use('/', function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/admin.html');
+			response.sendfile(__dirname + '/public/customer.html');
 		}
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/admin.html');
+		response.sendfile(__dirname + '/public/customer.html');
 	}
 });
 
@@ -239,7 +239,7 @@ app.post('/api/admin/approveProduct',admin.approveproduct);
 /*************** Products API *****************/
 app.post('/api/register',authentication.signup);
 
-app.get('/api/product/category', product.getProductCategoriesAndSubCategories);
+app.get('/api/product/category/get', product.getProductCategoriesAndSubCategories);
 app.get('/api/product/category/:category_id/subcategory', product.getProductSubCategoriesByCategoryId);
 app.post('/api/product/create',product.createproduct);
 app.get('/api/product',product.getAllProducts);

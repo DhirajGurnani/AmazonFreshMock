@@ -18,7 +18,7 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/doSignup', {
                 templateUrl: 'amazon_signup.html',
                 controller: 'signupController'
-            }).when('/product_category', {
+            }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
             }).when('/customer_profile', {
@@ -81,6 +81,21 @@ customerApp.controller('mainController', function($scope, $http) {
 });
 
 customerApp.controller('homeController', function($scope, $http) {
+	
+	var categoryResponse = $http.get('/api/product/category/get');
+	categoryResponse.success(function(categoryData) {
+		$scope.categories = categoryData.category;
+	});
+	
+	$scope.updateSubCategory = function(category_id) {
+		console.log(category_id);
+		var subCategoryResponse = $http.get('/api/product/category/' + category_id + '/subcategory');
+		subCategoryResponse.success(function(subCategoryData) {
+			$scope.subCategories = subCategoryData.subcategory;
+			console.log($scope.subCategories);
+		});
+	};
+	
     var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
