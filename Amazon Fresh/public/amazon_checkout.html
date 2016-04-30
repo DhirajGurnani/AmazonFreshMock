@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Amazon Checkout</title>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-   </head>
-   <body>
+<div id="wrapper" class="row ng-scope">
 		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848">
 			<div class="container-fluid">
 			   <ul class="nav navbar-nav">
@@ -40,14 +31,12 @@
 		<div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-				<form method="POST" action="#">
 					<h3>Credit/Debit card Information</h3><br/>
 					<span><b>Name on Card:</b><input type="text" class="form-control" ng-model="c_name" placeholder="Card Holder's Name"></span><br/>
 					<span><b>Card Number:</b><input type="text" class="form-control" ng-model="c_num" placeholder="Debit/Credit Card Number"></span><br/>
 					<span><b>Expiration Date:</b><input type="number" min="1" max="12" ng-model="c_month" placeholder="Month"> <input type="number" min="2016" max="2020" ng-model="c_year" placeholder="Year"></span><br/><br/>
 					<span><b>Card CVV:</b><input type="number" class="form-control" ng-model="c_cvv" size="5" placeholder="Security Code"></span><br/><br/>
-					<button class="btn btn-primary" type="submit" style="color:white; background-color:green">Pay Now</button>
-				</form>	
+					<button class="btn btn-primary" style="color:white; background-color:green">Pay Now</button>
 			</div>
 			<div class="col-sm-4"></div>
 		</div>
@@ -64,5 +53,4 @@
 				</div>
 			</div>
 		</div>
-   </body>
-</html>
+</div>
