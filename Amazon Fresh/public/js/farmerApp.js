@@ -105,22 +105,45 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
 	};
 	
 	$scope.createNewProduct = function(){
+		var farmer_details = $http.get('/api/getsessioninfo');
+		farmer_details.success(function(data) {
+			var puid = data.profile[0].puid;
+		
 		console.log($scope.selectedCategory);
 		//alert("aaya");
+		
+		var dattaaaa = {
+				"product_name":$scope.product_name,
+				"quantity":$scope.product_quantity,
+				"puid": puid,
+				"price":$scope.product_price,
+				"description":$scope.message,
+				"category_id":$scope.selectedCategory,
+				"subcategory_id":$scope.selectedSubCategory
+			};
+		
+		console.log(dattaaaa);
 		$http({
 			method : 'POST',
 			url : '/api/product/create',
 			data : {
-				"product_name":$scope.product_name
+				"product_name":$scope.product_name,
+				"quantity":$scope.product_quantity,
+				"puid": puid,
+				"price":$scope.product_price,
+				"description":$scope.message,
+				"category_id":$scope.selectedCategory,
+				"subcategory_id":$scope.selectedSubCategory
 			},
 			headers : {
-				'Content-Type' : undefined
+				'Content-Type' : 'application/json'
 			},
-			transformRequest : angular.identity
+//			transformRequest : angular.identity
 		}).success(
 		function(data) {
 			 console.log(data);
 			 alert(data);
+		});
 		});
 	}
 });
