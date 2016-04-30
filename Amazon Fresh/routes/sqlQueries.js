@@ -336,4 +336,7 @@ exports.sqlgetProductsPending = function() {
 
 exports.getProductSubCategoriesByCategoryId = function(category_id) {
 	return "select * from ProductSubCategory where category_id = '" + category_id + "'";
+
+exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
+	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
 };
