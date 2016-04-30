@@ -234,6 +234,7 @@ app.post('/api/customer/:puid/delete',customer.deletecustomer);
 /*************** Admin API *****************/
 app.post('/api/admin/approveFarmer',admin.approvefarmer);
 app.post('/api/admin/approveProduct',admin.approveproduct);
+app.get('/api/admin/getProductsPending',admin.getProductsPending);
 
 
 /*************** Products API *****************/
