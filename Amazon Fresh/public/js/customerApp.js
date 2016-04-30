@@ -81,7 +81,6 @@ customerApp.controller('mainController', function($scope, $http) {
 });
 
 customerApp.controller('homeController', function($scope, $http) {
-	
 	var categoryResponse = $http.get('/api/product/category/get');
 	categoryResponse.success(function(categoryData) {
 		$scope.categories = categoryData.category;

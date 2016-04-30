@@ -76,6 +76,7 @@ CREATE TABLE `Products`(
 `product_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 `puid` INT(10) UNSIGNED NOT NULL,
 `product_name` VARCHAR(128) NOT NULL,
+`quantity` INT(10) NOT NULL,
 `price` VARCHAR(10) NOT NULL,
 `description` VARCHAR(256),
 `status` ENUM('approved','pending','blocked'),
@@ -117,6 +118,17 @@ PRIMARY KEY (`driver_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ####
+# Structure for table DeliverySlots
+####
+CREATE TABLE `DeliverySlots`(
+`delivery_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`delivery_slot` VARCHAR(64) NOT NULL,
+`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (`delivery_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+####
 # Structure for table Billing
 ####
 CREATE TABLE `Billing`(
@@ -129,13 +141,16 @@ CREATE TABLE `Billing`(
 `zipcode` VARCHAR(10) NOT NULL,
 `phone` VARCHAR(10) NOT NULL,
 `total_price` INT(10) UNSIGNED NOT NULL,
+`delivery_date` DATE NOT NULL,
+`delivery_id` INT(10) UNSIGNED NOT NULL,
 `driver_id` INT(10) UNSIGNED,
 `status` ENUM('placed', 'packing', 'transit', 'delivered'),
 `current_location` VARCHAR(512),
 `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (`billing_id`),
-FOREIGN KEY (`customer_id`) REFERENCES `Users`(`puid`) ON DELETE CASCADE,
-FOREIGN KEY (`driver_id`) REFERENCES `Drivers`(`driver_id`)
+FOREIGN KEY (`delivery_id`) REFERENCES `DeliverySlots`(`delivery_id`),
+FOREIGN KEY (`driver_id`) REFERENCES `Drivers`(`driver_id`),
+FOREIGN KEY (`customer_id`) REFERENCES `Users`(`puid`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ####
@@ -166,17 +181,21 @@ PRIMARY KEY (`truck_id`)
 
 ####
 # Structure for table Trips
+
 ####
 CREATE TABLE `Trips`(
 `trip_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 `driver_id` INT(10) UNSIGNED NOT NULL,
 `truck_id` INT(10) UNSIGNED NOT NULL,
 `truck_location` VARCHAR(512) NOT NULL,
+`admin_id` INT(10) UNSIGNED NOT NULL,
+`comments` VARCHAR(128) NOT NULL,
 `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (`trip_id`),
-FOREIGN KEY (`driver_id`) REFERENCES `Drivers`(`driver_id`) ON DELETE CASCADE,
-FOREIGN KEY (`truck_id`) REFERENCES `Trucks`(`truck_id`) ON DELETE CASCADE
+FOREIGN KEY (`admin_id`) REFERENCES `Users`(`puid`),
+FOREIGN KEY (`driver_id`) REFERENCES `Drivers`(`driver_id`),
+FOREIGN KEY (`truck_id`) REFERENCES `Trucks`(`truck_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ####
@@ -187,9 +206,9 @@ CREATE TABLE `TripInfo`(
 `billing_id` INT(10) UNSIGNED NOT NULL,
 `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-PRIMARY KEY (`trip_id`),
+PRIMARY KEY (`trip_id`,`billing_id`),
 FOREIGN KEY (`trip_id`) REFERENCES `Trips`(`trip_id`) ON DELETE CASCADE,
-FOREIGN KEY (`billing_id`) REFERENCES `Billing`(`billing_id`) ON DELETE CASCADE
+FOREIGN KEY (`billing_id`) REFERENCES `Billing`(`billing_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
