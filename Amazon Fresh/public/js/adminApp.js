@@ -311,9 +311,9 @@ adminApp.controller('approveFarmerController', function($scope, $http) {
 	}
 });
 
-adminApp.controller('approveCustomerController', function($scope, $http) {
+adminApp.controller('approveProductController', function($scope, $http) {
 	var getProductPending = function() {
-		var getProductPendingResponse = $http.get('/api/admin/trips/getProductsPending');
+		var getProductPendingResponse = $http.get('/api/admin/getProductsPending');
 		getProductPendingResponse.success(function(product){
 			$scope.products = product.message;
 		});
@@ -323,7 +323,7 @@ adminApp.controller('approveCustomerController', function($scope, $http) {
 		$http({
 			method : 'POST',
 			url : '/api/admin/approveProduct',
-			data : {"puid" : id},
+			data : {"product_id" : id},
 			headers : {
 					'Content-Type' : 'application/json'
 			}
