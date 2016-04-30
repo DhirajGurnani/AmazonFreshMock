@@ -21,6 +21,14 @@ exports.sqllocationStats = function(tripId){
 	return "select location as Location, count(location) as Count from amazondb.Billing group by location";
 };
 
+exports.sqlGetBills = function(){
+	return "SELECT * FROM amazondb.Billing order by billing_id desc;"
+};
+
+exports.sqlValidEmail = function(email){
+	return "SELECT * FROM Users where email ='"+email+"';";
+};
+
 exports.sqlRevenueStats = function(){
 	return "select date(created_at) as label, sum(total_price) as y from amazondb.Billing group by date(created_at)"
 }

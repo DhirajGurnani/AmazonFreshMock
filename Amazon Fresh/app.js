@@ -213,6 +213,7 @@ app.get('/api/getSessionInfo',function(request,response){
 	//console.log(request.session);
 	response.send(request.session);
 });
+app.post('/api/validEmail',authentication.validEmail);
 /*************** Farmers API *****************/
 /*****Farmers*****/
 app.get('/api/farmers', farmers.getFarmers);
@@ -269,6 +270,7 @@ app.get('/api/admin/trips/availableTrucks',trips.availableTrucks);
 app.get('/api/admin/trips/getBills',trips.getBills);
 app.get('/api/admin/trips/locationStats',trips.locationStats);
 app.get('/api/admin/trips/revenueStats',trips.revenueStats);
+app.get('/api/admin/trips/getBills',trips.getBills);
 
 /*************** Billing API *****************/
 app.post('/api/billing/create', billing.createNewBill);
