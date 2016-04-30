@@ -39,7 +39,14 @@ farmerApp.controller('mainController', function($scope, $http) {
 			get_pictures.success(function(data){
 				alert(data);
 				console.log(data);
-				$scope.urls = data.urls;
+				var urls = data.urls.length;
+				console.log(urls);
+				var urs = [ ];
+				for(i=0;i<urls;i++){
+					urs[i]=data.urls[i];
+				}
+				$scope.no_of_image = urls;
+				$scope.image_urls = urs;
 			});
 
 		}

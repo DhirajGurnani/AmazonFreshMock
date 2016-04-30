@@ -277,7 +277,6 @@ customerApp.controller('customer_profileController', function($scope, $http) {
 			console.log(data);
 		});
 
-<<<<<<< Updated upstream
 	var customer_details = $http.get('/api/getsessioninfo');
 	customer_details.success(function(data) {
 		/*/alert("aaya");
@@ -287,17 +286,7 @@ customerApp.controller('customer_profileController', function($scope, $http) {
 			$scope.Loggedin = false;
 			$scope.Loggedoff = true;
 			$scope.first_name = data.profile[0].first_name;
-			$scope.last_name = data.profile[0].last_name;
-			$scope.birthday = data.profile[0].birthday;
-			$scope.address = data.profile[0].address;
-			$scope.location = data.profile[0].location;
-			$scope.state = data.profile[0].state;
-			$scope.zipcode = data.profile[0].zipcode;
-			$scope.phone = data.profile[0].phone;
-			$scope.status = data.profile[0].status;
-			$scope.created_at = data.profile[0].created_at;
-			$scope.updated = data.profile[0].updated_at;
-
+	
 		}
 	});
 	$scope.edit_customer_profile = function() {
@@ -306,7 +295,8 @@ customerApp.controller('customer_profileController', function($scope, $http) {
 	};
 	
 
-});
+	}});
+
 customerApp.controller('edit_customer_profileController', function($scope, $http) {
 	alert("aaya");
 	var customer_edit_details = $http.get('/api/getsessioninfo');
@@ -328,11 +318,9 @@ customerApp.controller('edit_customer_profileController', function($scope, $http
 			$scope.status = data.profile[0].status;
 			$scope.created_at = data.profile[0].created_at;
 			$scope.updated = data.profile[0].updated_at;
-=======
 	};
->>>>>>> Stashed changes
 
-		}
+		});
 		
-	});
+	
 });
