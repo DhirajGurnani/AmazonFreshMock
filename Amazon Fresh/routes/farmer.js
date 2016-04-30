@@ -213,7 +213,7 @@ exports.getImageUrlsForFarmerByPuid = function(request, response) {
 				console.log(JSON.stringify(data));
 				var imageUrls = [];
 				for (var index = 0; index < data[request.params.puid].images.length; index++) {
-					var imageUrl = '/api/farmers/images/' + data[request.params.puid].images[index];
+					var imageUrl = 'api/farmers/images/' + data[request.params.puid].images[index];
 					imageUrls.push(imageUrl);
 				}
 				response.send({

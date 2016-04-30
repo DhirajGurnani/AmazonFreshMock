@@ -118,7 +118,7 @@ exports.getImageUrlsForProductByProductId = function(request, response) {
 				console.log(JSON.stringify(data));
 				var imageUrls = [];
 				for (var index = 0; index < data[request.params.product_id].images.length; index++) {
-					var imageUrl = '/api/products/images/' + data[request.params.product_id].images[index];
+					var imageUrl = 'api/products/images/' + data[request.params.product_id].images[index];
 					imageUrls.push(imageUrl);
 				}
 				response.send({
