@@ -272,6 +272,7 @@ app.get('/api/admin/trips/locationStats',trips.locationStats);
 app.get('/api/admin/trips/revenueStats',trips.revenueStats);
 app.get('/api/admin/trips/getBills',trips.getBills);
 app.get('/api/admin/trips/getFarmersPending',trips.getFarmersPending);
+app.get('/api/admin/trips/getProductsPending',trips.getProductsPending);
 
 /*************** Billing API *****************/
 app.post('/api/billing/create', billing.createNewBill);
