@@ -239,6 +239,8 @@ app.post('/api/admin/approveProduct',admin.approveproduct);
 /*************** Products API *****************/
 app.post('/api/register',authentication.signup);
 
+app.get('/api/product/category', product.getProductCategoriesAndSubCategories);
+app.get('/api/product/category/:category_id/subcategory', product.getProductSubCategoriesByCategoryId);
 app.post('/api/product/create',product.createproduct);
 app.get('/api/product',product.getAllProducts);
 app.get('/api/product/:product_id',product.getProductByProductId);
@@ -255,6 +257,7 @@ app.post('/api/product/:product_id/updateQuantity', product.updateQuantityByProd
 app.get('/api/products/:product_id/images', product.getImageUrlsForProductByProductId);
 app.post('/api/products/:product_id/images', product.postImagesForProductByProductId);
 app.get('/api/products/images/:imageName', product.getImageByImageUrl);
+
 
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);

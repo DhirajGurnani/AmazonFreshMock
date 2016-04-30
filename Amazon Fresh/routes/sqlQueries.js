@@ -249,16 +249,9 @@ exports.getQueryForHashTagTweetsCreation = function(tweetid, hashid) {
 	return "Insert into HashTagTweets (tweetid, hashid) values ('" + tweetid + "','" + hashid + "')";
 };
 
-exports.createproduct = function(product_name,price,description) 
+exports.getQueryForProductCreation = function(puid, product_name, quantity, price, description, category_id, subcategory_id) 
 {
-
-return "Insert into Products (product_name, price, description) values ('"
-+ product_name
-+ "','"
-+ price
-+ "','"
-+ description +
- "')";
+	return "Insert into Products(puid, product_name, quantity, price, description, category_id, subcategory_id) values('" + puid+  "','"  +  product_name+  "','"  +  quantity+  "','"  +  price+  "','"  +  description+  "','"  +  category_id+  "','"  +  subcategory_id + "')";
 };
 exports.getQueryForUpdateProductDetails = function(product_id, product_name, quantity, price, description, category_id, subcategory_id) {
 	return "UPDATE Products set product_name = '" + product_name + "', quantity = '" + quantity + "', price = '" + price + "', description = '" + description + "', category_id = '" + category_id + "', subcategory_id = '" + subcategory_id + "'  where product_id = '" + product_id + "'";
@@ -329,3 +322,11 @@ exports.getFarmerProfileByProductId = function(product_id) {
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
 };
+
+exports.getProductCategories = function() {
+	return "select * from ProductCategory";
+};
+
+exports.getProductSubCategoriesByCategoryId = function(category_id) {
+	return "select * from ProductSubCategory where category_id = '" + category_id + "'";
+}

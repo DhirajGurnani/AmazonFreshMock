@@ -152,27 +152,30 @@ exports.getImageByImageUrl = function(request, response) {
 };
 /***************************************************************************************************************/
 
-//createproduct
-
+/**
+ * creates new product
+ * 
+ */
 exports.createproduct = function(request, response) {
 	try {
 		if(true) {
 			if(true) {
+				var puid = request.body.puid;
 				var product_name = request.body.product_name;
+				var quantity = request.body.quantity;
 				var price = request.body.price;
 				var description = request.body.description;
-
-				var sqlQuery = sqlQueryList.createproduct(product_name,price,description);
+				var category_id = request.body.category_id;
+				var subcategory_id = request.body.subcategory_id;
+				var sqlQuery = sqlQueryList.getQueryForProductCreation(puid, product_name, quantity, price, description, category_id, subcategory_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
 							response.send({
-								"status" : 201							
-								
+								"status" : 201,
+								"message" : "Product Created Successfully"
 							})},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
 								"errmsg" : error 
@@ -287,7 +290,9 @@ exports.getProductByProductId = function(request, response) {
 	}
 };
 
-//listallproductsbycategoryid
+/**
+ * fetches products by category id
+ */
 exports.getAllProductsByCategoryId = function(request, response) {
 	try {
 		if(true) {
@@ -636,10 +641,10 @@ exports.getProductCategoriesAndSubCategories = function(request, response) {
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							response.send({
-								"status" : 200,
-								"ratings" : rows
-							});
+								response.send({
+									"status" : 200,
+									"category" : rows
+								});
 						},
 						function(error){
 							response.send({
@@ -668,3 +673,44 @@ exports.getProductCategoriesAndSubCategories = function(request, response) {
 		});
 	}
 }
+
+exports.getProductSubCategoriesByCategoryId = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var sqlQuery = sqlQuery = sqlQueryList.getProductSubCategoriesByCategoryId(request.params.category_id);
+				dbHelper.executeQuery(
+						sqlQuery, 
+						function(rows) {
+								response.send({
+									"status" : 200,
+									"subcategory" : rows
+								});
+						},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: Unable to get ratings: " + error 
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
