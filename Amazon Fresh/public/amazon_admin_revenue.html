@@ -1,45 +1,15 @@
 <div id="wrapper" class="row ng-scope" style="text-align:center">
-	   <script type="text/javascript">
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-      title:{
-        text: "Trips Statistics(Count) per Location"    
-      },
-      animationEnabled: true,
-      axisY: {
-        title: "Number of Trips"
-      },
-      legend: {
-        verticalAlign: "bottom",
-        horizontalAlign: "center"
-      },
-      theme: "theme2",
-      data: [
-
-      {        
-        type: "column",  
-        showInLegend: true, 
-        legendMarkerColor: "grey",
-        legendText: "Locations",
-        dataPoints: [    
-        {y: 297571, label: "Venezuela"},
-        {y: 267017,  label: "Saudi" },
-        {y: 175200,  label: "Canada"},
-        {y: 154580,  label: "Iran"},
-        {y: 116000,  label: "Russia"},
-        {y: 97800, label: "UAE"},
-        {y: 20682,  label: "US"},        
-        {y: 20350,  label: "China"}        
-        ]
-      }   
-      ]
-    });
-
-    chart.render();
-  </script>
-  <br/><br/>
-  <div>{{tripLocations}}</div>
-  <div id="chartContainer" style="padding-left:200px; height:400px; width:800px;"></div>
+<style>
+#chartdiv {
+	padding-left: 100px;
+	width		: 90%;
+	height		: 400px;
+	font-size	: 11px;
+}
+</style>
+  <br/>
+  <h3><b>Revenue ($) Statistics (per Day)</b></h3>
+  <div id="chartdiv"></div>
 	<br />
 	<br />
 	<br />
