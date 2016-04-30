@@ -173,7 +173,7 @@ exports.createproduct = function(request, response) {
 						function(rows) {
 							response.send({
 								"status" : 201,
-								"message" : "Product Created Successfully"
+								"product_id" : rows.insertId
 							})},
 						function(error){
 							response.send({

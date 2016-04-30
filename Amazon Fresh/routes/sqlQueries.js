@@ -251,7 +251,7 @@ exports.getQueryForHashTagTweetsCreation = function(tweetid, hashid) {
 
 exports.getQueryForProductCreation = function(puid, product_name, quantity, price, description, category_id, subcategory_id) 
 {
-	return "Insert into Products(puid, product_name, quantity, price, description, category_id, subcategory_id) values('" + puid+  "','"  +  product_name+  "','"  +  quantity+  "','"  +  price+  "','"  +  description+  "','"  +  category_id+  "','"  +  subcategory_id + "')";
+	return "Insert into Products(puid, product_name, quantity, price, description, category_id, subcategory_id, status) values('" + puid+  "','"  +  product_name+  "','"  +  quantity+  "','"  +  price+  "','"  +  description+  "','"  +  category_id+  "','"  +  subcategory_id + "', 'pending')";
 };
 exports.getQueryForUpdateProductDetails = function(product_id, product_name, quantity, price, description, category_id, subcategory_id) {
 	return "UPDATE Products set product_name = '" + product_name + "', quantity = '" + quantity + "', price = '" + price + "', description = '" + description + "', category_id = '" + category_id + "', subcategory_id = '" + subcategory_id + "'  where product_id = '" + product_id + "'";
