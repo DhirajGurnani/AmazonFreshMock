@@ -81,7 +81,7 @@ app.use('/', function(request, response) {
 	}
 	else {
 		console.log("NO session: ");
-		response.sendfile(__dirname + '/public/admin.html');
+		response.sendfile(__dirname + '/public/customer.html');
 	}
 });
 

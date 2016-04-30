@@ -144,9 +144,10 @@ customerApp.controller('loginController', function($scope, $http) {
 			}
 		}).success(function(data) {
 			console.log("success");
-			console.log(data + "success");
+			console.log(data);
 			//alert(data);
-			window.location = "/home";
+			//if(data.)
+			window.location = "/	";
 			
 			
 		}).error(function(data) {
@@ -193,7 +194,7 @@ customerApp.controller('signupController', function($scope, $http) {
 			console.log("success");
 			console.log(data + "success");
 //			alert(data);
-			window.location = "/doLogin";
+			window.location = "/";
 			
 			
 		}).error(function(data) {
