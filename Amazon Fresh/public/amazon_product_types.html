@@ -24,18 +24,20 @@
 		</nav>
 		<br/><br/><br/><br/>
 		<div class="row">
-			<div class="col-sm-2">
-				<div class="dropdown" style="padding-left:15px">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#484848">Shop <span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li><a href="#"><strong>fruits</strong><br>Check out your fruits</a></li><br>
-						<li><a href="#"><strong>Vegetables</strong><br>Fresh Vegeies every day</a></li><br>
-						<li><a href="#"><strong>Dairy</strong><br>A healthy Dairy for healthy heart</a></li><br>
-						<li><a href="#"><strong>Meat</strong><br>Meats of all kinds</a></li> 	<br>
-						<li><a href="#"><strong>Others</strong><br>We have a solution for you</a></li>
-					</ul>
-				</div>
-			</div>
+			<div class="dropdown col-sm-3" style="padding-left: 15px">
+               <button class="btn btn-primary dropdown-toggle" type="button"
+                  data-toggle="dropdown"
+                  style="background-color: #484848; margin-left: 10px">
+               Shop <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu">
+                  <li ng-repeat = "category in categories">
+                  <a href="/product_category/{{category.category_id}}"><strong>{{category.name}}</strong><br>{{category.description}}
+                  </a>
+                  </li>
+                  <br>
+               </ul>
+            </div>
 			<div class="col-sm-7">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
