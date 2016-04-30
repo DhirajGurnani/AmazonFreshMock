@@ -18,9 +18,9 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/revenueStatistics', {
 				templateUrl : 'amazon_admin_revenue.html',
 				controller : 'revenueController'
-			}).when('/trackingTrips', {
-				templateUrl : 'amazon_admin_tracking.html',
-				controller : 'trackingController'
+			}).when('/adminBills', {
+				templateUrl : 'amazon_admin_bills.html',
+				controller : 'billController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
@@ -105,7 +105,7 @@ adminApp.controller('createController', function($scope, $http) {
 	var getBillDetails = function() {
 		var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
 		getBillDetailsResponse.success(function(bill){
-			$scope.bills = bill.bills;
+			$scope.bills = bill.message;
 		});
 	};
 	$scope.tripCreate = function(){
@@ -268,6 +268,12 @@ adminApp.controller('revenueController', function($scope, $http) {
 });
 
 
-adminApp.controller('trackingController', function($scope, $http) {
-
+adminApp.controller('billController', function($scope, $http) {
+	var getAdminBills = function() {
+		var getAdminBillsResponse = $http.get('/api/admin/trips/getBills');
+		getAdminBillsResponse.success(function(adminBill){
+			$scope.adminBills = adminBill.message;
+		});
+	};
+	getAdminBills();
 });

@@ -1,0 +1,48 @@
+<div id="wrapper" class="row ng-scope">
+	<h3 style="text-align:center"><b>All Bills Generated</b></h3>
+	<div class="row" style="margin-left: 15px; margin-right: 15px">
+		<br />
+		<div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Bill ID</b></div>
+			<div class="col-sm-2" style="margin-right: 10px"><b>Customer ID</b></div>
+			<div class="col-sm-2" style="margin-right: 10px"><b>Created at</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Address</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Location</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>ZipCode</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Phone No</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Price</b></div>
+			<div class="col-sm-1" style="margin-right: 10px"><b>Status</b></div>
+		</div>
+		<br />
+		<div class="panel-body" ng-repeat="adminBill in adminBills" value="{{adminBill.billing_id}}" style="border-style: ridge">
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.billing_id}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{adminBill.customer_id}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{adminBill.created_at}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.address}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.location}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.zipcode}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.phone}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>${{adminBill.total_price}}</span>
+			</div>
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{adminBill.status}}</span>
+			</div>
+		</div>
+	</div>
+	<br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
