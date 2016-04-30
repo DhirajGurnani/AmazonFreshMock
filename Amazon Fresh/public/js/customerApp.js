@@ -9,15 +9,15 @@ customerApp.config(['$routeProvider', '$locationProvider',
             .when('/', {
                 templateUrl: 'amazon_welcome.html',
                 controller: 'mainController'
+            }).when('/doSignup', {
+                templateUrl: 'amazon_signup.html',
+                controller: 'signupController'
             }).when('/doLogin', {
                 templateUrl: 'amazon_login.html',
                 controller: 'loginController'
             }).when('/home', {
                 templateUrl: 'amazon_home.html',
                 controller: 'homeController'
-            }).when('/doSignup', {
-                templateUrl: 'amazon_signup.html',
-                controller: 'signupController'
             }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
@@ -90,15 +90,22 @@ customerApp.controller('homeController', function($scope, $http) {
 	var categoryResponse = $http.get('/api/product/category/get');
 	categoryResponse.success(function(categoryData) {
 		$scope.categories = categoryData.category;
+		var categories = [];
+		$scope.categories.forEach(function(category) {
+			var subCategoryResponse = $http.get('/api/product/category/' + category.category_id + '/subcategory');
+			subCategoryResponse.success(function(subCategoryData) {
+				category.subCategories = subCategoryData.subcategory;
+				//console.log(category);
+				categories.push(category);
+				$scope.categories = categories;
+				console.log($scope.categories = categories);
+			});
+		});
 	});
 	
 	$scope.updateSubCategory = function(category_id) {
 		console.log(category_id);
-		var subCategoryResponse = $http.get('/api/product/category/' + category_id + '/subcategory');
-		subCategoryResponse.success(function(subCategoryData) {
-			$scope.subCategories = subCategoryData.subcategory;
-			console.log($scope.subCategories);
-		});
+		
 	};
 	
     var sessioninfo = $http.get('/api/getsessioninfo');
