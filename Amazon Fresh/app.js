@@ -238,15 +238,19 @@ app.post('/api/admin/approveProduct',admin.approveproduct);
 
 /*************** Products API *****************/
 app.post('/api/register',authentication.signup);
+
 app.post('/api/product/create',product.createproduct);
-app.get('/api/products',product.listallproducts);
-app.get('/api/product/:product_id',product.showparticularproducts);
-app.post('/api/product/category/:categoryid',product.listproductsbycategoryid);
-app.post('/api/product/category/:categoryid/subcategory/:subcategoryid',product.listproductsbysubcategoryid);
-app.post('api/product/:product_id/update',product.updateproduct);
-app.get('/api/product/:product_id/ratings',product.productratings);
-app.get('/api/product/:product_id/reviews',product.productreview);
-app.post('/api/product/:product_id/delete',product.deleteproduct);
+app.get('/api/product',product.getAllProducts);
+app.get('/api/product/:product_id',product.getProductByProductId);
+app.get('/api/product/category/:category_id',product.getAllProductsByCategoryId);
+app.get('/api/product/subcategory/:subcategory_id', product.getProductBySubcategoryId);
+app.get('/api/product/category/:category_id/subcategory/:subcategory_id',product.getProductsByCAtegoryIdAndSubCategoryId);
+app.post('/api/product/:product_id/update',product.updateProductByProductId);
+//app.post('api/product/:product_id/delete',product.deleteProductByProductId);
+app.get('/api/product/:product_id/ratings',product.getProductRatingsByProductId);
+app.post('/api/product/:product_id/delete',product.deleteProductByProductId);
+
+app.post('/api/product/:product_id/updateQuantity', product.updateQuantityByProductId);
 
 app.get('/api/products/:product_id/images', product.getImageUrlsForProductByProductId);
 app.post('/api/products/:product_id/images', product.postImagesForProductByProductId);

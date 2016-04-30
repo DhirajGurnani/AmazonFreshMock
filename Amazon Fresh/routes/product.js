@@ -156,8 +156,8 @@ exports.getImageByImageUrl = function(request, response) {
 
 exports.createproduct = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
+		if(true) {
+			if(true) {
 				var product_name = request.body.product_name;
 				var price = request.body.price;
 				var description = request.body.description;
@@ -200,24 +200,22 @@ exports.createproduct = function(request, response) {
 	}
 };
 
-
-//List all products
-
-exports.listallproducts = function(request, response) {
+/**
+ * fetches all products
+ */
+exports.getAllProducts = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var sqlQuery = sqlQueryList.listallproducts();
+		if(true) {
+			if(true) {
+				var sqlQuery = sqlQueryList.getQueryForAllProducts();
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
 							response.send({
-								"status" : 200							
-								
+								"status" : 200,						
+								"products" : rows
 							})},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
 								"errmsg" : error 
@@ -245,27 +243,26 @@ exports.listallproducts = function(request, response) {
 	}
 };
 
-//show a particular product
-
-exports.showparticularproducts = function(request, response) {	
+/**
+ * fetches product by product_id
+ */
+exports.getProductByProductId = function(request, response) {	
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var productid = request.param("product_id");  // value is got from the url api/product/:pid
-				var sqlQuery = sqlQueryList.showparticularproducts(product_id);
+		if(true) {
+			if(true) {
+				var product_id = request.params.product_id;  // value is got from the url api/product/:pid
+				var sqlQuery = sqlQueryList.getQueryForProductByProductId(product_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
 							response.send({
-								"status" : 200							
-								
+								"status" : 200,
+								"product" : rows
 							})},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
-								"errmsg" : error 
+								"errmsg" : "Error: No product found for product_id: " + product_id + " : error: " + error
 							});
 						});
 			}
@@ -289,27 +286,117 @@ exports.showparticularproducts = function(request, response) {
 		});
 	}
 };
-
 
 //listallproductsbycategoryid
-
-exports.listproductsbycategoryid = function(request, response) {
+exports.getAllProductsByCategoryId = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var category_id = request.param("category_id"); // value got from api/product/:category_id
-				var sqlQuery = sqlQueryList.listproductsbycategoryid(category_id);
+		if(true) {
+			if(true) {
+				var category_id = request.params.category_id; // value got from api/product/:category_id
+				var sqlQuery = sqlQueryList.getQueryForProductsByCategoryId(category_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
-							response.send(rows			
-								)},
+							response.send({
+								"status" : 200,
+								"products" : rows
+							});
+							},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
-								"errmsg" : error
+								"errmsg" : "Error: cannot get products by categoryId: " + category_id + " : error: " + error
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+/**
+ * fetches products by subcategory_id
+ */
+exports.getProductBySubcategoryId = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var subcategory_id = request.params.subcategory_id;
+				var sqlQuery = sqlQueryList.getQueryForProductBySubcategoryId(subcategory_id);
+				dbHelper.executeQuery(
+						sqlQuery, 
+						function(rows) {
+							response.send({
+								"status": 200,
+								"products": rows
+							});
+						},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: Unable to fetch product by product_id: " + product_id + " and subcategory_id: " + subcategory_id +" : error: " + error
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+/**
+ * fetches products by product_id and subcategory_id
+ */
+exports.getProductsByCAtegoryIdAndSubCategoryId = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var subcategory_id = request.params.subcategory_id;
+				var category_id = request.params.category_id;  // value got from  api///product/:category_id/:subcategory_id:
+				var sqlQuery = sqlQueryList.getQueryForProductsByCategoryAndSubCategoryId(category_id,subcategory_id);
+				dbHelper.executeQuery(
+						sqlQuery, 
+						function(rows) {
+							response.send({
+								"status": 200,
+								"products": rows
+							});
+						},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: Unable to fetch product by product_id: " + product_id + " and subcategory_id: " + subcategory_id +" : error: " + error
 							});
 						});
 			}
@@ -335,79 +422,34 @@ exports.listproductsbycategoryid = function(request, response) {
 };
 
 
-
-//listallproductsbysubcategoryid
-
-exports.listproductsbysubcategoryid = function(request, response) {
+/**
+ * 
+ * update product by product_id
+ * 
+ */
+exports.updateProductByProductId = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var subcategory_id = request.param("subcategory_id");
-				var category_id = request.param("category_id");  // value got from  api///product/:category_id/:subcategory_id:
-				var sqlQuery = sqlQueryList.listproductsbysubcategoryid(category_id,subcategory_id);
+		if(true) {
+			if(true) {
+				var product_id = request.params.product_id;
+				var product_name = request.body.product_name;
+				var quantity = request.body.quantity;
+				var price = request.body.price;
+				var description = request.body.description;
+				var category_id = request.body.category_id;
+				var subcategory_id = request.body.subcategory_id;
+				var sqlQuery = sqlQueryList.getQueryForUpdateProductDetails(product_id, product_name, quantity, price, description, category_id, subcategory_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
-							response.send(rows						
-								)},
-						function(error){
-							//  failure callback
 							response.send({
-								"status" : 400, 
-								"errmsg" : error
-							});
-						});
-			}
-			else {
-				response.send({
-	        		"status": 403,
-	        		"message": "Error: Cannot find user profile"
-	        	});
-			}
-		}
-		else {
-			response.send({
-	    		"status" : 403,
-	    		"message" : "Error: Cannot find session"
-	    	});
-		}
-	} catch (err) {
-		response.send({
-			"status" : 500,
-			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
-		});
-	}
-};
-
-
-//Update product:
-
-exports.updateproduct = function(request, response) {
-	try {
-		if(request.session) {
-			if(request.session.profile) {
-				 var product_id = request.param("product_id");// value got from url api/product/:pid/update
-				 var input = JSON.parse(JSON.stringify(req.body));
-				 
-				 var productname = input.product_name;
-				 var price = input.price;
-				 var description = input.description;
-				
-				var sqlQuery = sqlQueryList.updateproduct(productname,price,description,product_id);
-				dbHelper.executeQuery(
-						sqlQuery, 
-						function(rows) {
-							//	success callback
-							response.send({
-								"status" : 200													
-								
+								"status" : 200,
+								"message" : "Updated Successfully"
 							})},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
-								"errmsg" : error
+								"errmsg" : "Error: Unable to udpate: " + request.body + " error: " + error
 							});
 						});
 			}
@@ -433,28 +475,27 @@ exports.updateproduct = function(request, response) {
 };
 
 
-//Product ratings
-
-
-exports.productratings = function(request, response) {
+/**
+ * get product ratings by product_id
+ */
+exports.getProductRatingsByProductId = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var product_id = request.param("product_id"); // value for from the url api/product/:pid/ratings
-				var sqlQuery = sqlQueryList.productratings(product_id);
+		if(true) {
+			if(true) {
+				var product_id = request.params.product_id;
+				var sqlQuery = sqlQueryList.getProductRatingsByProductId(product_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
-							response.send(
-								rows						
-								
-							)},
+							response.send({
+								"status" : 200,
+								"ratings" : rows
+							});
+						},
 						function(error){
-							//  failure callback
 							response.send({
 								"status" : 400, 
-								"errmsg" : error 
+								"errmsg" : "Error: Unable to get ratings: " + error 
 							});
 						});
 			}
@@ -479,70 +520,91 @@ exports.productratings = function(request, response) {
 	}
 };
 
-//product reviews
-
-exports.productreview = function(request, response) {
+/**
+ * 
+ * 
+ * 
+ */
+exports.deleteProductByProductId = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var product_id = request.param("product_id");// value got from url api/product/:pid/reviews
-				var sqlQuery = sqlQueryList.productreview(product_id);
+		if(true) {
+			if(true) {
+				var product_id = request.params.product_id;
+				var sqlQuery = sqlQueryList.getQueryForDeleteOfAProductByProductId(product_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							//	success callback
-							response.send(rows							
-								)},
-						function(error){
-							//  failure callback
-							response.send({
-								"status" : 400, 
-								"errmsg" : error 
-							});
-						});
-			}
-			else {
-				response.send({
-	        		"status": 403,
-	        		"message": "Error: Cannot find user profile"
-	        	});
-			}
-		}
-		else {
-			response.send({
-	    		"status" : 403,
-	    		"message" : "Error: Cannot find session"
-	    	});
-		}
-	} catch (err) {
-		response.send({
-			"status" : 500,
-			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
-		});
-	}
-};
-
-//delete product
-
-exports.deleteproduct = function(request, response) {
-	try {
-		if(request.session) {
-			if(request.session.profile) {
-				var product_id = request.param("product_id");// value got from api/product/:pid/delete
-				var sqlQuery = sqlQueryList.deleteproduct(product_id);
-				dbHelper.executeQuery(
-						sqlQuery, 
-						function(rows) {
-							//	success callback
 							response.send({
 									"status" : 200,
-									"message" : " the product is deleted "									
-								
-								
+									"message" : "The product is deleted"									
 							})},
 						function(error){
-							//  failure callback
+								response.send({
+									"status" : 400,
+									"message" : "Error: Unable to delete product: " + error
+								});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+exports.updateQuantityByProductId = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var product_id = request.params.product_id;
+				var updatedQuantity = request.body.quantity;
+				var sqlQuery = sqlQueryList.getQueryForProductByProductId(product_id);
+				dbHelper.executeQuery(sqlQuery, 
+						function(rows) {
+							rows[0].quantity = parseInt(rows[0].quantity) - parseInt(updatedQuantity);
 							
+							var product_id = rows[0].product_id;
+							var product_name = rows[0].product_name;
+							var quantity = rows[0].quantity;
+							var price = rows[0].price;
+							var description = rows[0].description;
+							var category_id = rows[0].category_id;
+							var subcategory_id = rows[0].subcategory_id;
+							sqlQuery = sqlQueryList.getQueryForUpdateProductDetails(product_id, product_name, quantity, price, description, category_id, subcategory_id);
+							dbHelper.executeQuery(
+									sqlQuery, 
+									function(rows) {
+										response.send({
+											"status" : 200,
+											"message" : "Updated Successfully"
+										})},
+									function(error){
+										response.send({
+											"status" : 400, 
+											"errmsg" : "Error: Unable to udpate: " + request.body + " error: " + error
+										});
+									});
+							
+							},
+						function(error){
+								response.send({
+									"status" : 400,
+									"message" : "Error: Unable to find product: " + error
+								});
 						});
 			}
 			else {

@@ -252,45 +252,48 @@ return "Insert into Products (product_name, price, description) values ('"
 + description +
  "')";
 };
-
-exports.updateproduct = function(productname,price,description,product_id) {
-return "UPDATE Products set product_name = '" + productname + "' , price = '" + price + "', description = '" + description + "' where product_id = '" + product_id + "'";
+exports.getQueryForUpdateProductDetails = function(product_id, product_name, quantity, price, description, category_id, subcategory_id) {
+	return "UPDATE Products set product_name = '" + product_name + "', quantity = '" + quantity + "', price = '" + price + "', description = '" + description + "', category_id = '" + category_id + "', subcategory_id = '" + subcategory_id + "'  where product_id = '" + product_id + "'";
 };
 
-exports.listallproducts = function() {
+exports.getQueryForAllProducts = function() {
 return "select * from Products";
 };
 
-exports.showparticularproducts = function(product_id) {
+exports.getQueryForProductByProductId = function(product_id) {
 return "select * from Products where product_id = '" + product_id + "'";
 };
 
-exports.productratings = function(product_id) {
-return "select rating from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
+exports.getProductRatingsByProductId = function(product_id) {
+return "select * from Ratings where product_id = '" + product_id + "'";
 };
 
-exports.deleteproduct = function(product_id) {
-return "delete from Products where product_id = '" + product_id + "'";
+exports.getQueryForDeleteOfAProductByProductId = function(product_id) {
+	return "delete from Products where product_id = '" + product_id + "'";
 };
 
 exports.productreviews = function(product_id) {
-return "select reviews from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
+	return "select reviews from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
 };
 
-exports.listproductsbycategoryid = function(category_id) {
-return "select * from Products where category_id = '" + category_id + "'";
+exports.getQueryForProductsByCategoryId = function(category_id) {
+	return "select * from Products where category_id = '" + category_id + "'";
 };
 
-exports.listproductsbysubcategoryid = function(category_id,subcategory_id) {
-return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "'";
+exports.getQueryForProductBySubcategoryId = function(subcategory_id) {
+	return "select * from Products where subcategory_id = '" + subcategory_id + "'";
+};
+
+exports.getQueryForProductsByCategoryAndSubCategoryId = function(category_id, subcategory_id) {
+	return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "'";
 };
 
 exports.deletecustomer = function(puid) {
-return "delete from User_profiles where puid = '" + puid + "'";
+	return "delete from User_profiles where puid = '" + puid + "'";
 };
 
 exports.updatecustomer = function(firstname,lastname,birthday,address,location,state,zipcode,phone,puid) {
-return "UPDATE User_profiles set first_name = '" + firstname + "' , last_name = '" + lastname + "', birthday = '" + birthday + "' , address = '" + address + "' , location = '" + location + "' , state = '" + state + "' , zipcode = '" + zipcode + "' , phone = '" + phone + "'  where puid = '" + puid + "'";
+	return "UPDATE User_profiles set first_name = '" + firstname + "' , last_name = '" + lastname + "', birthday = '" + birthday + "' , address = '" + address + "' , location = '" + location + "' , state = '" + state + "' , zipcode = '" + zipcode + "' , phone = '" + phone + "'  where puid = '" + puid + "'";
 };
 
 exports.approvefarmer = function(puid) {
