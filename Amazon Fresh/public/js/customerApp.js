@@ -21,6 +21,12 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
+            }).when('/product_sub_category/:sub_category_id', {
+                templateUrl: 'amazon_product_types.html',
+                controller: 'product_sub_categoryController'
+            }).when('/product/:product_id', {
+                templateUrl: 'amazon_product.html',
+                controller: 'productController'
             }).when('/customer_profile', {
                 templateUrl: 'amazon_profile.html',
                 controller: 'customer_profileController'
@@ -130,7 +136,7 @@ customerApp.controller('homeController', function($scope, $http) {
         });
     };
 
-    $scope.go_to_product_cayegory = function() {
+    $scope.go_to_product_category = function() {
         window.location = "/product_category";
     };
 });
@@ -260,6 +266,114 @@ customerApp.controller('signupController', function($scope, $http) {
 });
 
 customerApp.controller('product_categoryController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
+});
+
+customerApp.controller('product_sub_categoryController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
+});
+
+customerApp.controller('productController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
 });
 
 customerApp.controller('customer_profileController', function($scope, $http) {
