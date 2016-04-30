@@ -161,10 +161,6 @@ app.post('/api/convertToLatLng', function(request, response) {
             });
         });
     }).end();
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 });
 
 /*************** Authentication API *****************/
