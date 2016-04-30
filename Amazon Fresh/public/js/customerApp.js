@@ -187,6 +187,7 @@ customerApp.controller('product_categoryController', function($scope, $http) {
 
 customerApp.controller('customer_profileController', function($scope, $http) {
     var sessioninfo = $http.get('/api/getsessioninfo');
+    console.log(sessioninfo);
     sessioninfo.success(function(data) {
         if (data.profile) {
             $scope.loggedIn = true;
@@ -196,6 +197,13 @@ customerApp.controller('customer_profileController', function($scope, $http) {
             $scope.loggedIn = false;
             $scope.loggedOff = true;
         }
+        $scope.first_name = data.profile[0].first_name;
+        $scope.last_name = data.profile[0].last_name;
+        $scope.address = data.profile[0].address;
+        $scope.location = data.profile[0].location;
+        $scope.state = data.profile[0].state;
+        $scope.zipcode = data.profile[0].zipcode;
+        $scope.phone = data.profile[0].phone;
     });
 
     $scope.go_to_homepage = function() {

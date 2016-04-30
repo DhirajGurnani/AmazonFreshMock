@@ -12,12 +12,12 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/pendingTrips', {
 				templateUrl : 'amazon_admin_pending.html',
 				controller : 'pendingController'
-			}).when('/completedTrips', {
-				templateUrl : 'amazon_admin_completed.html',
-				controller : 'completedController'
-			}).when('/analyseTrips', {
-				templateUrl : 'amazon_admin_analysis.html',
-				controller : 'analysisController'
+			}).when('/tripStatistics', {
+				templateUrl : 'amazon_admin_statistics.html',
+				controller : 'statisticsController'
+			}).when('/revenueStatistics', {
+				templateUrl : 'amazon_admin_revenue.html',
+				controller : 'revenueController'
 			}).when('/trackingTrips', {
 				templateUrl : 'amazon_admin_tracking.html',
 				controller : 'trackingController'
@@ -166,13 +166,107 @@ adminApp.controller('pendingController', function($scope, $http) {
 	}
 });
 
-adminApp.controller('completedController', function($scope, $http) {
+adminApp.controller('statisticsController', function($scope, $http) {
+	
+	var getTripLocations = function() {
+		var getTripLocationsResponse = $http.get('api/admin/trips/locationStats');
+		getTripLocationsResponse.success(function(tLocation){
+			$scope.tripLocations = tLocation.datapoints;
+			
+			var chartData = $scope.tripLocations;
 
+			console.log($scope.tripLocations);
+
+			var chart = AmCharts.makeChart( "chartdiv", {
+			  "type": "serial",
+			  "theme": "light",
+			  "dataProvider": chartData,
+			  "valueAxes": [ {
+			    "gridColor": "#FFFFFF",
+			    "gridAlpha": 0.2,
+			    "dashLength": 0
+			  } ],
+			  "gridAboveGraphs": true,
+			  "startDuration": 1,
+			  "graphs": [ {
+			    "balloonText": "[[category]]: <b>[[value]]</b>",
+			    "fillAlphas": 0.8,
+			    "lineAlpha": 0.2,
+			    "type": "column",
+			    "valueField": "Count"
+			  } ],
+			  "chartCursor": {
+			    "categoryBalloonEnabled": false,
+			    "cursorAlpha": 0,
+			    "zoomable": false
+			  },
+			  "categoryField": "Location",
+			  "categoryAxis": {
+			    "gridPosition": "start",
+			    "gridAlpha": 0,
+			    "tickPosition": "start",
+			    "tickLength": 20
+			  },
+			  "export": {
+			    "enabled": true
+			  }
+
+			} );
+		});
+	}
+	getTripLocations();
 });
 
-adminApp.controller('analysisController', function($scope, $http) {
+adminApp.controller('revenueController', function($scope, $http) {
+	var getRevenueStats = function() {
+		var getRevenueStatsResponse = $http.get('api/admin/trips/revenueStats');
+		getRevenueStatsResponse.success(function(rStats){
+			$scope.revenueStats = rStats.datapoints;
+			
+			var chartData = $scope.revenueStats;
 
+			console.log($scope.revenueStats);
+
+			var chart = AmCharts.makeChart( "chartdiv", {
+			  "type": "serial",
+			  "theme": "light",
+			  "dataProvider": chartData,
+			  "valueAxes": [ {
+			    "gridColor": "#FFFFFF",
+			    "gridAlpha": 0.2,
+			    "dashLength": 0
+			  } ],
+			  "gridAboveGraphs": true,
+			  "startDuration": 1,
+			  "graphs": [ {
+			    "balloonText": "[[category]]: <b>[[value]]</b>",
+			    "fillAlphas": 0.8,
+			    "lineAlpha": 0.2,
+			    "type": "column",
+			    "valueField": "y"
+			  } ],
+			  "chartCursor": {
+			    "categoryBalloonEnabled": false,
+			    "cursorAlpha": 0,
+			    "zoomable": false
+			  },
+			  "categoryField": "label",
+			  "categoryAxis": {
+			    "gridPosition": "start",
+			    "gridAlpha": 0,
+			    "tickPosition": "start",
+			    "tickLength": 20
+			  },
+			  "export": {
+			    "enabled": true
+			  }
+
+			} );
+		});
+	}
+	getRevenueStats();
 });
+
 
 adminApp.controller('trackingController', function($scope, $http) {
 

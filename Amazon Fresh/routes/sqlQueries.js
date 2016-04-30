@@ -18,7 +18,7 @@ exports.getBillId = function(tripId){
 };
 
 exports.sqllocationStats = function(tripId){
-	return "select location as label, count(location) as y from amazondb.Billing group by location";
+	return "select location as Location, count(location) as Count from amazondb.Billing group by location";
 };
 
 exports.sqlRevenueStats = function(){
@@ -320,4 +320,3 @@ exports.getFarmerProfileByProductId = function(product_id) {
 
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
-};
