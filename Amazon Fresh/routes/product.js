@@ -714,3 +714,44 @@ exports.getProductSubCategoriesByCategoryId = function(request, response) {
 		});
 	}
 };
+
+exports.getFiveProducts = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var sqlQuery = sqlQuery = sqlQueryList.getFiveProductsForHomePage();
+				dbHelper.executeQuery(
+						sqlQuery, 
+						function(rows) {
+								response.send({
+									"status" : 200,
+									"products" : rows
+								});
+						},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: Unable to get products: " + error 
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};

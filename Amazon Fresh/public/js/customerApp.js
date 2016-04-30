@@ -101,19 +101,33 @@ customerApp.controller('homeController', function($scope, $http) {
 			var subCategoryResponse = $http.get('/api/product/category/' + category.category_id + '/subcategory');
 			subCategoryResponse.success(function(subCategoryData) {
 				category.subCategories = subCategoryData.subcategory;
-				//console.log(category);
 				categories.push(category);
 				$scope.categories = categories;
-				console.log($scope.categories = categories);
 			});
 		});
 	});
 	
-	$scope.updateSubCategory = function(category_id) {
-		console.log(category_id);
-		
+	var loadFiveProducts = function() {
+		var getFiveProductsResponse = $http.get('/api/getFiveProducts');
+		getFiveProductsResponse.success(function(data) {
+			$scope.products = data.products;
+			var products = []
+			data.products.forEach(function(product) {
+				var imageUrlResponse = $http.get('/api/products/' + product.product_id + '/images');
+				imageUrlResponse.success(function(urlData) {
+					//imageUrl
+					console.log(urlData.urls);
+					if(urlData.urls) {
+						product.imageUrl = urlData.urls[0];
+						products.push(product);
+						$scope.products = products;
+					}
+				});
+			});
+		});
 	};
-	
+	loadFiveProducts();
+
     var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {

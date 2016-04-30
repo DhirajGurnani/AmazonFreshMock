@@ -46,8 +46,6 @@ exports.updateDriverAvailable=function(driverId){
 	return "update Drivers set status = 'available' where driver_id ="+driverId+";"
 };
 
-
-
 exports.updateBillingQuery = function(driverId,billId){
 	return "update Billing set status = 'transit',driver_id="+
 	driverId+" where billing_id ="+
@@ -58,8 +56,6 @@ exports.billUpdateQuery = function(billId){
 	return "update Billing set status = 'placed' where billing_id ="+
 	billId+";"
 };
-
-
 
 exports.getTripQuery = function(tripId){
 	return "Select * from Trips where trip_id ="+tripId+";"
@@ -136,62 +132,9 @@ exports.getQueryForUserProfileByPuid = function(puid) {
 	return "select * from User_profiles where puid = '" + puid + "'";
 };
 
-/**
- *  Query for getting follower count for a given puid
- */
-exports.getFollowerCountByPuid = function(puid) {
-	return "select count(*) as count from Followers where followerid = '"
-			+ puid + "'";
-};
-
-exports.getFollowingCountByPuid = function(puid) {
-	return "select count(*) as count from Followers where puid = '" + puid
-			+ "'";
-};
-
-exports.getTweetsCountByPuid = function(puid) {
-	return "select count(*) as count from Tweets where puid = '" + puid + "'";
-};
 
 exports.getUserPuidByEmailQuery = function(email) {
 	return "select puid from Users where email = '" + email + "'";
-};
-
-exports.getFollowersByPuidQuery = function(puid) {
-	return "select followerid from Followers where puid = '" + puid + "'";
-};
-
-exports.getQueryForGetMyTweets = function(puid) {
-	return "Select * from Tweets where puid = '" + puid + "' order by created_at DESC";
-};
-
-exports.getQueryForFollowerTweets = function(puid) {
-	return "select a.* from Tweets a where a.puid in (select followerid from Followers where puid = " + puid + ") order by a.created_at DESC";
-};
-
-exports.getQueryForNewUsersByPuid = function(puid, limit) {
-	return "select a.puid, b.first_name, b.last_name, b.handle from Users a, User_profiles b where a.puid = b.puid and a.puid not in(select followerid from Followers where puid = "
-			+ puid + ") and a.puid!= " + puid + " limit " + limit;
-};
-
-exports.getQueryForHashTagByHashtag = function(hashtag) {
-	return "select hashid from HashTags where hashtag = '" + hashtag + "'"; 
-};
-
-exports.getQueryForHashTagsInfo = function() {
-	return "select a.hashid, a.hashtag, count(b.tweetid) as count from HashTags a, HashTagTweets b where a.hashid = b.hashid group by a.hashid order by count DESC limit 9";
-};
-
-exports.getQueryForHashTagTweets = function(hashid) {
-	return "select a.* from Tweets a, HashTagTweets b where a.tweetid = b.tweetid and b.hashid = '" + hashid + "'";
-};
-
-exports.getQueryForHashTagMessage = function(hashid) {
-	return "select hashtag from HashTags where hashid = '" + hashid + "'";
-};
-
-exports.getQueryForHashTagId = function(hashtag) {
-	return "select hashid from HashTags where hashtag like '#" + hashtag + "'";
 };
 
 exports.getQueryforProfileIdbyName = function(name) {
@@ -223,32 +166,6 @@ exports.getQueryForUserCreation = function(email, password) {
 			+ password + "')";
 };
 
-exports.getQueryForTweetCreation = function(puid, tweet, handle, first_name,
-		last_name) {
-	return "Insert into Tweets (puid, tweet, handle, first_name, last_name) values ('"
-			+ puid
-			+ "','"
-			+ tweet
-			+ "','"
-			+ handle
-			+ "','"
-			+ first_name
-			+ "','" 
-			+ last_name + "')";
-};
-
-exports.getQueryForUserFollowerCreation = function(puid, followerid) {
-	return "Insert into Followers (puid, followerid) values ('" + puid + "','" + followerid + "')";
-};
-
-exports.getQueryForHashTagEntryCreation = function(hashtag) {
-	return "Insert into HashTags (hashtag) values('" + hashtag + "')";
-};
-
-exports.getQueryForHashTagTweetsCreation = function(tweetid, hashid) {
-	return "Insert into HashTagTweets (tweetid, hashid) values ('" + tweetid + "','" + hashid + "')";
-};
-
 exports.getQueryForProductCreation = function(puid, product_name, quantity, price, description, category_id, subcategory_id) 
 {
 	return "Insert into Products(puid, product_name, quantity, price, description, category_id, subcategory_id, status) values('" + puid+  "','"  +  product_name+  "','"  +  quantity+  "','"  +  price+  "','"  +  description+  "','"  +  category_id+  "','"  +  subcategory_id + "', 'pending')";
@@ -258,7 +175,7 @@ exports.getQueryForUpdateProductDetails = function(product_id, product_name, qua
 };
 
 exports.getQueryForAllProducts = function() {
-return "select * from Products";
+return "select * from Products where status = 'approved'";
 };
 
 exports.getQueryForProductByProductId = function(product_id) {
@@ -273,20 +190,16 @@ exports.getQueryForDeleteOfAProductByProductId = function(product_id) {
 	return "delete from Products where product_id = '" + product_id + "'";
 };
 
-exports.productreviews = function(product_id) {
-	return "select reviews from Products pro inner join Ratings rat  on pro.product_id = rat.product_id where pro.product_id = '" + product_id + "'";
-};
-
 exports.getQueryForProductsByCategoryId = function(category_id) {
-	return "select * from Products where category_id = '" + category_id + "'";
+	return "select * from Products where category_id = '" + category_id + "'and status = 'approved'";
 };
 
 exports.getQueryForProductBySubcategoryId = function(subcategory_id) {
-	return "select * from Products where subcategory_id = '" + subcategory_id + "'";
+	return "select * from Products where subcategory_id = '" + subcategory_id + "' and status = 'approved'";
 };
 
 exports.getQueryForProductsByCategoryAndSubCategoryId = function(category_id, subcategory_id) {
-	return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "'";
+	return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "' and status = 'approved'";
 };
 
 exports.deletecustomer = function(puid) {
@@ -336,4 +249,8 @@ exports.sqlgetProductsPending = function() {
 
 exports.getProductSubCategoriesByCategoryId = function(category_id) {
 	return "select * from ProductSubCategory where category_id = '" + category_id + "'";
-}
+};
+
+exports.getFiveProductsForHomePage = function() {
+	return "select * from Products where status = 'pending'";
+};
