@@ -57,7 +57,21 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
         console.log(files);
         filesInfo = files;
     };
+    $scope.logout_from_farmer_account= function(){
+    	alert("aaya");
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+        });
 
+    };
     $scope.upload_image = function() {
         var farmer_details = $http.get('/api/getsessioninfo');
         farmer_details.success(function(data) {
@@ -105,6 +119,8 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
         }
     };
 
+
+    
     var filesInfo = [];
     $scope.uploadFile = function(files) {
         filesInfo.push(files[0]);
