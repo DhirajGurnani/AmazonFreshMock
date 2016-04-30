@@ -18,7 +18,7 @@ exports.getBillId = function(tripId){
 };
 
 exports.sqllocationStats = function(tripId){
-	return "select location as label, count(location) as y from amazondb.Billing group by location";
+	return "select location as Location, count(location) as Count from amazondb.Billing group by location";
 };
 
 exports.sqlRevenueStats = function(){
