@@ -18,6 +18,9 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/home', {
                 templateUrl: 'amazon_home.html',
                 controller: 'homeController'
+            }).when('/cart', {
+                templateUrl: 'amazon_cart.html',
+                controller: 'cartController'
             }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
@@ -482,6 +485,43 @@ customerApp.controller('customer_profileController', function($scope, $http) {
             window.location = "/edit_customer_information";
         };
     }
+});
+
+customerApp.controller('cartController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
 });
 
 customerApp.controller('edit_customer_profileController', function($scope, $http) {
