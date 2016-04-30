@@ -23,7 +23,7 @@ exports.sqllocationStats = function(tripId){
 
 exports.sqlRevenueStats = function(){
 	return "select date(created_at) as label, sum(total_price) as y from amazondb.Billing group by date(created_at)"
-}
+};
 
 exports.updateTruck=function(truckId){
 	return "update Trucks set status ='in_delivery' where truck_id = "+truckId+";"
@@ -320,3 +320,4 @@ exports.getFarmerProfileByProductId = function(product_id) {
 
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
+};
