@@ -12,12 +12,12 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/pendingTrips', {
 				templateUrl : 'amazon_admin_pending.html',
 				controller : 'pendingController'
-			}).when('/completedTrips', {
-				templateUrl : 'amazon_admin_completed.html',
-				controller : 'completedController'
-			}).when('/analyseTrips', {
-				templateUrl : 'amazon_admin_analysis.html',
-				controller : 'analysisController'
+			}).when('/tripStatistics', {
+				templateUrl : 'amazon_admin_statistics.html',
+				controller : 'statisticsController'
+			}).when('/revenueStatistics', {
+				templateUrl : 'amazon_admin_revenue.html',
+				controller : 'revenueController'
 			}).when('/trackingTrips', {
 				templateUrl : 'amazon_admin_tracking.html',
 				controller : 'trackingController'
@@ -166,11 +166,18 @@ adminApp.controller('pendingController', function($scope, $http) {
 	}
 });
 
-adminApp.controller('completedController', function($scope, $http) {
-
+adminApp.controller('statisticsController', function($scope, $http) {
+	var getTripLocations = function() {
+		var getTripLocationsResponse = $http.get('api/admin/trips/locationStats');
+		getTripLocationsResponse.success(function(tLocation){
+			$scope.tripLocations = tLocation.datapoints;
+			console.log(tLocation.datapoints);
+		});
+	}
+	getTripLocations();
 });
 
-adminApp.controller('analysisController', function($scope, $http) {
+adminApp.controller('revenueController', function($scope, $http) {
 
 });
 
