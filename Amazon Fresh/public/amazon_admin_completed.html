@@ -1,54 +1,45 @@
 <div id="wrapper" class="row ng-scope">
-	<div class="row" style="margin-left: 15px; margin-right: 15px">
-		<br />
-		<div>
-			<div class="col-sm-2" style="margin-right: 10px">Trip No.</div>
-			<div class="col-sm-2" style="margin-right: 10px">Order ID</div>
-			<div class="col-sm-2" style="margin-right: 10px">Driver ID</div>
-			<div class="col-sm-2" style="margin-right: 10px">Truck ID</div>
-			<div class="col-sm-3">Date of delivery</div>
-		</div>
-		<br />
-		<div class="panel-body" style="border-style: ridge">
-			<div class="col-sm-2">1</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>112</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>113</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>114</span>
-			</div>
-			<div class="col-sm-3">1 day ago</div>
-		</div>
-		<div class="panel-body" style="border-style: ridge">
-			<div class="col-sm-2">2</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>113</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>114</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>112</span>
-			</div>
-			<div class="col-sm-3">2 days ago</div>
-		</div>
-		<div class="panel-body" style="border-style: ridge">
-			<div class="col-sm-2">3</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>114</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>112</span>
-			</div>
-			<div class="col-sm-2" style="margin-right: 10px">
-				<span>113</span>
-			</div>
-			<div class="col-sm-3">2 days ago</div>
-		</div>
-	</div>
+	<script type="text/javascript">
+	   window.onload = function () {
+	     var chart = new CanvasJS.Chart("chartContainer",
+	     {
+	       title:{
+	         text: "Top Oil Reserves"    
+	       },
+	       animationEnabled: true,
+	       axisY: {
+	         title: "Reserves(MMbbl)"
+	       },
+	       legend: {
+	         verticalAlign: "bottom",
+	         horizontalAlign: "center"
+	       },
+	       theme: "theme2",
+	       data: [
+	   
+	       {        
+	         type: "column",  
+	         showInLegend: true, 
+	         legendMarkerColor: "grey",
+	         legendText: "MMbbl = one million barrels",
+	         dataPoints: [      
+	         {y: 297571, label: "Venezuela"},
+	         {y: 267017,  label: "Saudi" },
+	         {y: 175200,  label: "Canada"},
+	         {y: 154580,  label: "Iran"},
+	         {y: 116000,  label: "Russia"},
+	         {y: 97800, label: "UAE"},
+	         {y: 20682,  label: "US"},        
+	         {y: 20350,  label: "China"}        
+	         ]
+	       }   
+	       ]
+	     });
+   
+     chart.render();
+   };
+</script>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 	<br />
 	<br />
 	<br />

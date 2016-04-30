@@ -23,8 +23,8 @@ customerApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/product_category', {
 				templateUrl : 'amazon_product_category.html',
 				controller : 'product_categoryController'
-			}).when('/go_customer_profile', {
-				templateUrl : 'amazon_customer_profile.html',
+			}).when('/customer_profile', {
+				templateUrl : 'amazon_profile.html',
 				controller : 'customer_profileController'
 			}).when('/edit_customer_information', {
 				templateUrl : 'amazon_edit_customer_profile.html',
@@ -46,52 +46,32 @@ customerApp.controller('mainController', function($scope, $http) {
 			}
 		});
 	};
-	$scope.go_to_homepage = function() {
-		// alert("login");
-			// console.log("in home");
-			window.location = "/home";
-		};
-	$scope.go_to_loginpage = function() {
-		// alert("login");
-		// console.log("in home");
-		window.location = "/doLogin";
-	};
-
 	
-});
-
-customerApp.controller('homeController', function($scope, $http) {
 	var sessioninfo = $http.get('/api/getsessioninfo');
 	sessioninfo.success(function(data) {
-		/*/alert("aaya");
-		console.log(data);
-		alert(data.profile);
-		*/if(data.profile){
-			$scope.Loggedin = false;
-			$scope.Loggedoff = true;
+		if(data.profile){
+			$scope.loggedIn = true;
+			$scope.loggedOff = false;
 			$scope.username = data.profile[0].first_name;
-		//	alert("yes");
-			}else{
-
-				$scope.Loggedin = true;
-				$scope.Loggedoff = false;
-				
-			//	alert("no");
-			
+			}
+		else{
+			$scope.loggedIn = false;
+			$scope.loggedOff = true;
 		}
 	});
-
+	
+	$scope.go_to_homepage = function() {
+			window.location = "/home";
+		};
+		
 	$scope.go_to_loginpage = function() {
-		// alert("login");
-		// console.log("in home");
 		window.location = "/doLogin";
 	};
-	$scope.go_to_product_cayegory = function() {
-		 //alert("login");
-		// console.log("in home");
-		
-		window.location = "/product_category";
+	
+	$scope.go_to_customer_profile = function() {
+		window.location = "/customer_profile";
 	};
+	
 	$scope.logout_from_account = function() {
 		$http({
 			method : 'POST',
@@ -100,29 +80,70 @@ customerApp.controller('homeController', function($scope, $http) {
 				'Content-Type' : 'application/json'
 			}
 		}).success(function(data) {
-/*			console.log("success");
-			console.log(data + "success");
-			alert(data);
-*/			window.location = "/doLogin";
 			
+			window.location = "/doLogin";
 			
 		}).error(function(data) {
 			console.log("failure");
 			console.log(data);
-			// alert(data+"fail");
 		});
 
-	};$scope.go_to_homepage = function() {
-		// alert("login");
-		// console.log("in home");
+	};
+	
+});
+
+customerApp.controller('homeController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+	sessioninfo.success(function(data) {
+		if(data.profile){
+			$scope.loggedIn = true;
+			$scope.loggedOff = false;
+			$scope.username = data.profile[0].first_name;
+			}
+		else{
+			$scope.loggedIn = false;
+			$scope.loggedOff = true;
+		}
+	});
+	
+	$scope.go_to_homepage = function() {
 		window.location = "/home";
-	};$scope.go_to_customer_profile = function() {
-		// alert("login");
-		// console.log("in home");
-		window.location = "/go_customer_profile";
+	};
+	
+	$scope.go_to_loginpage = function() {
+		window.location = "/doLogin";
 	};
 
+	$scope.go_to_customer_profile = function() {
+		window.location = "/customer_profile";
+	};
+	
 
+	$scope.logout_from_account = function() {
+		$http({
+			method : 'POST',
+			url : 'api/logout',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			
+			window.location = "/doLogin";
+			
+		}).error(function(data) {
+			console.log("failure");
+			console.log(data);
+		});
+
+	};
+	
+	$scope.go_to_product_cayegory = function() {
+		 //alert("login");
+		// console.log("in home");
+		
+		window.location = "/product_category";
+	};
+	
 });
 
 customerApp.controller('loginController', function($scope, $http) {
@@ -215,7 +236,48 @@ customerApp.controller('product_categoryController', function($scope, $http) {
 
 
 customerApp.controller('customer_profileController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+	sessioninfo.success(function(data) {
+		if(data.profile){
+			$scope.loggedIn = true;
+			$scope.loggedOff = false;
+			$scope.username = data.profile[0].first_name;
+			}
+		else{
+			$scope.loggedIn = false;
+			$scope.loggedOff = true;
+		}
+	});
+	
+	$scope.go_to_homepage = function() {
+			window.location = "/home";
+		};
+		
+	$scope.go_to_loginpage = function() {
+		window.location = "/doLogin";
+	};
+	
+	$scope.go_to_customer_profile = function() {
+		window.location = "/customer_profile";
+	};
+	
+	$scope.logout_from_account = function() {
+		$http({
+			method : 'POST',
+			url : 'api/logout',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			
+			window.location = "/doLogin";
+			
+		}).error(function(data) {
+			console.log("failure");
+			console.log(data);
+		});
 
+<<<<<<< Updated upstream
 	var customer_details = $http.get('/api/getsessioninfo');
 	customer_details.success(function(data) {
 		/*/alert("aaya");
@@ -266,6 +328,9 @@ customerApp.controller('edit_customer_profileController', function($scope, $http
 			$scope.status = data.profile[0].status;
 			$scope.created_at = data.profile[0].created_at;
 			$scope.updated = data.profile[0].updated_at;
+=======
+	};
+>>>>>>> Stashed changes
 
 		}
 		
