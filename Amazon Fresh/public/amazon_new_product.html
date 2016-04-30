@@ -103,11 +103,33 @@
             <div style="font-size:15px;">
             <span class="glyphicon glyphicon-plus"></span>
             </div> Click here to upload pictures of farm	
-            <input type="file">
+            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
             </span>
+      <input type="file" name="file2" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+      <input type="file" name="file3" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+           
             <br>
             <br>
-            <button class="btn" style="color:white; background-color:#808080" ng-click="createNewProduct();">Submit</button>
+            <button class="btn" style="color:white; background-color:#808080" ng-click="createNewProduct();" data-toggle="modal" data-target="#myModal">Create</button>
+            <div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Modal Header</h4>
+			        </div>
+			        <div class="modal-body">
+			          <p>Some text in the modal.</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="refreshPage()">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
             <br>
             <br><br>
          </div>
