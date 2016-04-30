@@ -8,8 +8,8 @@ var sqlQueryList = require('./sqlQueries');
 
 exports.approvefarmer = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				var puid = request.body.puid;
 				var sqlQuery = sqlQueryList.approvefarmer(puid);
 				dbHelper.executeQuery(
@@ -27,7 +27,7 @@ exports.approvefarmer = function(request, response) {
 								"errmsg" : error 
 							});
 						});
-			}
+			}/*
 			else {
 				response.send({
 	        		"status": 403,
@@ -41,7 +41,8 @@ exports.approvefarmer = function(request, response) {
 	    		"message" : "Error: Cannot find session"
 	    	});
 		}
-	} catch (err) {
+	}*/ 
+	catch (err) {
 		response.send({
 			"status" : 500,
 			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
