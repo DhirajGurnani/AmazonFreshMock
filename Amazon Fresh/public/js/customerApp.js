@@ -153,33 +153,96 @@ customerApp.controller('signupController', function($scope, $http) {
         window.location = "/doLogin";
     };
     $scope.go_to_signup_operation = function() {
-        $http({
-            method: 'POST',
-            url: 'api/register',
-            data: {
-                "first_name": $scope.firstname,
-                "last_name": $scope.lastname,
-                "email": $scope.email,
-                "birthday": $scope.birthday,
-                "address": $scope.address,
-                "location": $scope.location,
-                "state": $scope.state,
-                "zipcode": $scope.zipcode,
-                "phone": $scope.phone,
-                "role": $scope.role,
-                "password": $scope.password,
-                "status": "pending"
-            },
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).success(function(data) {
-            console.log(data);
-            window.location = "/";
-        }).error(function(data) {
-            console.log("failure");
-        });
-    };
+ 
+    	var firstname= $scope.firstname;
+		var last_name = $scope.lastname;
+		var email = $scope.email;
+		var birthday = $scope.birthday;
+		var address = $scope.address;
+		var location = $scope.location;
+		var state = $scope.state;
+		var zipcode =$scope.zipcode;
+		var phone = $scope.phone;
+		var role = $scope.role;
+		var password = $scope.password;
+		console.log($scope.password);
+	//	alert($scope.password);	
+		if($scope.firstname == undefined ||
+				$scope.lastname == undefined ||
+				$scope.email == undefined ||
+				$scope.birthday == undefined ||
+				$scope.address == undefined ||
+				$scope.location == undefined ||
+				$scope.state == undefined ||
+				$scope.zipcode == undefined ||
+				$scope.phone == undefined ||
+				$scope.role == undefined ||
+				$scope.password == undefined ){
+		
+	alert("Error");
+		} else{
+
+			alert("aaya");
+			$http({
+				method : 'POST',
+				url : 'api/validEmail',
+				data:{
+					
+					"email" : $scope.email,
+					
+				},
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+		
+		}).success(function(data) {
+		//	console.log("success");
+			/alert(data + "success");
+			//console.log(data);
+//			alert(data);
+			//window.location = "/";
+			if(data==true){
+				alert("user already exist");
+			} else {
+		
+		//	alert("gaya");
+		
+		$http({
+			method : 'POST',
+			url : 'api/register',
+			data : {
+				"first_name" : $scope.firstname,
+				"last_name" : $scope.lastname,
+				"email" : $scope.email,
+				"birthday" : $scope.birthday,
+				"address" : $scope.address,
+				"location" : $scope.location,
+				"state" : $scope.state,
+				"zipcode" : $scope.zipcode,
+				"phone" : $scope.phone,
+				"role" : $scope.role,
+				"password" : $scope.password,
+				"status" : "pending"
+			},
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+	//		console.log("success");
+		//	console.log(data + "success");
+//			alert(data);
+			window.location = "/";
+			
+			
+		}).error(function(data) {
+			console.log("failure");
+			console.log(data);
+			// alert(data+"fail");
+		});
+			}
+		});
+	}
+	}
 });
 
 customerApp.controller('product_categoryController', function($scope, $http) {
