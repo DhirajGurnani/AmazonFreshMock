@@ -13,7 +13,6 @@ customerApp.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'amazon_login.html',
                 controller: 'loginController'
             }).when('/home', {
-
                 templateUrl: 'amazon_home.html',
                 controller: 'homeController'
             }).when('/doSignup', {
@@ -46,7 +45,6 @@ customerApp.controller('mainController', function($scope, $http) {
             }
         });
     };
-
     var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
@@ -58,19 +56,15 @@ customerApp.controller('mainController', function($scope, $http) {
             $scope.loggedOff = true;
         }
     });
-
     $scope.go_to_homepage = function() {
         window.location = "/home";
     };
-
     $scope.go_to_loginpage = function() {
         window.location = "/doLogin";
     };
-
     $scope.go_to_customer_profile = function() {
         window.location = "/customer_profile";
     };
-
     $scope.logout_from_account = function() {
         $http({
             method: 'POST',
@@ -79,16 +73,11 @@ customerApp.controller('mainController', function($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).success(function(data) {
-
             window.location = "/doLogin";
-
         }).error(function(data) {
-            console.log("failure");
             console.log(data);
         });
-
     };
-
 });
 
 customerApp.controller('homeController', function($scope, $http) {
@@ -103,20 +92,15 @@ customerApp.controller('homeController', function($scope, $http) {
             $scope.loggedOff = true;
         }
     });
-
     $scope.go_to_homepage = function() {
         window.location = "/home";
     };
-
     $scope.go_to_loginpage = function() {
         window.location = "/doLogin";
     };
-
     $scope.go_to_customer_profile = function() {
         window.location = "/customer_profile";
     };
-
-
     $scope.logout_from_account = function() {
         $http({
             method: 'POST',
@@ -125,32 +109,23 @@ customerApp.controller('homeController', function($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).success(function(data) {
-
             window.location = "/doLogin";
-
         }).error(function(data) {
             console.log("failure");
             console.log(data);
         });
-
     };
 
     $scope.go_to_product_cayegory = function() {
-        //alert("login");
-        // console.log("in home");
-
         window.location = "/product_category";
     };
-
 });
 
 customerApp.controller('loginController', function($scope, $http) {
     $scope.go_to_signup = function() {
         window.location = "/doSignup";
     };
-
     $scope.checklogin = function() {
-        // alert("went");
         $http({
             method: 'POST',
             url: 'api/login',
