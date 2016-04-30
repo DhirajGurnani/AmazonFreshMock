@@ -330,6 +330,10 @@ exports.getProductCategories = function() {
 	return "select * from ProductCategory";
 };
 
+exports.sqlgetProductsPending = function() {
+	return "SELECT * FROM amazondb.Products where status = 'pending'";
+};
+
 exports.getProductSubCategoriesByCategoryId = function(category_id) {
 	return "select * from ProductSubCategory where category_id = '" + category_id + "'";
 };
