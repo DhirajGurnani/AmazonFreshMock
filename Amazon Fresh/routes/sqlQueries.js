@@ -16,6 +16,15 @@ exports.updateTripInfoQuery = function(tripId,billId){
 exports.getBillId = function(tripId){
 	return "select billing_id from TripInfo where trip_id = "+tripId+";";
 };
+
+exports.sqllocationStats = function(tripId){
+	return "select location as label, count(location) as y from amazondb.Billing group by location";
+};
+
+exports.sqlRevenueStats = function(){
+	return "select date(created_at) as label, sum(total_price) as y from amazondb.Billing group by date(created_at)"
+}
+
 exports.updateTruck=function(truckId){
 	return "update Trucks set status ='in_delivery' where truck_id = "+truckId+";"
 };

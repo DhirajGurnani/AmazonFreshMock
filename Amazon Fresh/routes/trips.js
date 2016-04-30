@@ -494,3 +494,89 @@ exports.getTruckTrips = function(request,response){
 		});
 	}
 };
+
+exports.locationStats = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var sqllocationStats = sqlQueryList.sqllocationStats();
+				dbHelper.executeQuery(
+						sqllocationStats, 
+						function(success) {
+							response.send({ //or 201 for creation,
+								"datapoints" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+exports.revenueStats = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var sqlRevenueStats = sqlQueryList.sqlRevenueStats();
+				dbHelper.executeQuery(
+						sqlRevenueStats, 
+						function(success) {
+							response.send({ //or 201 for creation,
+								"datapoints" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
