@@ -1,0 +1,52 @@
+<div id="wrapper" class="row ng-scope">
+	<h3 style="text-align:center"><b>Pending Farmer Approvals</b></h3>
+	<div class="row" style="margin-left: 15px; margin-right: 15px">
+		<br />
+		<div>
+			<div class="col-sm-1" style="margin-right: 10px">Farmer ID</div>
+			<div class="col-sm-2" style="margin-right: 10px">First Name</div>
+			<div class="col-sm-2" style="margin-right: 10px">Last Name</div>
+			<div class="col-sm-2" style="margin-right: 10px">Address</div>
+			<div class="col-sm-2" style="margin-right: 10px">Phone</div>
+			<div class="col-sm-2" style="margin-right: 10px"></div>
+		</div>
+		<br />
+		<div class="panel-body" ng-repeat="farmer in farmers" value="{{farmer.puid}}" style="border-style: ridge">
+			<div class="col-sm-1" style="margin-right: 10px">
+				<span>{{farmer.puid}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{farmer.first_name}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{farmer.last_name}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{farmer.address}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<span>{{farmer.phone}}</span>
+			</div>
+			<div class="col-sm-2" style="margin-right: 10px">
+				<button type="button" class="btn btn-primary btn-info" ng-click="fApprove(farmer.puid)">Approve</button>
+				<div id="myModal" class="modal fade" role="dialog">
+		  			<div class="modal-dialog">
+		    			<div class="modal-content">
+		      				<div class="modal-header">
+		        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        				<h4 class="modal-title">Message</h4>
+		      				</div>
+		     				 <div class="modal-body">
+		        				<p>Farmer Approved Successfully</p>
+		      				</div>
+		     				 <div class="modal-footer">
+		       					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      				</div>
+		    			</div>
+		  			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>

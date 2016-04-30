@@ -21,6 +21,12 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/adminBills', {
 				templateUrl : 'amazon_admin_bills.html',
 				controller : 'billController'
+			}).when('/farmerApproval', {
+				templateUrl : 'amazon_admin_fApproval.html',
+				controller : 'approveFarmerController'
+			}).when('/productApproval', {
+				templateUrl : 'amazon_admin_pApproval.html',
+				controller : 'approveProductController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
@@ -167,7 +173,6 @@ adminApp.controller('pendingController', function($scope, $http) {
 });
 
 adminApp.controller('statisticsController', function($scope, $http) {
-	
 	var getTripLocations = function() {
 		var getTripLocationsResponse = $http.get('api/admin/trips/locationStats');
 		getTripLocationsResponse.success(function(tLocation){
@@ -276,4 +281,60 @@ adminApp.controller('billController', function($scope, $http) {
 		});
 	};
 	getAdminBills();
+});
+
+adminApp.controller('approveFarmerController', function($scope, $http) {
+	var getFarmerPending = function() {
+		var getFarmerPendingResponse = $http.get('/api/admin/trips/getFarmersPending');
+		getFarmerPendingResponse.success(function(farmer){
+			$scope.farmers = farmer.message;
+		});
+	};
+	getFarmerPending();
+	$scope.fApprove = function(id){
+		$http({
+			method : 'POST',
+			url : '/api/admin/approveFarmer',
+			data : {"puid" : id},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			console.log('success read');
+			if(data.status === 200) {
+				console.log('Success');
+				window.location = '/farmerApproval';
+			}
+			else {				
+			}
+		});
+	}
+});
+
+adminApp.controller('approveCustomerController', function($scope, $http) {
+	var getProductPending = function() {
+		var getProductPendingResponse = $http.get('/api/admin/trips/getProductsPending');
+		getProductPendingResponse.success(function(product){
+			$scope.products = product.message;
+		});
+	};
+	getProductPending();
+	$scope.pApprove = function(id){
+		$http({
+			method : 'POST',
+			url : '/api/admin/approveProduct',
+			data : {"puid" : id},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			console.log('success read');
+			if(data.status === 200) {
+				console.log('Success');
+				window.location = '/productApproval';
+			}
+			else {				
+			}
+		});
+	}
 });
