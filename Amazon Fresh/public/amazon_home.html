@@ -69,17 +69,13 @@
                   <a href="/product_category/{{category.category_id}}"><strong>{{category.name}}</strong><br>{{category.description}}
                   </a>
                   </li>
-                  <br>
                </ul>
             </div>
-            <div class="input-group col-sm-6">
-               <input type="text" class="form-control"
-                  placeholder="Search AmazonFresh" ng-model="search"
-                  aria-describedby="basic-addon1" style="height: 50px"> <span
-                  class="input-group-addon" id="basic-addon1"
-                  style="background-color: #484848">
-               <button type="button" class="btn btn-default"
-                  style="color: white; background-color: #484848">Go</button>
+            <div class="input-group col-sm-9">
+               <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
+                  aria-describedby="basic-addon1"> 
+                  <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
+                  <span style="color:white; ">Go</span>
                </span>
             </div>
          </div>
