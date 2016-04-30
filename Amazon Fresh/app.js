@@ -248,6 +248,9 @@ app.get('/api/product/:product_id/ratings',product.productratings);
 app.get('/api/product/:product_id/reviews',product.productreview);
 app.post('/api/product/:product_id/delete',product.deleteproduct);
 
+app.get('/api/products/:product_id/images', product.getImageUrlsForProductByProductId);
+app.post('/api/products/:product_id/images', product.postImagesForProductByProductId);
+app.get('/api/products/images/:imageName', product.getImageByImageUrl);
 
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);

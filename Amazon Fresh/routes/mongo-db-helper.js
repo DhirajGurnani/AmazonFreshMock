@@ -15,6 +15,7 @@ exports.insertIntoCollection = function(collection, data, success) {
 exports.updateCollection = function(collection, searchData, data, success) {
 	collection.updateOne(searchData,data, function(err, results) {
 		assert.equal(err, null);
+		console.log(results);
 		success();
 	});
 };
@@ -38,8 +39,8 @@ exports.readOne = function(collection, searchData, projection, success) {
 
 exports.doesExistInDb = function(collection, searchData, success, failure) {
 	collection.findOne(searchData, function(err, data) {
-		console.log("exists in db print: ");
-		console.log(JSON.stringify(data));
+		//console.log("exists in db print: ");
+		//console.log(JSON.stringify(data));
 		if(data === null) {
 			failure();
 		}
