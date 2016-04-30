@@ -76,7 +76,7 @@ app.use('/', function(request, response) {
 		}
 		else {
 			console.log("No Profile: ");
-			response.sendfile(__dirname + '/public/customer.html');
+			response.sendfile(__dirname + '/public/admin.html');
 		}
 	}
 	else {
@@ -260,6 +260,8 @@ app.get('/api/admin/trips/getPendingTrips',trips.getPendingTrips);
 app.get('/api/admin/trips/availableDrivers',trips.availableDrivers);
 app.get('/api/admin/trips/availableTrucks',trips.availableTrucks);
 app.get('/api/admin/trips/getBills',trips.getBills);
+app.get('/api/admin/trips/locationStats',trips.locationStats);
+app.get('/api/admin/trips/revenueStats',trips.revenueStats);
 
 /*************** Billing API *****************/
 app.post('/api/billing/create', billing.createNewBill);
