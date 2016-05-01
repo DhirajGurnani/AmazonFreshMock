@@ -476,6 +476,12 @@ customerApp.controller('product_sub_categoryController', function($scope, $http)
 });
 
 customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
+	var category_info = $http.get('/api/product/category/get');
+	category_info.success(function(data){
+	//	console.log(data);
+		$scope.categories = data.category;
+	});
+
 	//alert($routeParams.product_id);
 	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
 	get_product_response.success(function(data){
