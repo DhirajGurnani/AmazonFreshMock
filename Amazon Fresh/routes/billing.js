@@ -85,7 +85,8 @@ exports.createNewBill = function(request, response) {
 														if(data) {
 															response.send({
 																"status" : 201,
-																"message" : "New bill created successfully"
+																"message" : "New bill created successfully",
+																"bill_id":billing_id
 															});
 														}
 													}, function(error) {

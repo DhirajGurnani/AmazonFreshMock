@@ -1,0 +1,106 @@
+<div id="wrapper" class="row ng-scope">
+   <style>
+      #panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+      .btn-file {
+      position: relative;
+      overflow: hidden;
+      }
+      .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+      }
+   </style>
+   <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
+      <div class= "row">
+         <div class="col-sm-9">
+            <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+         </div>
+         <div class="col-sm-2">
+         </div>
+         <div class="col-sm-1 nav navbar-nav pull-right">
+            <a href="#" ng-click="logout_from_farmer_account()"  style="background-color: #484848; color: white">Sign Out</a>
+         </div>
+      </div>
+   </nav>
+   <br/><br/><br/>
+   <div class="row">
+      <div class="dropdown col-sm-2" style="margin-left: 35px">
+      </div>
+      <div class="input-group col-sm-8">
+         <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
+            aria-describedby="basic-addon1"> 
+         <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
+         <span style="color:white; ">Go</span>
+         </span>
+      </div>
+   </div>
+   <br/>
+   <div class="row" style="margin-left:12px;">
+      <div class="col-sm-1">
+         <strong>Firstname:</strong><br><br>
+         <strong>Lastname:</strong><br><br>
+         <strong>Birthday:</strong><br><br>
+         <strong>Address:</strong><br><br>
+         <strong>Location:</strong><br><br>
+         <strong>State:</strong><br><br>
+         <strong>Zipcode:</strong><br><br>
+         <strong>Phone:</strong><br><br>
+         <strong>Created at:</strong><br><br>
+         <strong>Updated at:</strong><br><br>
+      </div>
+      <div class="col-sm-2">
+         {{first_name}}<br><br>
+         {{last_name}}<br><br>
+         {{birthday}}<br><br>
+         {{address}}<br><br>
+         {{location}}<br><br>
+         {{state}}<br><br>
+         {{zipcode}}<br><br>
+         {{phone}}<br><br>
+         {{created_at}}<br><br>
+         {{updated}}<br><br>
+      </div>
+      <div class="col-sm-8" style="margin-left:12px;">
+         <h4>Farmer's Photos</h4>
+         <div class = "row">
+         	<div class= "row">
+         		<div class = "col-sm-6" ng-repeat="imageUrl in imageUrls">
+               <div>
+                  <a href = "#" class = "thumbnail">
+                  <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
+                  </a>
+                  <br>
+               </div>
+               <video controls ng-hide="!($index == (imageUrls.length - 2))">
+               <source ng-src="{{videoUrls  | trustUrl}}" type="video/mp4">
+               </video controls>
+            </div>
+         	</div>
+         </div>
+      </div>
+   </div>
+
+<br/>
+<div class="row">
+   <div class="panel-body" style="background-color:#333333;padding-left:40px">
+      <div class="row">
+         <div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+         <div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+      </div>
+      <div style="color:white">
+         <br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+      </div>
+   </div>
+</div>
+</div>

@@ -12,6 +12,7 @@ var express = require('express')
   , admin = require('./routes/admin')
   , billing = require('./routes/billing')
   , farmers = require('./routes/farmer')
+  , ratings = require('./routes/ratings')
   , http = require('http')
   , path = require('path')
   , random = require('./routes/random');
@@ -319,6 +320,9 @@ app.get('/api/getFiveProducts', product.getFiveProducts);
 /*************** DP Algorithm ***************/
 app.get('/dpa/category/:category_id/subcategory/:subcategory_id', product.getDynamicPriceForAProduct);
 
+/*********************Product Rating**************/
+app.post('/api/postRating',ratings.postRating);
+app.post('/api/getRating',ratings.getRating);
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);
 app.post('/api/admin/trips/deleteTrip',trips.deleteTrip);

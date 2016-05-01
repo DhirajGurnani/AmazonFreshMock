@@ -22,8 +22,8 @@ exports.getVideoForFarmerByPuid = function(request, response) {
 		}, function() {
 			dbHelper.readOne(farmers, {"puid":request.params.puid}, null, function(data) {
 				try {
-					if(data[request.params.puid].video) {
-						if(data[request.params.puid].video.length >0) {
+					if(data[request.params.puid].videos) {
+						if(data[request.params.puid].videos.length >0) {
 							response.setHeader('Content-type', 'video/mp4');
 						    mongodb.MongoClient.connect(mongoURL, function(error, db) {
 						    	var bucket = new mongodb.GridFSBucket(db, {
@@ -405,11 +405,11 @@ exports.getFarmers = function(request, response) {
 
 exports.getFarmerByPuid = function(request, response) {
 	try {
-		var sqlQuery = sqlQueryList.getQueryForFarmerByPuid(request.params.puid);
+		var sqlQuery = sqlQueryList.getProfile(request.params.puid);
 		mysqlDbHelper.executeQuery(sqlQuery, function(rows) {
 			response.send({
-				"status" : 200, // or 201 for creation,
-				"farmers" : rows // or id for creation and data for get
+				"status" : 200,
+				"farmers" : rows
 			});
 		}, function() {
 			// failure callback
