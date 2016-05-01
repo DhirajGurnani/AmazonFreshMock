@@ -20,9 +20,19 @@ exports.updatecustomer = function(request, response) {
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
-							response.send({
-								profile:rows
-							})},
+							if(rows.affectedRows>0){
+								var profile = sqlQueryList.getProfile(puid);
+								dbHelper.executeQuery(
+										profile,function(success){
+											request.session.profile = success;
+											response.send({
+												profile:request.session.profile[0]
+											})										
+										},function(error){
+											
+										}); 	
+							}
+							},
 						function(error){
 							//  failure callback
 							response.send({
