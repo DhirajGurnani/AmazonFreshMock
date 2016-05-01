@@ -330,6 +330,48 @@ exports.getProductByFarmerId = function(request, response) {
 	}
 };
 
+
+exports.getProductBySearch = function(request, response) {	
+	try {
+		if(true) {
+			if(true) {
+				var product_name = request.body.product_name;  // value is got from the url api/product/:pid
+				var sqlQuery = sqlQueryList.getgetProductBySearch(product_name);
+				dbHelper.executeQuery(
+						sqlQuery, 
+						function(rows) {
+							response.send({
+								"status" : 200,
+								"product" : rows
+							})},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: No product found for product_id: " + product_id + " : error: " + error
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
 /**
  * fetches products by category id
  */

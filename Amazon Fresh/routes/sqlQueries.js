@@ -125,6 +125,12 @@ exports.getProfile = function(puid){
 exports.getQueryForProductByFarmer = function(puid){
 	return "select * from Products where puid = '"+puid+"';";
 }
+
+
+exports.getgetProductBySearch = function(product_name){
+	return "select * from Products where product_name LIKE '%"+product_name+"%';";
+}
+
 /**
  *  Query for getting password for a given email
  */
