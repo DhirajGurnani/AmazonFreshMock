@@ -17,6 +17,10 @@ exports.getBillId = function(tripId){
 	return "select billing_id from TripInfo where trip_id = "+tripId+";";
 };
 
+exports.getDeliverySlots = function(tripId){
+	return "select * from DeliverySlots";
+};
+
 exports.sqllocationStats = function(tripId){
 	return "select location as Location, count(location) as Count from amazondb.Billing group by location";
 };

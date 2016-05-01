@@ -9,7 +9,7 @@
 var dbHelper = require('./mysql-db-helper');
 var sqlQueryList = require('./sqlQueries');
 var redis = require('redis');
-var client = redis.createClient(); 
+//var client = redis.createClient(); 
 
 exports.createTrip = function(request,response){
 	try {
@@ -649,6 +649,48 @@ exports.getFarmersPending = function(request,response){
 				var sqlgetFarmersPending = sqlQueryList.sqlgetFarmersPending();
 				dbHelper.executeQuery(
 						sqlgetFarmersPending, 
+						function(success) {
+							response.send({ //or 201 for creation,
+								"message" : success // or id for creation and data for get
+							});
+						}, 
+						function(error){
+							//  failure callback
+							response.send({
+								"status" : 400, 
+								"errmsg" : error 
+							});
+						});
+			}/*
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 401,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+		
+	} */
+		catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+exports.getDeliverySlots = function(request,response){
+	try {		
+		//if(request.session) {
+			//if(request.session.profile) {
+				var getDeliverySlots = sqlQueryList.getDeliverySlots();
+				dbHelper.executeQuery(
+						getDeliverySlots, 
 						function(success) {
 							response.send({ //or 201 for creation,
 								"message" : success // or id for creation and data for get
