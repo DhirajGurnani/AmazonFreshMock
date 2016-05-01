@@ -551,16 +551,99 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 });
 
 customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
-	// initialize with defaults
-	var avg = 4.5;
-	// with plugin options (do not attach the CSS class "rating" to your input if using this approach)
-	$("#avgRating").rating({'size':'sm', displayOnly: true, step: 0.5});
-	$("#avgRating").rating("update", avg);
+	
+	$scope.createReview = function(){
+		console.log({
+	        	"product_id" : $routeParams.product_id,
+	        	"ratings" : parseInt(document.getElementById("myRating").value),
+	        	"reviews" : $scope.myReview
+	        });
+		$http({
+	        method: 'POST',
+	        url: 'api/postRating',
+	        data:{
+	        	"product_id" : $routeParams.product_id,
+	        	"ratings" : parseInt(document.getElementById("myRating").value),
+	        	"reviews" : $scope.myReview
+	        },
+	        headers: {
+	            'Content-Type': 'application/json'
+	        }
+	    }).success(function(data) {
+	    	if(data.status == 201) {
+	    		window.location = "/product/" + $routeParams.product_id;
+	    	}
+	    }).error(function(error) {
+	    });
+	};
+	
+	$http({
+        method: 'POST',
+        url: 'api/getRating',
+        data:{
+        	"product_id" : $routeParams.product_id
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+    	if(data.status == 200) {
+    		console.log(data);
+    		$("#avgRating").rating({'size':'sm', displayOnly: true, step: 0.5});
+    		$("#avgRating").rating("update", data.average);
+    		
+    		if(data.ratings[0]) {
+    			$scope.rating1 = {};
+        		$scope.rating1.rating = data.ratings[0].rating;
+        		$scope.rating1.review = data.ratings[0].reviews;
+        		$("#avgRating1").rating({'size':'sm', displayOnly: true, step: 0.5});
+        		$("#avgRating1").rating("update", data.ratings[0].rating);
+    		}
+    		
+    		if(data.ratings[1]) {
+    			$scope.rating2 = {};
+        		$scope.rating2.rating = data.ratings[1].rating;
+        		$scope.rating2.review = data.ratings[1].reviews;
+        		$("#avgRating2").rating({'size':'sm', displayOnly: true, step: 0.5});
+        		$("#avgRating2").rating("update", data.ratings[1].rating);
+    		}
+
+    		if(data.ratings[2]) {
+    			$scope.rating3 = {};
+        		$scope.rating3.rating = data.ratings[2].rating;
+        		$scope.rating3.review = data.ratings[2].reviews;
+        		$("#avgRating3").rating({'size':'sm', displayOnly: true, step: 0.5});
+        		$("#avgRating3").rating("update", data.ratings[2].rating);
+    		}
+    		
+    		if(data.ratings[3]) {
+    			$scope.rating4 = {};
+        		$scope.rating4.rating = data.ratings[3].rating;
+        		$scope.rating4.review = data.ratings[3].reviews;
+        		$("#avgRating4").rating({'size':'sm', displayOnly: true, step: 0.5});
+        		$("#avgRating4").rating("update", data.ratings[3].rating);
+    		}
+    		
+    		if(data.ratings[4]) {
+        		$scope.rating5 = {};
+        		$scope.rating5.rating = data.ratings[4].rating;
+        		$scope.rating5.review = data.ratings[4].reviews;
+        		$("#avgRating5").rating({'size':'sm', displayOnly: true, step: 0.5});
+        		$("#avgRating5").rating("update", data.ratings[4].rating);    	
+    		}
+    		$scope.ratings = true;
+    	}
+    	else {
+    		$scope.ratings = null;
+    	}
+    }).error(function(error) {
+    	$scope.ratings = null;
+    });
 	
 	
+	$("#myRating").rating({'size':'sm', step: 1});
 	
-	$("#input-4").rating({'size':'sm', step: 1});
-	
+	/*
 	$scope.ratings = null;
 	$scope.rating1 = {"rating_id":1, "review":"fdsjlh lsjgljdshgljhdgsl lg ljdsgh ldsgh jdshg jlhsdgl h dgs"};
 	$scope.ratings = [{"rating_id":1}];
@@ -568,6 +651,7 @@ customerApp.controller('productController', function($scope, $http, $routeParams
 	$("#avgRating" + $scope.ratings[0].rating_id).rating({'size':'sm', displayOnly: true, step: 0.5});
 	$("#avgRating" + $scope.ratings[0].rating_id).rating("update", avg);
 	
+	*/
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);

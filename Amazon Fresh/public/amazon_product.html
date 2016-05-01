@@ -114,12 +114,13 @@
 			    				<h4><b>Give your Rating & Review</b></h4><br><br>
 			    				<div class="form-group">
 							      <label>Your Rating:</label>
-							      <label for="input-4" class="control-label">Rate This</label>
-								  <input id="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="true">
+							      <br>
+							      <label for="myRating" class="control-label">Rate This</label>
+								  <input id="myRating" class="rating rating-loading" data-show-clear="false" data-show-caption="true">
 							    </div>
 							    <div class="form-group">
 							      <label for="pwd">Your Reviews:</label>
-							      <textarea type="text" class="form-control" id="pwd" rows="3"></textarea>
+							      <textarea ng-model="myReview" type="text" class="form-control" id="pwd" rows="3"></textarea>
 							    </div>
 							    <div class="form-group">
 							    	<button class="btn btn-success" ng-click="createReview();">Submit</button>
@@ -129,44 +130,44 @@
 			    		<div class="panel panel-default">
 			    			<div class="panel-body">
 			    				<h4><b>Previous Ratings and Reviews</b></h4><br><br>
-			    				<div>
+			    				<div ng-hide="(rating1 == undefined)">
 			    					<div class="form-group">
-			    						<label for="avgRating1" class="control-label">Average Rating</label>
 			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
 								    </div>
 								    <div class="form-group">
-								      <label for="pwd">Review:</label>
-								      <p>{{rating1.review}}</p>
+								      <p><b>Review:</b> {{rating1.review}}</p>
 								    </div>
 			    				</div>
-			    				<div>
+			    				<div ng-hide="(rating2 == undefined)">
 			    					<div class="form-group">
-			    						<label for="avgRating1" class="control-label">Average Rating</label>
-			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+			         					<input id="avgRating2" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
 								    </div>
 								    <div class="form-group">
-								      <label for="pwd">Review:</label>
-								      <p>{{rating1.review}}</p>
+								      <p><b>Review:</b> {{rating2.review}}</p>
 								    </div>
 			    				</div>
-			    				<div>
+			    				<div ng-hide="(rating3 == undefined)">
 			    					<div class="form-group">
-			    						<label for="avgRating1" class="control-label">Average Rating</label>
-			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+			         					<input id="avgRating3" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
 								    </div>
 								    <div class="form-group">
-								      <label for="pwd">Review:</label>
-								      <p>{{rating1.review}}</p>
+								      <p><b>Review:</b> {{rating3.review}}</p>
 								    </div>
 			    				</div>
-			    				<div>
+			    				<div ng-hide="(rating4 == undefined)">
 			    					<div class="form-group">
-			    						<label for="avgRating1" class="control-label">Average Rating</label>
-			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+			         					<input id="avgRating4" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
 								    </div>
 								    <div class="form-group">
-								      <label for="pwd">Review:</label>
-								      <p>{{rating1.review}}</p>
+								      <p><b>Review:</b> {{rating4.review}}</p>
+								    </div>
+			    				</div>
+			    				<div ng-hide="(rating5 == undefined)">
+			    					<div class="form-group">
+			         					<input id="avgRating5" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+								    </div>
+								    <div class="form-group">
+								      <p><b>Review:</b> {{rating5.review}}</p>
 								    </div>
 			    				</div>
 			    				<div ng-hide="!(ratings == undefined)">

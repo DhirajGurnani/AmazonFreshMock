@@ -16,7 +16,8 @@ exports.postRating = function(request,response){
 				dbHelper.executeQuery(
 						postRating, 
 						function(success) {
-							response.send({ //or 201 for creation,
+							response.send({ //or 201 for creation,\
+								"status" : 201,
 								"message" : success // or id for creation and data for get
 							});
 						}, 
@@ -68,12 +69,16 @@ exports.getRating = function(request,response){
 										getReview, 
 										function(success) {
 											response.send({
-												"rating":rating[0].average,
-												"review":success
+												"status" : 200,
+												"average":rating[0].average,
+												"ratings":success
 											})
 										},
 										function(error){
-											response.send({"error":error});
+											response.send({
+												"status" : 400,
+												"error": error
+												});
 										});							
 							}
 							else{
