@@ -615,9 +615,6 @@ customerApp.controller('shippingController', function($scope, $http) {
     $scope.go_to_cart = function(){
     	window.location = "/cart";
     };
-    $scope.go_to_checkout = function(){
-    	window.location = "/checkout";
-    };
     $scope.logout_from_account = function() {
         $http({
             method: 'POST',
@@ -627,6 +624,36 @@ customerApp.controller('shippingController', function($scope, $http) {
             }
         }).success(function(data) {
             window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
+    $scope.go_to_checkout = function(){
+    	sessioninfo.success(function(data) {
+            $scope.customer_id = data.profile[0].puid;
+        });
+    	$http({
+            method: 'POST',
+            url: 'api/logout',
+            data: {
+                "customer_id": $scope.customer_id,
+                "address": $scope.address1,
+                "location": $scope.city,
+                "state": $scope.state,
+                "zipcode": $scope.zip,
+                "phone": $scope.phone,
+                "total_price": $scope.email,
+                "delivery_date": $scope.date,
+                "delivery_id": $scope.time_slot.value,
+                "phone": $scope.phone,
+                "status": "pending"
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/checkout";
         }).error(function(data) {
             console.log("failure");
             console.log(data);
