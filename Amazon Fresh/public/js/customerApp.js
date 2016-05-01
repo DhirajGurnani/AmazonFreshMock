@@ -495,7 +495,8 @@ customerApp.controller('productController', function($scope, $http, $routeParams
             	  "product_id":$routeParams.product_id,
             	  "product_name":data.product[0].product_name,
             	  "quantity":$scope.prod_Quantity,
-            	  "price":data.product[0].price            	  
+            	  "price":data.product[0].price,
+            	  "puid":data.product[0].puid
               },
               headers: {
                   'Content-Type': 'application/json'
@@ -718,6 +719,38 @@ customerApp.controller('cartController', function($scope, $http) {
         } else {
             $scope.loggedIn = false;
             $scope.loggedOff = true;
+        }
+        console.log(data.products);
+        var temp_product_name = [ ]
+        var temp_product_total_price = [ ]
+        for(i = 0; i < data.products.length; i++){
+        	//temp_product_name[i]=data.products[i].product_name;
+        	temp_product_total_price[i] = data.products[i].quantity*data.products[i].price;
+        }
+        $scope.product_addition_amounts = 0;
+        for(i = 0; i < data.products.length; i++){
+        	$scope.product_addition_amounts=$scope.product_addition_amounts+temp_product_total_price[i];
+        }
+        
+        
+       // $scope.product_price = temp_product_price;
+        $scope.product_total_bill_amount = $scope.product_addition_amounts + 6;
+        var imageUrls = [];
+        var products = [];
+        
+        data.products.forEach(function(product) {
+        	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+            get_pictures.success(function(data2) {
+            	console.log(data2);
+            	product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+                products.push(product);
+                $scope.products = products;
+                console.log($scope.products);
+            });
+        });
+        
+        for (i = 0; i < data.products.length; i++){
+        
         }
     });
     $scope.go_to_homepage = function() {
