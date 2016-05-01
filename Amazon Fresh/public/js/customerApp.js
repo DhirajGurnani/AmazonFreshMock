@@ -996,7 +996,51 @@ customerApp.controller('amazon_edit_customer_profileController', function($scope
             $scope.loggedIn = false;
             $scope.loggedOff = true;
         }
-        console.log(data.profile[0]);
+        console.log(data.profile[0].puid);
         $scope.profile = data.profile[0];
+        $scope.Editdbon = true;
+        $scope.Editdboff = false;
+
     });
+    
+    $scope.go_to_update_operation = function(){
+    	alert($scope.profile.birthday);
+    	var sessioninfo = $http.get('/api/getsessioninfo');
+        sessioninfo.success(function(data) {
+        	//
+    	$http({
+            method: 'POST',
+            url: '/api/customers/'+data.profile[0].puid+'/update',
+            data:{
+            	"first_name":$scope.profile.firstname,
+            	"last_name":$scope.profile.lastname,
+            	"birthday":$scope.profile.birthday,
+            	"address":$scope.profile.address,
+            	"location":$scope.profile.location,
+            	"state":$scope.profile.state,
+            	"zipcode":$scope.profile.zipcode,
+            	"phone":$scope.profile.phone,				
+            	"puid":$scope.profile.puid
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/customer_profile";
+        }).error(function(data) {
+            console.log(data);
+        });
+        });
+    
+    };
+    $scope.change_birthday = function(){
+    	//alert($scope.firstname);
+    	$scope.Editdbon = false;
+        $scope.Editdboff = true;
+    };
+    $scope.change_un_birthday = function(){
+    	//alert($scope.firstname);
+    	$scope.Editdbon = true;
+        $scope.Editdboff = false;
+    };
 });
