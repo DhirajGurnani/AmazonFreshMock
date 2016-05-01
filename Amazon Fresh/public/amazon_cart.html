@@ -72,34 +72,36 @@
             <div>
                <div class="col-sm-8"></div>
                <div class="col-sm-2">Price</div>
-               <div class="col-sm-2"><span class="pull-right">Quantity</span></div>
+               <div class="col-sm-2"><span>Quantity</span></div>
             </div>
             <br/>
+            
+            <div ng-repeat="product in products">
             <div class="panel-body" style="border-style:ridge">
+            
                <div class="col-sm-2">
-                  <img src="https://images-na.ssl-images-amazon.com/images/I/71hH3zqDmbL._SR280,280_.jpg" alt="image from DB" style="width:60px; height:80px">
+                  <img ng-src="{{product.imageUrls}}" alt="image from DB" style="width:60px; height:80px">
                </div>
                <div class="col-sm-6" style="text-align:left">
-                  <span style="font-size:12"><a href="#" style="color:blue"><b>Product Name</b></a></span> by<br/>
-                  <span>Product Supplier</span><br/>
+                  <span style="font-size:12"><a href="#" style="color:blue"><b>{{product.product_name}}</b></a></span> by<br/>
+                  <span><a href="/farmer/{{product.puid}}">Product Supplier</a></span><br/>
                   <span style="color:green">In Stock</span><br/>
                   <span>Ships in Certified Frustration-Free Packaging</span><br/>
                   <span>Eligible for FREE Shipping</span>
                </div>
                <div class="col-sm-2" style="color:red">
-                  <span>$11</span>
+                  <span>$ {{product.price}}</span>
                </div>
                <div class="col-sm-2">
-                  <select name="quantity" class="pull-right">
-                     <option value="1">1</option>
-                     <option value="2">2</option>
-                     <option value="3">3</option>
-                     <option value="4">4</option>
-                  </select>
+                  <span>{{product.quantity}}</span>
+                  
                </div>
+                </div>
             </div>
+            
+           
             <br/>
-            <h4 class="pull-right"><b>Subtotal: <span style="color:red">$11</b></span></h4>
+            <h4 class="pull-right"><b>Subtotal: <span style="color:red">$ {{product_addition_amounts}}</b></span></h4>
          </div>
          <br/><br/><br/>
       </div>
@@ -110,10 +112,10 @@
          <div class="panel-body" style="background-color:#f2f2f2; margin-right:10px">
             <h3><b>Order Summary</b></h3>
             <br/>
-            <span><b>Subtotal: <span class="pull-right">$11</span></b></span><br/>
+            <span><b>Subtotal: <span class="pull-right">$ {{product_addition_amounts}}</span></b></span><br/>
             <span><b>Estimated Shipping: <span class="pull-right">$3</span></b></span><br/>
             <span><b>Estimated Tax: <span class="pull-right">$3</span></b></span><br/>
-            <span><b>Estimated Total: <span class="pull-right" style="color:red">$17</span></b></span><br/><br/>
+            <span><b>Estimated Total: <span class="pull-right" style="color:red">$ {{product_total_bill_amount}}</span></b></span><br/><br/>
             <button type="button" class="form-control" ng-click="go_to_shipping()" style="background-color:green; color:white">Proceed to checkout</button><br/>
          </div>
          </br>
