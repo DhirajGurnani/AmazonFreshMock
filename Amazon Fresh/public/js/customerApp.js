@@ -475,12 +475,21 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
     };
 });
 
-customerApp.controller('product_sub_categoryController', function($scope, $http) {
+customerApp.controller('product_sub_categoryController', function($scope, $http, $routeParams) {
+	alert($routeParams.category_id);
+	alert($routeParams.sub_category_id);
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);
 		$scope.categories = data.category;
 	});
+	var product_get_info = $http.get('/api/product/category/'+$routeParams.category_id+'/subcategory/'+$routeParams.sub_category_id);
+	product_get_info.success(function(data){
+		$scope.products.data.products;
+		
+	//	$scope.categories = data.category;
+	});
+	
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
