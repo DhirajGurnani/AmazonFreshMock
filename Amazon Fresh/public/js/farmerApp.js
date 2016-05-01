@@ -152,24 +152,56 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
                 },
             }).success(
                 function(data) {
-                    filesInfo.forEach(function(file) {
-                        var reqData = new FormData();
-                        reqData.append("image", file);
+                	var product_id = data.product_id;
+                	if(filesInfo[0]) {
+                		var reqData = new FormData();
+                        reqData.append("image", filesInfo[0]);
                         $http({
                             method: 'POST',
-                            url: '/api/products/' + data.product_id + '/images',
+                            url: '/api/products/' + product_id + '/images',
                             data: reqData,
                             headers: {
                                 'Content-Type': undefined
                             },
                             transformRequest: angular.identity
                         }).success(
-                            function(data) {
-                                console.log(data);
-                                //alert(data);
+                            function(data1) {
+                                console.log(data1);
+                                if(filesInfo[1]) {
+                            		var reqData = new FormData();
+                                    reqData.append("image", filesInfo[1]);
+                                    $http({
+                                        method: 'POST',
+                                        url: '/api/products/' + product_id + '/images',
+                                        data: reqData,
+                                        headers: {
+                                            'Content-Type': undefined
+                                        },
+                                        transformRequest: angular.identity
+                                    }).success(
+                                        function(data2) {
+                                            console.log(data2);
+                                            if(filesInfo[2]) {
+                                        		var reqData = new FormData();
+                                                reqData.append("image", filesInfo[2]);
+                                                $http({
+                                                    method: 'POST',
+                                                    url: '/api/products/' + product_id + '/images',
+                                                    data: reqData,
+                                                    headers: {
+                                                        'Content-Type': undefined
+                                                    },
+                                                    transformRequest: angular.identity
+                                                }).success(
+                                                    function(data) {
+                                                        console.log(data);
+                                                        
+                                                    });
+                                        	}
+                                        });
+                            	}
                             });
-                    });
-
+                	}
                 });
         });
     }

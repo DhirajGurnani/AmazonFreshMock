@@ -436,9 +436,24 @@ customerApp.controller('product_sub_categoryController', function($scope, $http)
     };
 });
 
-customerApp.controller('productController', function($scope, $http, $routeParams) {
-	alert($routeParams.product_id);
-	
+customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
+	//alert($routeParams.product_id);
+	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
+	get_product_response.success(function(data){
+		console.log(data.product[0].product_name);
+		$scope.product_name = data.product[0].product_name;
+		$scope.product_price = data.product[0].price;
+		$scope.product_description = data.product[0].description;
+		var get_pictures = $http.get('/api/products/' + $routeParams.product_id + '/images');
+        get_pictures.success(function(data) {
+            var imageUrls = [];
+            for (i = 0; i < data.urls.length; i++) {
+                imageUrls[i] = "http://localhost:3000/" + data.urls[i];
+            }
+            console.log($location.$$absUrl);
+            $scope.imageUrls = imageUrls;
+        });
+	});
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {

@@ -65,21 +65,24 @@
          </div>
          <br/>
          <div class="row">
-            <div class="col-sm-4" style="text-align:center; padding-left:15px">
-               <br/><br/><img src="https://images-na.ssl-images-amazon.com/images/I/71hH3zqDmbL._SR280,280_.jpg" alt="image from DB">
-            </div>
+            <div class="col-sm-4" ng-repeat="imageUrl in imageUrls" style="text-align:center; padding-left:15px">
+               <div>
+                  <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
+                  <br>
+               </div>
+              </div>
             <div class="col-sm-8">
-               <h3>Product_Name</h3>
+               <h3>{{product_name}}</h3>
                <p>other products by <a href=""><u>Farmer_Name</u></a></p>
                <br/><br/>
-               <p><strong>Price</strong></p>
+               <p><strong> {{product_price}}</strong></p>
                <br/><br/>
                <button type="button" class="btn btn-default" style="color:white; background-color:#aaa" ng-click="add_to_cart();">Add to Cart</button>
             </div>
          </div>
          <div class="row" style="padding-left:25px">
             <h3>Product Description</h3>
-            <p>description</p>
+            <p>{{product_description}}</p>
             <h3>Product Details</h3>
             <p>details</p>
          </div>
