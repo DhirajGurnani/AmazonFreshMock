@@ -582,10 +582,6 @@ customerApp.controller('customer_profileController', function($scope, $http) {
 
             }
         });
-        $scope.edit_customer_profile = function() {
-            alert("signup");
-            window.location = "/edit_customer_information";
-        };
     }
 });
 
@@ -637,24 +633,21 @@ customerApp.controller('shippingController', function($scope, $http) {
         });
     	$http({
             method: 'POST',
-            url: 'api/billing/create',
+            url: 'api/addToShipping',
             data: {
-                "customer_id": customer_id,
                 "address": $scope.address1,
                 "location": $scope.city,
                 "state": $scope.state,
                 "zipcode": $scope.zip,
                 "phone": $scope.phone,
-                "total_price": "$10",
                 "delivery_date": $scope.date,
                 "delivery_id": $scope.time_slot,
-                "phone": $scope.phone,
-                "status": "pending"
             },
             headers: {
                 'Content-Type': 'application/json'
             }
         }).success(function(data) {
+        	window.alert("Successfully inserted into Session");
             window.location = "/checkout";
         }).error(function(data) {
             console.log("failure");
