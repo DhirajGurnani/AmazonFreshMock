@@ -476,8 +476,8 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 });
 
 customerApp.controller('product_sub_categoryController', function($scope, $http, $routeParams) {
-	alert($routeParams.category_id);
-	alert($routeParams.sub_category_id);
+	//alert($routeParams.category_id);
+	//alert($routeParams.sub_category_id);
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);
@@ -485,7 +485,20 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 	});
 	var product_get_info = $http.get('/api/product/category/'+$routeParams.category_id+'/subcategory/'+$routeParams.sub_category_id);
 	product_get_info.success(function(data){
-		$scope.products.data.products;
+		console.log(data.products);
+		$scope.products = data.products;
+        var products = [];
+        
+        data.products.forEach(function(product) {
+        	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+            get_pictures.success(function(data2) {
+            	//console.log(data2);
+            	product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+                products.push(product);
+                $scope.products = products;
+                //console.log($scope.products);
+            });
+        });
 		
 	//	$scope.categories = data.category;
 	});
