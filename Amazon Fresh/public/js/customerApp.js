@@ -30,7 +30,7 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
-            }).when('/product_sub_category/:sub_category_id', {
+            }).when('/product_category/:category_id/product_sub_category/:sub_category_id', {
                 templateUrl: 'amazon_product_types.html',
                 controller: 'product_sub_categoryController'
             }).when('/product/:product_id', {
@@ -369,7 +369,22 @@ customerApp.controller('customer_order_confirmationController', function($scope,
     
 });
 
-customerApp.controller('product_categoryController', function($scope, $http) {
+customerApp.controller('product_categoryController', function($scope, $http, $routeParams) {
+	$scope.category_id = $routeParams.category_id;
+	//alert($routeParams.category_id);
+	var subcategory_info = $http.get('/api/product/category/'+ $routeParams.category_id +'/subcategory');
+	subcategory_info.success(function(data){
+//		console.log(data.subcategory);
+		$scope.subcategories = data.subcategory;
+		
+//		$scope.subcategories.category_id = $routeParams.category_id;
+	});
+	
+	var category_info = $http.get('/api/product/category/get');
+	category_info.success(function(data){
+	//	console.log(data);
+		$scope.categories = data.category;
+	});
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
@@ -413,6 +428,11 @@ customerApp.controller('product_categoryController', function($scope, $http) {
 });
 
 customerApp.controller('product_sub_categoryController', function($scope, $http) {
+	var category_info = $http.get('/api/product/category/get');
+	category_info.success(function(data){
+	//	console.log(data);
+		$scope.categories = data.category;
+	});
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
