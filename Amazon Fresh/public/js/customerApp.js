@@ -481,19 +481,33 @@ customerApp.controller('productController', function($scope, $http, $routeParams
     	window.location = "/cart";
     };
     $scope.add_to_cart = function(){
-    	  $http({
+    	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
+    	get_product_response.success(function(data){
+    		console.log(data.product[0]);
+    		//alert($scope.prod_Quantity);
+    		$scope.product_name = data.product[0].product_name;
+    		$scope.product_price = data.product[0].price;
+    		$scope.product_description = data.product[0].description;
+    		$http({
               method: 'POST',
-              url: 'api/logout',
+              url: 'api/addToCart',
+              data:{
+            	  "product_id":$routeParams.product_id,
+            	  "product_name":data.product[0].product_name,
+            	  "quantity":$scope.prod_Quantity,
+            	  "price":data.product[0].price            	  
+              },
               headers: {
                   'Content-Type': 'application/json'
               }
           }).success(function(data) {
-              window.location = "/doLogin";
+        	  alert("successful_insertion");
+              //window.location = "/doLogin";
           }).error(function(data) {
               console.log("failure");
               console.log(data);
           });
-    
+    	});
     };
     $scope.logout_from_account = function() {
         $http({
