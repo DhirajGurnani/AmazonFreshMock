@@ -27,6 +27,9 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/productApproval', {
 				templateUrl : 'amazon_admin_pApproval.html',
 				controller : 'approveProductController'
+			}).when('/doLogin', {
+				templateUrl: 'amazon_login.html',
+                controller: 'loginController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
@@ -96,6 +99,21 @@ adminApp.controller('createController', function($scope, $http) {
 	    });
 	};
 
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
+	
 	var getDriverDetails = function() {
 		var getDriverDetailsResponse = $http.get('/api/admin/trips/availableDrivers');
 		getDriverDetailsResponse.success(function(driver){
@@ -151,6 +169,21 @@ adminApp.controller('pendingController', function($scope, $http) {
 		});
 	}
 	getPendingTrips();
+	
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
 	
 	$scope.tripDelete = function(trip_Id){
 		$http({
@@ -220,6 +253,21 @@ adminApp.controller('statisticsController', function($scope, $http) {
 		});
 	}
 	getTripLocations();
+	
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
 });
 
 adminApp.controller('revenueController', function($scope, $http) {
@@ -270,6 +318,21 @@ adminApp.controller('revenueController', function($scope, $http) {
 		});
 	}
 	getRevenueStats();
+	
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
 });
 
 
@@ -281,6 +344,21 @@ adminApp.controller('billController', function($scope, $http) {
 		});
 	};
 	getAdminBills();
+	
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
 });
 
 adminApp.controller('approveFarmerController', function($scope, $http) {
@@ -308,6 +386,20 @@ adminApp.controller('approveFarmerController', function($scope, $http) {
 			else {				
 			}
 		});
+		$scope.doLogout = function(){
+			$http({
+	            method: 'POST',
+	            url: 'api/logout',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            }
+	        }).success(function(data) {
+	            window.location = "/doLogin";
+	        }).error(function(data) {
+	            console.log("failure");
+	            console.log(data);
+	        });
+		};
 	}
 });
 
@@ -336,6 +428,20 @@ adminApp.controller('approveProductController', function($scope, $http) {
 				$scope.quantityPresent = data.quantityPresent;
 				$scope.quantitysold = data.quantitysold;
 			});
+	};
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
 	};
 	$scope.pApprove = function(id,price){
 		$http({
