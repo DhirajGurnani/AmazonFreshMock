@@ -51,10 +51,9 @@ exports.createNewBill = function(request, response) {
 									  		encodeURIComponent(profile[0].address.trim()) +
 									  		encodeURIComponent(profile[0].location.trim()) +
 									  		encodeURIComponent(profile[0].state.trim()) +
-									  		encodeURIComponent(profile[0].zipcode.trim()) +
 									  		'&key=AIzaSyAedFlNKrewiALWjKTQfNHB6Y7yjRbDaoU'
 										};
-
+										console.log(options.path);
 										https.get(options, function(res) {
 										  console.log('STATUS: ' + res.statusCode);
 										  console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -67,25 +66,35 @@ exports.createNewBill = function(request, response) {
 										  res.on('end', function() {
 											  console.log("body: " + body)
 									            // Data reception is done, do whatever with it!
+											  
 									            var parsedBody = JSON.parse(body);
-									            var geometry = parsedBody.results[0].geometry;
-									            var current_location = geometry.location.lat + 
-									            						":" + 
-									            						geometry.location.lng;
-									            var sqlQueryUpdate = sqlQueryList.getQueryForUpdateBillingWithCurrentLocation(billing_id, current_location);
-									            dbHelper.executeQuery(sqlQueryUpdate, function(data) {
-													if(data) {
-														response.send({
-															"status" : 201,
-															"message" : "New bill created successfully"
-														});
-													}
-												}, function(error) {
-													response.send({
-														"status" : 400,
-														"message" : "Error: New bill not created successfully: " + error
+											  console.log(parsedBody);
+											  if(parsedBody.results.length == 0) {
+												  response.send({
+														"status" : 201,
+														"message" : "New bill created successfully"
 													});
-												});
+											  }
+											  else {
+												  var geometry = parsedBody.results[0].geometry;
+										            var current_location = geometry.location.lat + 
+										            						":" + 
+										            						geometry.location.lng;
+										            var sqlQueryUpdate = sqlQueryList.getQueryForUpdateBillingWithCurrentLocation(billing_id, current_location);
+										            dbHelper.executeQuery(sqlQueryUpdate, function(data) {
+														if(data) {
+															response.send({
+																"status" : 201,
+																"message" : "New bill created successfully"
+															});
+														}
+													}, function(error) {
+														response.send({
+															"status" : 400,
+															"message" : "Error: New bill not created successfully: " + error
+														});
+													}); 
+											  }
 									        });
 										}).end();
 									}, function(err) {

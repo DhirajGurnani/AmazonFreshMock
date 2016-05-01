@@ -316,15 +316,6 @@ app.get('/api/admin/trips/getDeliverySlots',trips.getDeliverySlots);
 /*************** Billing API *****************/
 app.post('/api/billing/create', billing.createNewBill);
 
-/*************** Billing API *****************/
-app.post('/api/billing/create', billing.createNewBill);
-
-/*************** Billing API *****************/
-app.post('/api/billing/create', billing.createNewBill);
-
-/*************** Billing API *****************/
-app.post('/api/billing/create', billing.createNewBill);
-
 /*************** End Backend API *****************/
 
 http.createServer(app).listen(app.get('port'), function(){

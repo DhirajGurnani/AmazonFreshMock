@@ -233,7 +233,7 @@ exports.getQueryForBillingInfoCreation = function(billing_id, product_id, quanti
 };
 
 exports.getFarmerProfileByProductId = function(product_id) {
-	return "select * from User_profiles where puid = (select puid from products where product_id = " + product_id + ")";
+	return "select * from User_profiles where puid = (select puid from Products where product_id = " + product_id + ")";
 };
 exports.sqlgetFarmersPending = function(product_id) {
 	return "select * from amazondb.User_profiles where role = 'farmer' and status = 'pending';";
