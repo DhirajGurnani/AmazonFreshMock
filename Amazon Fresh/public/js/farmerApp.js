@@ -6,11 +6,17 @@ var farmerApp = angular.module('farmer', ['ngRoute']);
 farmerApp.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider, $routeParams) {
         $routeProvider.when('/', {
+            templateUrl: 'farmer_direction.html',
+            controller: 'farmer_directionController'
+        }).when('/view_profile_farmer', {
             templateUrl: 'amazon_farmer_profile.html',
             controller: 'mainController'
         }).when('/go_to_newproduct', {
             templateUrl: 'amazon_new_product.html',
             controller: 'newProductController'
+        }).when('/farmer_edit_profile', {
+            templateUrl: 'amazon_farmer_edit_profile.html',
+            controller: 'amazon_edit_farmer_profileController'
         });
         $locationProvider.html5Mode(true);
     }
@@ -20,6 +26,97 @@ farmerApp.filter("trustUrl", ['$sce', function($sce) {
         return $sce.trustAsResourceUrl(recordingUrl);
     };
 }]);
+
+farmerApp.controller('amazon_edit_farmer_profileController', function($scope, $http) {
+	//console.log("aaya");
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+        console.log(data.profile[0].puid);
+        $scope.profile = data.profile[0];
+        $scope.Editdbon = true;
+        $scope.Editdboff = false;
+
+    });
+    
+    $scope.go_to_update_operation = function(){
+    	console.log($scope.profile);
+    	var sessioninfo = $http.get('/api/getsessioninfo');
+        sessioninfo.success(function(data) {
+        	//
+    	$http({
+            method: 'POST',
+            url: '/api/customers/update',
+            data:{
+            	"first_name":$scope.profile.first_name,
+            	"last_name":$scope.profile.last_name,
+            	"birthday":$scope.profile.birthday,
+            	"address":$scope.profile.address,
+            	"location":$scope.profile.location,
+            	"state":$scope.profile.state,
+            	"zipcode":$scope.profile.zipcode,
+            	"phone":$scope.profile.phone,				
+            	"puid":$scope.profile.puid
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/";
+        }).error(function(data) {
+            console.log(data);
+        });
+        });
+    
+    };
+    $scope.change_birthday = function(){
+    	//alert($scope.firstname);
+    	$scope.Editdbon = false;
+        $scope.Editdboff = true;
+    };
+    $scope.change_un_birthday = function(){
+    	//alert($scope.firstname);
+    	$scope.Editdbon = true;
+        $scope.Editdboff = false;
+    };
+});
+
+farmerApp.controller('farmer_directionController', function($scope, $http, $location) {
+
+    $scope.logout_from_farmer_account= function(){
+  //  	alert("aaya");
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+        });
+    };
+    $scope.go_to_newproduct = function() {
+        window.location = "/go_to_newproduct";
+    }
+    $scope.go_to_viewproduct = function() {
+        window.location = "/view_profile_farmer";
+    }
+    
+    $scope.go_to_updateprofile = function() {
+        window.location = "/farmer_edit_profile";
+    }
+
+});
+
 
 farmerApp.controller('mainController', function($scope, $http, $location) {
     var farmer_details = $http.get('/api/getsessioninfo');

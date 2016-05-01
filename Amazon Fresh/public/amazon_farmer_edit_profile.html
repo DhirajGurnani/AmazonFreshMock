@@ -1,0 +1,63 @@
+<div id="wrapper" class="row ng-scope">
+<style>
+		#panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+	  </style>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
+			<div class="container-fluid" style="color:white">
+               <a href=""><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10" style="text-align:left">
+				<div class="panel-body" id="panel">
+						<h3>Update Profile </h3>
+						<br/>
+						<div class="row">
+						
+						<div class ="col-sm-3">
+						<label> First Name:</label>
+						<input type="text" class="form-control"  ng-model="profile.first_name" size="30" style="padding:5px"> <br/>
+						<label> Last Name:</label>
+						<input type="text" class="form-control"  ng-model="profile.last_name" size="30" style="padding:5px" required><br/>
+						<label> Date of Birth:</label>
+						<div ng-hide = "Editdboff">
+						<label>{{profile.birthday}}</label> 	<button ng-click="change_birthday();"  class="btn" style="color:white; background-color:#808080">Change</button>
+   			 	</div>
+						<div ng-hide = "Editdbon">
+						<input type="date" class="form-control"  ng-model="profile.birthday" size="30" style="padding:5px" required>
+						<button ng-click="change_un_birthday();"  class="btn" style="color:white; background-color:#808080"><i class="glyphicon glyphicon-remove"></i></button>
+						</div><br/>
+						<label> Address:</label>
+						<input type="text" class="form-control"  ng-model="profile.address" size="30" style="padding:5px" required><br/>
+						<label> City:</label>
+						<input type="text" class="form-control"  ng-model="profile.location" size="30" style="padding:5px" required><br/>
+						<label> State:</label>
+						<input type="text" class="form-control"  ng-model="profile.state" size="30" style="padding:5px" required><br/>
+						<label> Zipcode::</label>
+						<input type="text" class="form-control"  ng-model="profile.zipcode" size="30" style="padding:5px" required><br/>
+						<label> Contact Number:</label>
+							<input type="text" class="form-control"  ng-model="profile.phone" size="30" style="padding:5px" required><br/>
+						</div>
+						<div class ="col-sm-9">
+						</div></div>
+  
+ 					<button ng-click="go_to_update_operation();"  class="btn" style="color:white; background-color:#808080">Continue</button>
+   			 	</div>
+			</div>
+		</div>
+  	
+			<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+		</div>
+
+  <!-- Trigger the modal with a button -->
+</div>
