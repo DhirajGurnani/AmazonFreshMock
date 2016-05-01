@@ -110,7 +110,7 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
     };
 
     $scope.logout_from_farmer_account= function(){
-    	alert("aaya");
+  //  	alert("aaya");
         $http({
             method: 'POST',
             url: 'api/logout',
@@ -137,6 +137,21 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
         $scope.categories = categoryData.category;
         console.log($scope.categories);
     });
+
+    $scope.logout_from_farmer_account= function(){
+//    	alert("aaya");
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+        });
+    };
 
     $scope.updateSubCategory = function() {
         if ($scope.selectedCategory !== null || $scope.selectedCategory !== undefined) {
