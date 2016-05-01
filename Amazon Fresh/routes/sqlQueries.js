@@ -238,7 +238,17 @@ exports.getFarmerProfileByProductId = function(product_id) {
 exports.sqlgetFarmersPending = function(product_id) {
 	return "select * from amazondb.User_profiles where role = 'farmer' and status = 'pending';";
 };
+exports.postRating = function(product_id,ratings,reviews) {
+	return "INSERT INTO Ratings (product_id,rating,reviews) VALUES ('" +
+	        product_id +"','"+ratings+"','"+reviews+"');";
+};
 
+exports.getRating = function(product_id) {
+	return "SELECT avg(rating) as average from Ratings where product_id ="+product_id+";";
+};
+exports.getReview = function(product_id) {
+	return "SELECT * from Ratings where product_id ="+product_id+";";
+};
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
 };

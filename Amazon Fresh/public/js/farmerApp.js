@@ -52,24 +52,18 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
     });
 
     var filesInfo;
+    var videoFile;
+
     $scope.uploadFile = function(files) {
         console.log(files);
         filesInfo = files;
     };
-    $scope.logout_from_farmer_account= function(){
-    	alert("aaya");
-        $http({
-            method: 'POST',
-            url: 'api/logout',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).success(function(data) {
-            window.location = "/doLogin";
-        }).error(function(data) {
-            console.log("failure");
-        });
+    
+    $scope.uploadFile2 = function(files) {
+    	console.log(files);
+    	videoFile = files;
     };
+
     $scope.upload_image = function() {
         var farmer_details = $http.get('/api/getsessioninfo');
         farmer_details.success(function(data) {
@@ -86,11 +80,50 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
                 transformRequest: angular.identity
             }).success(
                 function(data) {
-                    console.log(data);
-                    alert(data);
+                    $("#myModal").modal();
                 });
         });
     };
+   $scope.redirectMyPage = function() {
+	   window.location = "/";
+   };
+
+    $scope.upload_video = function() {
+        var farmer_details = $http.get('/api/getsessioninfo');
+        farmer_details.success(function(data) {
+            var puid = data.profile[0].puid;
+            var reqData = new FormData();
+            reqData.append("video", videoFile[0]);
+            $http({
+                method: 'POST',
+                url: '/api/farmers/' + puid + '/video',
+                data: reqData,
+                headers: {
+                    'Content-Type': undefined
+                },
+                transformRequest: angular.identity
+            }).success(
+                function(data) {
+                    $("#myModal2").modal();
+                });
+        });
+    };
+
+    $scope.logout_from_farmer_account= function(){
+    	alert("aaya");
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+        });
+    };
+
     $scope.go_to_newproduct = function() {
         window.location = "/go_to_newproduct";
     }

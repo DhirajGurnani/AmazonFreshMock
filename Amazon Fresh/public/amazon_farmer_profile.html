@@ -74,36 +74,107 @@
          {{updated}}<br><br>
       </div>
       <div class="col-sm-8" style="margin-left:12px;">
-         <h4>Farmer's Photos</h4>
+         <h4><mark>Farmer's Photos</mark></h4>
          <div class = "row">
-         	<div class= "row">
-         		<div class = "col-sm-6" ng-repeat="imageUrl in imageUrls">
-               <div>
-                  <div style="margin-left:92%"><button type="button" class="btn btn-danger" ng-click="remove_image();">
-                     <span class="glyphicon glyphicon-remove"></span></button>
-                  </div>
-                  <a href = "#" class = "thumbnail">
-                  <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
-                  </a>
-                  <br>
-               </div>
-               <video controls ng-hide="!($index == (imageUrls.length - 2))">
-               <source ng-src="{{videoUrls  | trustUrl}}" type="video/mp4">
-               </video controls>
-            </div>
-         	</div>
+      		<div class = "col-sm-6" ng-repeat="imageUrl in imageUrls">
+              <div>
+                 <div style="margin-left:92%"><button type="button" class="btn btn-danger" ng-click="remove_image();">
+                    <span class="glyphicon glyphicon-remove"></span></button>
+                 </div>
+                 <a href = "#" class = "thumbnail">
+                 <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
+                 </a>
+                 <br>
+              </div>
+              <h4 style="color:black" ng-hide="!($index == (imageUrls.length - 1))"><mark>Video of the Farm</mark></h4>
+              <video controls ng-hide="!($index == (imageUrls.length - 1))">
+              		<source ng-src="{{videoUrls  | trustUrl}}" type="video/mp4">
+              </video controls>
+        	</div>
          </div>
+         <div class="row"><p></p></div>
+         <div class="row"><p></p></div>
          <div class="row">
          	<div class = "col-sm-12">
-            	<input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-               	<span class="btn btn-info btn-file">
-                  <div style="font-size:15px;">
-                     <span class="glyphicon glyphicon-plus"></span>
-                  </div>
-                  Click here to select pictures of farm	
-                  <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)">
-               </span>
-               <button type="button" class="btn btn-primary" ng-click="upload_image();">Upload Pictures</button>
+         		<h4 style="color:black"><mark>Upload Images of the Farm</mark></h4>
+         		<div class="row">
+         			<div class="col-sm-2">
+         				<span class="">
+				            <div style="font-size:15px; color:black">
+				            	<b>Click here to select</b>  
+				            </div>  
+				            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
+				            <br>
+		            	</span>
+         			</div>
+         			<div class="col-sm-2"><p></p></div>
+         		</div>
+         		<div class="row">
+         			<button type="button" class="btn btn-primary form-control" ng-click="upload_image();">Upload Pictures</button>
+				</div>
+				<!-- Modal -->
+				  <div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Image Upload</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p>Image Uploaded Successfully!</p>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="redirectMyPage();">Close</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
+               <br><br><br>
+            </div>
+         </div>
+         <div class="row"><p></p></div>
+         <div class="row"><p></p></div>
+         <div class="row">
+         	<div class = "col-sm-12">
+         		<h4 style="color:black"><mark>Upload Video of the Farm</mark></h4>
+         		<div class="row">
+         			<div class="col-sm-2">
+         				<span class="">
+				            <div style="font-size:15px; color:black">
+				            	<b>Click here to select</b>  
+				            </div>  
+				            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile2(this.files)">
+				            <br>
+		            	</span>
+         			</div>
+         			<div class="col-sm-2"><p></p></div>
+         		</div>
+         		<div class="row">
+         			<button type="button" class="btn btn-primary form-control" ng-click="upload_video();">Upload video</button>
+				</div>
+				<!-- Modal -->
+				  <div class="modal fade" id="myModal2" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Video Uploaded</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p>Video Uploaded Successfully!</p>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="redirectMyPage();">Close</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
                <br><br><br>
             </div>
          </div>
