@@ -119,7 +119,16 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
     $scope.uploadFile = function(files) {
         filesInfo.push(files[0]);
         $scope.myfiles = filesInfo;
-        $scope.myfiles1 = $scope.myfiles[0];
+        if($scope.myfiles[0]){
+        	$scope.myfiles0 = $scope.myfiles[0].name;
+        	console.log($scope.myfiles0);
+        }
+        if($scope.myfiles[1]) {
+            $scope.myfiles1 = $scope.myfiles[1].name;
+        }
+        if($scope.myfiles[2]){
+            $scope.myfiles2 = $scope.myfiles[2].name;
+        }
     };
 
     $scope.createNewProduct = function() {

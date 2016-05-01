@@ -71,7 +71,7 @@
 	            	<label>Price:       </label>
 	            </div>
 	            <div class="col-sm-9">
-	            	<input type="number" ng-model="product_price" placeholder="product price" class="form-control">
+	            	<input type="number" ng-model="product_price" placeholder="product price" class="form-control" min="0">
 	            </div>
             </div>
             <br>
@@ -112,7 +112,7 @@
 	            	<label>Quantity:       </label>
 	            </div>
 	            <div class="col-sm-9">
-	            	<input type="number" ng-model="product_quantity" placeholder="product Quantity" class="form-control">
+	            	<input type="number" ng-model="product_quantity" placeholder="product Quantity" class="form-control" min="0">
 	            </div>
             </div>
             <br>
@@ -122,29 +122,28 @@
             	</div>
             	<div class="col-sm-12"><p></p></div>
 	            <div class="col-sm-12">
-	            	<span class="btn btn-info btn-file">
-			            <div style="font-size:15px;">
-			            	<span class="glyphicon glyphicon-plus"></span>
-			            </div> Click here to upload
+	            	<span class="">
+			            <div style="font-size:15px; color:black">
+			            	<b>Click here to select</b>  
+			            </div> 
 			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
 		            </span>
-		            <span>fileName: {{myfiles1}}</span>
 	      		</div>
 	      		<div class="col-sm-12"><p></p></div>
 	      		<div class="col-sm-12">
-	            	<span class="btn btn-info btn-file">
-			            <div style="font-size:15px;">
-			            	<span class="glyphicon glyphicon-plus"></span>
-			            </div> Click here to upload
+	            	<span class="">
+			            <div style="font-size:15px; color:black">
+			            	<b>Click here to select</b>  
+			            </div>  
 			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
 		            </span>
 	      		</div>
 	      		<div class="col-sm-12"><p></p></div>	
 	      		<div class="col-sm-12">
-	            	<span class="btn btn-info btn-file">
-			            <div style="font-size:15px;">
-			            	<span class="glyphicon glyphicon-plus"></span>
-			            </div> Click here to upload
+	            	<span class="">
+			            <div style="font-size:15px; color:black">
+			            	<b>Click here to select</b>  
+			            </div>  
 			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
 		            </span>
 	      		</div>
