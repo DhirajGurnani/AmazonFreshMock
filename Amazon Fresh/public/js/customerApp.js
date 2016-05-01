@@ -758,13 +758,30 @@ customerApp.controller('cartController', function($scope, $http) {
     	window.location = "/cart";
     };
     $scope.go_to_shipping = function(){
-    	sessioninfo.success(function(data){
-    		if(data.profile){
-    			window.location = "/shipping";
-    		}else{
-    			window.location = "/doLogin";
-    		}
-    	});
+    	console.log($scope.product_total_bill_amount);
+    	if($scope.product_total_bill_amount !== undefined) {
+    		$http({
+                method: 'POST',
+                url: 'api/addTotalPrize',
+                data: {
+                	"total_price": $scope.product_total_bill_amount
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).success(function(data) {
+            	sessioninfo.success(function(data1){
+            		if(data1.profile){
+            			window.location = "/shipping";
+            		}else{
+            			window.location = "/doLogin";
+            		}
+            	});
+            }).error(function(data) {
+                console.log("failure");
+                console.log(data);
+            });
+    	}
     };
     $scope.logout_from_account = function() {
         $http({
