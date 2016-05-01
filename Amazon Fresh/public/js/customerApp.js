@@ -443,6 +443,7 @@ customerApp.controller('productController', function($scope, $http, $routeParams
 	//alert($routeParams.product_id);
 	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
 	get_product_response.success(function(data){
+		$scope.options = [1,2,3,4,5];
 		console.log(data.product[0]);
 		$scope.product_name = data.product[0].product_name;
 		$scope.product_price = data.product[0].price;

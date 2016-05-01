@@ -81,14 +81,17 @@
                <p><strong>Cost: $ {{product_price}}</strong></p>
                <br/><br/>
                <strong>Quantity:</strong>
-               <select ng-model="prod_Quantity">
-  <option selected>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option value="4" selected>4</option>
-</select>
-               
-               <button type="button" class="btn btn-default" style="color:white; background-color:#aaa" ng-click="add_to_cart();">Add to Cart</button>
+               <div class="row">
+               		<div class="col-sm-3">
+               			<select ng-model="prod_Quantity" class="form-control">
+				 			<option ng-repeat= "myoption in options" selected>{{myoption}}</option>
+						</select>
+               		</div>
+               		<div class="col-sm-9">
+               			<button type="button" class="btn btn-default" style="color:white; background-color:#aaa" ng-click="add_to_cart();">Add to Cart</button>
+               		</div>
+               </div>
+
             </div>
             <div class="col-sm-7"></div>
             <h3>Product Description</h3>
