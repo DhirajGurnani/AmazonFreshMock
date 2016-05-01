@@ -627,10 +627,6 @@ customerApp.controller('shippingController', function($scope, $http) {
         });
     };
     $scope.go_to_checkout = function(){
-    	var customer_id
-    	sessioninfo.success(function(data) {
-            customer_id = data.profile[0].puid;
-        });
     	$http({
             method: 'POST',
             url: 'api/addToShipping',
@@ -642,6 +638,10 @@ customerApp.controller('shippingController', function($scope, $http) {
                 "phone": $scope.phone,
                 "delivery_date": $scope.date,
                 "delivery_id": $scope.time_slot,
+<<<<<<< Updated upstream
+=======
+                "phone": $scope.phone,
+>>>>>>> Stashed changes
             },
             headers: {
                 'Content-Type': 'application/json'
