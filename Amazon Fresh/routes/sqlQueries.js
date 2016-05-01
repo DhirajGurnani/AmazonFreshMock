@@ -252,6 +252,9 @@ exports.getReview = function(product_id) {
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
 };
+exports.getOrders = function(customer_id){
+	return "select * from Billing where customer_id="+customer_id+" order by billing_id desc;";
+};
 
 exports.getProductCategories = function() {
 	return "select * from ProductCategory";
