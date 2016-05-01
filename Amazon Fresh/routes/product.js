@@ -678,7 +678,7 @@ exports.getProductSubCategoriesByCategoryId = function(request, response) {
 	try {
 		if(true) {
 			if(true) {
-				var sqlQuery = sqlQuery = sqlQueryList.getProductSubCategoriesByCategoryId(request.params.category_id);
+				var sqlQuery = sqlQueryList.getProductSubCategoriesByCategoryId(request.params.category_id);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
@@ -719,7 +719,7 @@ exports.getFiveProducts = function(request, response) {
 	try {
 		if(true) {
 			if(true) {
-				var sqlQuery = sqlQuery = sqlQueryList.getFiveProductsForHomePage();
+				var sqlQuery = sqlQueryList.getFiveProductsForHomePage();
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {
@@ -732,6 +732,116 @@ exports.getFiveProducts = function(request, response) {
 							response.send({
 								"status" : 400, 
 								"errmsg" : "Error: Unable to get products: " + error 
+							});
+						});
+			}
+			else {
+				response.send({
+	        		"status": 403,
+	        		"message": "Error: Cannot find user profile"
+	        	});
+			}
+		}
+		else {
+			response.send({
+	    		"status" : 403,
+	    		"message" : "Error: Cannot find session"
+	    	});
+		}
+	} catch (err) {
+		response.send({
+			"status" : 500,
+			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
+		});
+	}
+};
+
+exports.getDynamicPriceForAProduct = function(request, response) {
+	try {
+		if(true) {
+			if(true) {
+				var category_id = request.params.category_id;
+				var subcategory_id = request.params.subcategory_id;
+				var sqlQuery = sqlQueryList.getQuantityAndPriceForProductsByCatAndSubCat(category_id, subcategory_id);
+				dbHelper.executeQuery(sqlQuery, 
+						function(quantityAndPrice) {
+								var totalPrice = 0;
+								var totalQuantity = 0;
+								var averagePrice = 0;
+								console.log(quantityAndPrice.length);
+								for(var index = 0; index < quantityAndPrice.length; index++) {
+									var quantity = quantityAndPrice[index].quantity;
+									var price = quantityAndPrice[index].price;
+									totalPrice += parseInt(quantity) * parseInt(price);
+									totalQuantity += parseInt(quantity);
+									console.log("#" + parseInt(quantity));
+									console.log("#" + parseInt(price));
+									console.log("#" + (parseInt(quantity) * parseInt(price)));
+								}
+								var sqlQuery2 = sqlQueryList.getQuantityOfProductSold(category_id, subcategory_id);
+								dbHelper.executeQuery(sqlQuery2, 
+										function(soldQuantityAndPrice){
+											var soldTotalPrice = 0;
+											var soldTotalQuantity = 0;
+											var soldAveragePrice = 0;
+											for(var index1 = 0; index1 < soldQuantityAndPrice.length; index1++) {
+												var quantity = soldQuantityAndPrice[index1].quantity;
+												var price = soldQuantityAndPrice[index1].price;
+												soldTotalPrice += parseInt(quantity) * parseInt(price);
+												console.log(parseInt(quantity));
+												console.log(parseInt(price));
+												console.log(parseInt(quantity) * parseInt(price));
+												soldTotalQuantity += parseInt(quantity);
+											}
+											
+											var sqlQuery3 = sqlQueryList.getMaxAndMinPriceOfProductInDatabase(category_id, subcategory_id);
+											dbHelper.executeQuery(sqlQuery3,
+													function(maxAndMin) {
+														var maxprice = maxAndMin[0].max;
+														var minprice = maxAndMin[0].min;
+														averagePrice = totalPrice/totalQuantity;
+														soldAveragePrice = soldTotalPrice/soldTotalQuantity;
+														var finalAveragePrice = soldAveragePrice ? (averagePrice + soldAveragePrice)/2 : averagePrice;
+														//console.log(totalPrice);
+														//console.log(totalQuantity);
+														var sqlQuery4 = sqlQueryList.getTotalQuantityPresentForAProductByCatAndSubCat(category_id, subcategory_id);
+														dbHelper.executeQuery(sqlQuery4,
+																function(totalQuantityPresent) {
+																	response.send({
+																		"averagePrice" : finalAveragePrice,
+																		"maxprice" : maxprice,
+																		"minprice" : minprice,
+																		"quantityPresent" : totalQuantityPresent[0].sumOfQuantity,
+																		"quantitysold" : soldTotalQuantity
+																		});
+																},
+																function(error) {
+																	response.send({
+																		"averagePrice" : finalAveragePrice,
+																		"maxprice" : maxprice,
+																		"minprice" : minprice,
+																		"quantitysold" : soldTotalQuantity
+																		});
+																});
+										},
+										function(error) {
+											response.send({
+												"averagePrice" : finalAveragePrice,
+												"quantityPresent" : totalQuantityPresent[0].sumOfQuantity,
+												});
+										});
+								},
+								function(error) {
+									var finalAveragePrice = totalQuantity/totalPrice;
+									response.send({
+										"averagePrice" : finalAveragePrice,
+										});
+								});
+						},
+						function(error){
+							response.send({
+								"status" : 400, 
+								"errmsg" : "Error: Unable to get data: " + error 
 							});
 						});
 			}

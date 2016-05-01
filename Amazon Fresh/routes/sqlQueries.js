@@ -256,5 +256,21 @@ exports.getProductSubCategoriesByCategoryId = function(category_id) {
 };
 
 exports.getFiveProductsForHomePage = function() {
-	return "select * from Products where status = 'pending'";
+	return "select * from Products where status = 'approved' limit 5";
+};
+
+exports.getTotalQuantityPresentForAProductByCatAndSubCat = function(category_id, subcategory_id) {
+	return "select sum(quantity) as sumOfQuantity from Products where category_id = " + category_id + " and subcategory_id = " + subcategory_id + " and status = 'approved'";
+};
+
+exports.getQuantityOfProductSold = function(category_id, subcategory_id) {
+	return "select a.quantity as quantity, b.price as price from BillingInfo a, Products b where a.product_id in (select product_id from Products where category_id = " + category_id + " and subcategory_id = " + subcategory_id  + " and status = 'approved') and a.product_id = b.product_id";	
+};
+
+exports.getMaxAndMinPriceOfProductInDatabase = function(category_id, subcategory_id) {
+	return "select max(price) as max, min(price) as min from Products where category_id = " + category_id + " and subcategory_id = " + subcategory_id + " and status = 'approved'";
+};
+
+exports.getQuantityAndPriceForProductsByCatAndSubCat = function(category_id, subcategory_id) {
+	return "select quantity, price from Products where category_id = " + category_id + " and subcategory_id = " + subcategory_id + " and status = 'approved'";
 };

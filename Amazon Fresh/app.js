@@ -296,6 +296,9 @@ app.get('/api/products/images/:imageName', product.getImageByImageUrl);
 
 app.get('/api/getFiveProducts', product.getFiveProducts);
 
+/*************** DP Algorithm ***************/
+app.get('/dpa/category/:category_id/subcategory/:subcategory_id', product.getDynamicPriceForAProduct);
+
 /*************** Trips API *****************/
 app.post('/api/admin/trips/createTrip',trips.createTrip);
 app.post('/api/admin/trips/deleteTrip',trips.deleteTrip);
