@@ -165,7 +165,7 @@
                         <a href="/product_category/{{category.category_id}}" style="color: grey"><strong>{{category.name}}</strong> >></a>
                         <br/> 
                         <div ng-repeat = "subcategory in category.subCategories | orderBy : subcategory.subcategory_id">
-                           <a href="/product_subcategory/{{subcategory.subcategory_id}}" style="color: grey">{{subcategory.name}}</a><br/> 
+                           <a href="/product_category/{{category.category_id}}/product_sub_category/{{subcategory.subcategory_id}}" style="color: grey">{{subcategory.name}}</a><br/> 
                         </div>
                         <a href="/product_category/{{category.category_id}}">Shop all ></a>
                      </div>
