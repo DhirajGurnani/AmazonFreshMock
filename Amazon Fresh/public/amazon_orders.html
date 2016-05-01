@@ -39,20 +39,20 @@
 			<div ng-repeat="bill in bills">
 				<div class="panel-body" style="background-color:#f2f2f2">
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Bill Id:</b> {{bill.bill_id}}</span>
+						<span><b>Bill Id:</b> {{bill.billing_id}}</span>
 						<span class="pull-right"><a href="#">Report a problem</a></span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Order Date:</b> {{bill.order_date}}</span>
+						<span><b>Order Date:</b> {{bill.created_at}}</span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
 						<span><b>Delivery Date:</b> {{bill.delivery_date}}</span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Delivery Status:</b> {{bill.delivery_status}}</span>
+						<span><b>Delivery Status:</b> {{bill.status}}</span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Total Price:</b> {{bill.total_price}}</span>
+						<span><b>Total Price:</b> $ {{bill.total_price}}</span>
 					</div>
 				</div>
 				<br/>
