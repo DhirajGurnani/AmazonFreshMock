@@ -63,17 +63,19 @@
          <br/>
          <span>
             <b>Date:</b>
-            <input type="date" class="form-control" ng-mode="date"><br/>
+            <input type="date" class="form-control" ng-model="date"><br/>
          </span>
          <br/><br/>
          <span>
             <b>Time Slot:</b>
-            <select name="time_slot" class="form-control">
-               <option value="slot1">10 AM - 12 PM</option>
-               <option value="slot2">12 PM - 2 PM</option>
-               <option value="slot3">2 PM - 4 PM</option>
-               <option value="slow4">4 PM - 6 PM</option>
-               <option value="slot5">6 PM - 8 PM</option>
+            <select ng-model="time_slot" class="form-control">
+            	<option value="1">6 AM - 8 AM</option>
+            	<option value="2">8 AM - 10 AM</option>
+               <option value="3">10 AM - 12 PM</option>
+               <option value="4">12 PM - 2 PM</option>
+               <option value="5">2 PM - 4 PM</option>
+               <option value="6">4 PM - 6 PM</option>
+               <option value="7">6 PM - 8 PM</option>
             </select>
          </span>
       </div>
