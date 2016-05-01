@@ -209,6 +209,41 @@ app.get('/api/getSessionInfo',function(request,response){
 	//console.log(request.session);
 	response.send(request.session);
 });
+/*
+ * Cart Handling
+ */
+app.post('/api/addToCart',function(request,response){
+	if (request.session.products=== undefined ){
+		request.session.products = [];
+	}
+	request.session.products.push(request.body);
+	console.log(request.body);
+	console.log(request.session.products);
+	response.send(request.session.products);
+});
+app.get('/api/addToCart',function(request,response){
+	if (request.session.products=== undefined ){
+		request.session.products = [];
+	}
+	response.send(request.session.products);
+});
+app.post('/api/deleteFromCart',function(request,response){
+	console.log(request.body);
+	
+	var id=request.body.product_id;
+	console.log(id);
+	var products = request.session.products;
+	console.log(products);
+	for (var i =0 ; i < products.length; i++){
+		console.log(products[i].product_id);
+	  if(products[i].product_id===id){
+		 console.log("Inside Delete");
+	    delete request.session.products[i];
+	    request.session.products.splice(i,1);
+	  }
+	}
+	response.send(request.session.products);
+});
 app.post('/api/validEmail',authentication.validEmail);
 /*************** Farmers API *****************/
 /*****Farmers*****/
