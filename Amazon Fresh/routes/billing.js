@@ -159,7 +159,7 @@ exports.getOrders = function(request,response){
 	try {		
 		//if(request.session) {
 			//if(request.session.profile) {
-				var customer_id = request.body.customer_id; 
+				var customer_id = request.session.profile[0].puid; 
 				var getOrders = sqlQueryList.getOrders(customer_id);
 				dbHelper.executeQuery(
 						getOrders, 
