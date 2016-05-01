@@ -430,7 +430,9 @@ customerApp.controller('product_sub_categoryController', function($scope, $http)
     };
 });
 
-customerApp.controller('productController', function($scope, $http) {
+customerApp.controller('productController', function($scope, $http, $routeParams) {
+	alert($routeParams.product_id);
+	
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
@@ -456,6 +458,21 @@ customerApp.controller('productController', function($scope, $http) {
     };
     $scope.go_to_cart = function(){
     	window.location = "/cart"
+    };
+    $scope.add_to_cart = function(){
+    	  $http({
+              method: 'POST',
+              url: 'api/logout',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }).success(function(data) {
+              window.location = "/doLogin";
+          }).error(function(data) {
+              console.log("failure");
+              console.log(data);
+          });
+    
     };
     $scope.logout_from_account = function() {
         $http({
