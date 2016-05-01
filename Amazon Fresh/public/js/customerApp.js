@@ -551,6 +551,23 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 });
 
 customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
+	// initialize with defaults
+	var avg = 4.5;
+	// with plugin options (do not attach the CSS class "rating" to your input if using this approach)
+	$("#avgRating").rating({'size':'sm', displayOnly: true, step: 0.5});
+	$("#avgRating").rating("update", avg);
+	
+	
+	
+	$("#input-4").rating({'size':'sm', step: 1});
+	
+	$scope.ratings = null;
+	$scope.rating1 = {"rating_id":1, "review":"fdsjlh lsjgljdshgljhdgsl lg ljdsgh ldsgh jdshg jlhsdgl h dgs"};
+	$scope.ratings = [{"rating_id":1}];
+	console.log("#input" + $scope.ratings[0].rating_id);
+	$("#avgRating" + $scope.ratings[0].rating_id).rating({'size':'sm', displayOnly: true, step: 0.5});
+	$("#avgRating" + $scope.ratings[0].rating_id).rating("update", avg);
+	
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);

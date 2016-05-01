@@ -85,15 +85,98 @@
                		</div>
                		<div class="col-sm-9">
                			<button type="button" class="btn btn-default" style="color:white; background-color:#aaa" ng-click="add_to_cart();">Add to Cart</button>
+               			<br>
                		</div>
                </div>
-
+				<div class="row">
+					<div class="col-sm-9">
+			         	<label for="avgRating" class="control-label">Average Rating</label>
+			         	<input id="avgRating" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+			         </div>
+		         </div>
             </div>
             <div class="col-sm-7"></div>
             <h3>Product Description</h3>
             <p>{{product_description}}</p>
             <h3>Product Details</h3>
             <p>details</p>
+         </div>
+         <div class="row"><p><br><br></p></div>
+         <div class="row" style="padding-left:25px">
+         	<div class="col-sm-12">
+         		<div class="panel panel-default">
+			    	<div class="panel-body">
+			    		<h4><b>Product Ratings and Reviews</b></h4>
+			    		<br>
+			    		<!-- Post Your review and rating -->
+			    		<div class="panel panel-default">
+			    			<div class="panel-body">
+			    				<h4><b>Give your Rating & Review</b></h4><br><br>
+			    				<div class="form-group">
+							      <label>Your Rating:</label>
+							      <label for="input-4" class="control-label">Rate This</label>
+								  <input id="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="true">
+							    </div>
+							    <div class="form-group">
+							      <label for="pwd">Your Reviews:</label>
+							      <textarea type="text" class="form-control" id="pwd" rows="3"></textarea>
+							    </div>
+							    <div class="form-group">
+							    	<button class="btn btn-success" ng-click="createReview();">Submit</button>
+							    </div>
+			    			</div>
+			    		</div>
+			    		<div class="panel panel-default">
+			    			<div class="panel-body">
+			    				<h4><b>Previous Ratings and Reviews</b></h4><br><br>
+			    				<div>
+			    					<div class="form-group">
+			    						<label for="avgRating1" class="control-label">Average Rating</label>
+			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+								    </div>
+								    <div class="form-group">
+								      <label for="pwd">Review:</label>
+								      <p>{{rating1.review}}</p>
+								    </div>
+			    				</div>
+			    				<div>
+			    					<div class="form-group">
+			    						<label for="avgRating1" class="control-label">Average Rating</label>
+			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+								    </div>
+								    <div class="form-group">
+								      <label for="pwd">Review:</label>
+								      <p>{{rating1.review}}</p>
+								    </div>
+			    				</div>
+			    				<div>
+			    					<div class="form-group">
+			    						<label for="avgRating1" class="control-label">Average Rating</label>
+			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+								    </div>
+								    <div class="form-group">
+								      <label for="pwd">Review:</label>
+								      <p>{{rating1.review}}</p>
+								    </div>
+			    				</div>
+			    				<div>
+			    					<div class="form-group">
+			    						<label for="avgRating1" class="control-label">Average Rating</label>
+			         					<input id="avgRating1" class="rating" data-size="xs" data-min="0" data-max="5" data-step="0.1">
+								    </div>
+								    <div class="form-group">
+								      <label for="pwd">Review:</label>
+								      <p>{{rating1.review}}</p>
+								    </div>
+			    				</div>
+			    				<div ng-hide="!(ratings == undefined)">
+			    					<h5><b>No Ratings Available</b></h5><br><br>
+			    				</div>
+			    			</div>
+			    		</div>
+			    	</div>
+				</div>
+         	</div>
          </div>
       </div>
       <div class="col-sm-3" style="padding-right: 100px">
