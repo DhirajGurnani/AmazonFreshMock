@@ -13,26 +13,36 @@
 				<div class="panel-body" id="panel">
 						<h3>Update Profile </h3>
 						<br/>
+						<div class="row">
 						
-						<input type="text" placeholder="{{profile.first_name}}" value="{{profile.first_name}}" ng-model="firstname" size="30" style="padding:5px" required><br/><br/>
-						<input type="text" placeholder="{{profile.first_name}}" ng-model="lastname" size="30" style="padding:5px" required><br/><br/>
-						<input type="email" placeholder="E-mail Address" ng-model="email" size="30" style="padding:5px" required><br/><br/>
-						<input type="password" placeholder="Password" ng-model="password" size="30" style="padding:5px" required><br/><br/>
-						<input type="date" placeholder="Birthday" ng-model="birthday" size="30" style="padding:5px" required><br/></br>
-						<input type="text" placeholder="address" ng-model="address" size="30" style="padding:5px" required><br/><br/>
-						<input type="text" placeholder="location" ng-model="location" size="30" style="padding:5px" required><br/><br/>
-						<input type="text" placeholder="state" ng-model="state" size="30" style="padding:5px" required><br/><br/>
-						<input type="text" placeholder="zipcode" ng-model="zipcode" size="30" style="padding:5px" required><br/><br/>
-						<input type="number" placeholder="phone" ng-model="phone" size="30" style="padding:5px" required><br/><br/>
-			<label>Role:</label>		
-			<select ng-model="role">
-							<option value="customer" selected>Customer</option>
-							<option value="farmer">Farmer</option>
-							<option value="admin">Admin</option>
-						</select>	<br><br>
-						
+						<div class ="col-sm-3">
+						<label> First Name:</label>
+						<input type="text" class="form-control"  ng-model="profile.first_name" size="30" style="padding:5px"> <br/>
+						<label> Last Name:</label>
+						<input type="text" class="form-control"  ng-model="profile.last_name" size="30" style="padding:5px" required><br/>
+						<label> Date of Birth:</label>
+						<div ng-hide = "Editdboff">
+						<label>{{profile.birthday}}</label> 	<button ng-click="change_birthday();"  class="btn" style="color:white; background-color:#808080">Change</button>
+   			 	</div>
+						<div ng-hide = "Editdbon">
+						<input type="date" class="form-control"  ng-model="profile.birthday" size="30" style="padding:5px" required>
+						<button ng-click="change_un_birthday();"  class="btn" style="color:white; background-color:#808080"><i class="glyphicon glyphicon-remove"></i></button>
+						</div><br/>
+						<label> Address:</label>
+						<input type="text" class="form-control"  ng-model="profile.address" size="30" style="padding:5px" required><br/>
+						<label> City:</label>
+						<input type="text" class="form-control"  ng-model="profile.location" size="30" style="padding:5px" required><br/>
+						<label> State:</label>
+						<input type="text" class="form-control"  ng-model="profile.state" size="30" style="padding:5px" required><br/>
+						<label> Zipcode::</label>
+						<input type="text" class="form-control"  ng-model="profile.zipcode" size="30" style="padding:5px" required><br/>
+						<label> Contact Number:</label>
+							<input type="text" class="form-control"  ng-model="profile.phone" size="30" style="padding:5px" required><br/>
+						</div>
+						<div class ="col-sm-9">
+						</div></div>
   
- 					<button ng-click="go_to_signup_operation();"  class="btn" style="color:white; background-color:#808080">Continue</button>
+ 					<button ng-click="go_to_update_operation();"  class="btn" style="color:white; background-color:#808080">Continue</button>
    			 	</div>
 			</div>
 		</div>

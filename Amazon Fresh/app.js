@@ -289,7 +289,7 @@ app.post('/api/farmers/:puid/images', farmers.postImagesForFarmerByPuid);
 /*****Farm Info*****/
 
 /*************** Customers API *****************/
-app.post('/api/customers/:puid/update',customer.updatecustomer);
+app.post('/api/customers/update',customer.updatecustomer);
 app.post('/api/customer/:puid/delete',customer.deletecustomer);
 
 /*************** Admin API *****************/

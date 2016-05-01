@@ -331,7 +331,7 @@ adminApp.controller('approveProductController', function($scope, $http) {
 			}).success(function(data) {
 				console.log(data);
 				$scope.averagePrice = data.averagePrice;
-				$scope.mxprice = data.maxprice;
+				$scope.maxprice = data.maxprice;
 				$scope.minprice = data.minprice;
 				$scope.quantityPresent = data.quantityPresent;
 				$scope.quantitysold = data.quantitysold;
@@ -343,7 +343,7 @@ adminApp.controller('approveProductController', function($scope, $http) {
 			url : '/api/admin/approveProduct',
 			data : {
 				"product_id" : id,
-				"price" : price
+				"price" : parseInt(price)
 			},
 			headers : {
 					'Content-Type' : 'application/json'
