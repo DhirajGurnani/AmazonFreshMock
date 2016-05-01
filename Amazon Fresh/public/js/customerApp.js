@@ -582,10 +582,6 @@ customerApp.controller('customer_profileController', function($scope, $http) {
 
             }
         });
-        $scope.edit_customer_profile = function() {
-            alert("signup");
-            window.location = "/edit_customer_information";
-        };
     }
 });
 
@@ -631,30 +627,23 @@ customerApp.controller('shippingController', function($scope, $http) {
         });
     };
     $scope.go_to_checkout = function(){
-    	var customer_id
-    	sessioninfo.success(function(data) {
-            customer_id = data.profile[0].puid;
-        });
     	$http({
             method: 'POST',
-            url: 'api/billing/create',
+            url: 'api/addToShipping',
             data: {
-                "customer_id": customer_id,
                 "address": $scope.address1,
                 "location": $scope.city,
                 "state": $scope.state,
                 "zipcode": $scope.zip,
                 "phone": $scope.phone,
-                "total_price": "$10",
                 "delivery_date": $scope.date,
                 "delivery_id": $scope.time_slot,
-                "phone": $scope.phone,
-                "status": "pending"
             },
             headers: {
                 'Content-Type': 'application/json'
             }
         }).success(function(data) {
+        	window.alert("Successfully inserted into Session");
             window.location = "/checkout";
         }).error(function(data) {
             console.log("failure");
@@ -769,13 +758,30 @@ customerApp.controller('cartController', function($scope, $http) {
     	window.location = "/cart";
     };
     $scope.go_to_shipping = function(){
-    	sessioninfo.success(function(data){
-    		if(data.profile){
-    			window.location = "/shipping";
-    		}else{
-    			window.location = "/doLogin";
-    		}
-    	});
+    	console.log($scope.product_total_bill_amount);
+    	if($scope.product_total_bill_amount !== undefined) {
+    		$http({
+                method: 'POST',
+                url: 'api/addTotalPrize',
+                data: {
+                	"total_price": $scope.product_total_bill_amount
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).success(function(data) {
+            	sessioninfo.success(function(data1){
+            		if(data1.profile){
+            			window.location = "/shipping";
+            		}else{
+            			window.location = "/doLogin";
+            		}
+            	});
+            }).error(function(data) {
+                console.log("failure");
+                console.log(data);
+            });
+    	}
     };
     $scope.logout_from_account = function() {
         $http({

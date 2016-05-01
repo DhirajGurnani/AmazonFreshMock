@@ -221,6 +221,26 @@ app.post('/api/addToCart',function(request,response){
 	console.log(request.session.products);
 	response.send(request.session.products);
 });
+app.post('/api/addToShipping',function(request,response){
+	if (request.session.shipping=== undefined ){
+		request.session.shipping = request.body;
+	} else{
+		request.session.shipping=request.body;
+	}
+	console.log(request.body);
+	console.log(request.session);
+	response.send(request.session);
+});
+app.post('/api/addTotalPrice',function(request,response){
+	if (request.session.total_price=== undefined ){
+		request.session.total_price = request.body.total_price;
+	} else{
+		request.session.total_price=request.body.total_price;
+	}
+	console.log(request.body);
+	console.log(request.session);
+	response.send(request.session);
+});
 app.get('/api/addToCart',function(request,response){
 	if (request.session.products=== undefined ){
 		request.session.products = [];
