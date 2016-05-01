@@ -128,7 +128,7 @@ exports.getQueryForProductByFarmer = function(puid){
 
 
 exports.getgetProductBySearch = function(product_name){
-	return "select * from Products where product_name LIKE '%"+product_name+"%';";
+	return "select * from Products where product_name LIKE '%"+product_name+"%' and status = 'approved';";
 }
 
 /**
