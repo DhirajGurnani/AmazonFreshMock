@@ -35,28 +35,48 @@
    </nav>
 	    <br/><br/></br>
 		<div class="row" style="margin-left:150px; margin-right:150px">
-			<h2>Your Past Orders</h2>
-			<div ng-repeat="bill in bills">
+			<h2>Your Order Confirmation</h2>
 				<div class="panel-body" style="background-color:#f2f2f2">
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Bill Id:</b> {{bill.bill_id}}</span>
+						<span><b>Order Id:</b> 1</span>
 						<span class="pull-right"><a href="#">Report a problem</a></span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Order Date:</b> {{bill.order_date}}</span>
+						<span><b>Payment Status:</b> Received</span>
 					</div>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Delivery Date:</b> {{bill.delivery_date}}</span>
+						<span><b>Expected Delivery Date:</b> {{delivery_date}}</span>
 					</div>
-					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Delivery Status:</b> {{bill.delivery_status}}</span>
+					<div class="row" style="margin-left: 15px; margin-right: 15px">
+						<br />
+						<div>
+							<div class="col-sm-3" style="margin-right: 10px"><b>Product Name</b></div>
+							<div class="col-sm-2" style="margin-right: 10px"><b>Product Quantity</b></div>
+							<div class="col-sm-2" style="margin-right: 10px"><b>Unit Price</b></div>
+							<div class="col-sm-3" style="margin-right: 10px"><b>Sub-Total Price</b></div>
+						</div>
+						<br />
+						<div class="panel-body" ng-repeat="product in products" value="{{product.product_id}}" style="border-style: ridge">
+							<div class="col-sm-3" style="margin-right: 10px">
+								<span>{{product.product_name}}</span>
+							</div>
+							<div class="col-sm-2" style="margin-right: 10px">
+								<span>{{product.quantity}}</span>
+							</div>
+							<div class="col-sm-2" style="margin-right: 10px">
+								<span>$ {{(product.price)}}</span>
+							</div>
+							<div class="col-sm-3" style="margin-right: 10px">
+								<span>$ {{(product.price)*(product.quantity)}}</span>
+							</div>
+						</div>
 					</div>
+					<br/>
 					<div class="row" style="padding-left:15px; padding-right:15px">
-						<span><b>Total Price:</b> {{bill.total_price}}</span>
+						<span><b>Total Order Price:</b> $ {{order_price}}</span>
 					</div>
 				</div>
 				<br/>
-			</div>
 		</div>
 		<br/><br/><br/><br/><br/><br/><br/>
 		<div class="row">
