@@ -248,6 +248,10 @@ app.get('/api/addToCart',function(request,response){
 	}
 	response.send(request.session.products);
 });
+app.get('/api/clearSessionData',function(request,response){
+	request.session.products = [];
+	request.session.shipping = {};	
+});
 app.post('/api/deleteFromCart',function(request,response){
 	console.log(request.body);
 	
