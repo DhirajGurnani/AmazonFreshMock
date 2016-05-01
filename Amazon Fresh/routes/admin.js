@@ -59,7 +59,8 @@ exports.approveproduct = function(request, response) {
 			if(request.session.profile) {
 				//var puid = request.body.puid;
 				var product_id = request.body.product_id;
-				var sqlQuery = sqlQueryList.approveproduct(product_id);
+				var price = request.body.price;
+				var sqlQuery = sqlQueryList.approveproduct(product_id,price);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {

@@ -218,8 +218,8 @@ exports.approvefarmer = function(puid) {
 return "UPDATE User_profiles set status = 'active' where role = 'farmer' and puid = '" + puid + "'";
 };
 
-exports.approveproduct = function(product_id) {
-return "UPDATE Products set status = 'approved' where  product_id = '" + product_id + "'";
+exports.approveproduct = function(product_id,price) {
+return "UPDATE Products set status = 'approved' , price = '"+price+"' where  product_id = '" + product_id + "'";
 };
 
 exports.getQueryForBillingCreation = function(customer_id, address, location, state, zipcode, phone, total_price, delivery_date, delivery_id, status) {
