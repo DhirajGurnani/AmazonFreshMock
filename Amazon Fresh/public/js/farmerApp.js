@@ -22,7 +22,6 @@ farmerApp.filter("trustUrl", ['$sce', function($sce) {
 }]);
 
 farmerApp.controller('mainController', function($scope, $http, $location) {
-
     var farmer_details = $http.get('/api/getsessioninfo');
     farmer_details.success(function(data) {
         if (data.profile) {

@@ -12,6 +12,7 @@ var util = require('util');
 var mongoURL = 'mongodb://localhost:27017/amazondb';
 var dbHelper = require('./mongo-db-helper');
 var uuid = require('node-uuid');
+var path = require('path')
 
 exports.getVideoForFarmerByPuid = function(request, response) {
 	mongo.connect(mongoURL, function() {
@@ -19,19 +20,45 @@ exports.getVideoForFarmerByPuid = function(request, response) {
 		dbHelper.doesExistInDb(farmers, {
 			"puid": request.params.puid
 		}, function() {
-			response.setHeader('Content-type', 'video/mp4');
-		    mongodb.MongoClient.connect(mongoURL, function(error, db) {
-		    	var bucket = new mongodb.GridFSBucket(db, {
-		      	  	chunkSizeBytes: 1024,
-		    		bucketName: 'videos'
-		      	});
-		        bucket.openDownloadStreamByName(request.params.puid + '.mp4').
-		        pipe(response).
-		        on('error', function(error) {
-		        }).
-		        on('finish', function() {
-		        });
-		    });
+			dbHelper.readOne(farmers, {"puid":request.params.puid}, null, function(data) {
+				try {
+					if(data[request.params.puid].video) {
+						if(data[request.params.puid].video.length >0) {
+							response.setHeader('Content-type', 'video/mp4');
+						    mongodb.MongoClient.connect(mongoURL, function(error, db) {
+						    	var bucket = new mongodb.GridFSBucket(db, {
+						      	  	chunkSizeBytes: 1024,
+						    		bucketName: 'videos'
+						      	});
+						        bucket.openDownloadStreamByName(request.params.puid + '.mp4').
+						        pipe(response).
+						        on('error', function(error) {
+						        }).
+						        on('finish', function() {
+						        });
+						    });
+						}
+						else {
+							response.send({
+								"status" : 404,
+								"errmsg" : "Error: No video found: " + data[request.params.puid].video
+							});
+						}
+					}
+					else {
+						response.send({
+							"status" : 404,
+							"errmsg" : "Error: No video found: " + data[request.params.puid].video
+						});
+					}
+				}
+				catch(error) {
+					response.send({
+						"status" : 404,
+						"errmsg" : "Error: No video found error: " + error
+					});
+				}
+			});
 		}, function() {
 			response.send({
 				"status" : 404,
@@ -231,19 +258,43 @@ exports.getImageUrlsForFarmerByPuid = function(request, response) {
 };
 
 exports.getImageByImageUrl = function(request, response) {
-	response.setHeader('Content-type', 'image/png');
-    mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
-    	var bucket = new mongodb.GridFSBucket(db, {
-      	  	chunkSizeBytes: 1024,
-    		bucketName: 'images'
-      	});
-        bucket.openDownloadStreamByName(request.params.imageName).
-        pipe(response).
-        on('error', function(error) {
-        }).
-        on('finish', function() {
-        });
-    });
+	try {
+		var images = mongo.collection('images.files');
+		dbHelper.doesExistInDb(images, {
+			"filename" : request.params.imageName
+		},function() {
+			response.setHeader('Content-type', 'image/png');
+		    mongodb.MongoClient.connect('mongodb://localhost:27017/amazondb', function(error, db) {
+		    	var bucket = new mongodb.GridFSBucket(db, {
+		      	  	chunkSizeBytes: 1024,
+		    		bucketName: 'images'
+		      	});
+		        bucket.openDownloadStreamByName(request.params.imageName).
+		        pipe(response).
+		        on('error', function(error) {
+		        }).
+		        on('finish', function() {
+		        });
+		    });
+		}, function() {
+			var filePath = "public/images/default.jpg";
+		    var stat = fs.statSync(filePath);
+
+		    response.writeHead(200, {
+		        'Content-Type': 'image/png',
+		        'Content-Length': stat.size
+		    });
+
+		    var readStream = fs.createReadStream(filePath);
+		    readStream.pipe(response);
+		});
+	}
+	catch(error) {
+		response.send({
+			"status" : 404,
+			"errmsg" : "Error: Unable to get images: " + error
+		});
+	}
 };
 
 exports.getVideo2 = function(request, response) {
