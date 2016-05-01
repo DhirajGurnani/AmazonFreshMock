@@ -306,6 +306,7 @@ app.get('/api/product/category/:category_id/subcategory', product.getProductSubC
 app.post('/api/product/create',product.createproduct);
 app.get('/api/product',product.getAllProducts);
 app.get('/api/product/:product_id',product.getProductByProductId);
+app.post('/api/product/farmer/getProductByFarmerId',product.getProductByFarmerId);
 app.get('/api/product/category/:category_id',product.getAllProductsByCategoryId);
 app.get('/api/product/subcategory/:subcategory_id', product.getProductBySubcategoryId);
 app.get('/api/product/category/:category_id/subcategory/:subcategory_id',product.getProductsByCAtegoryIdAndSubCategoryId);

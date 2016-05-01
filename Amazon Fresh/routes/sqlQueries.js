@@ -122,6 +122,9 @@ exports.getProfile = function(puid){
 	return "select * from User_profiles where puid = '"+puid+"';";
 }
 
+exports.getQueryForProductByFarmer = function(puid){
+	return "select * from Products where puid = '"+puid+"';";
+}
 /**
  *  Query for getting password for a given email
  */
