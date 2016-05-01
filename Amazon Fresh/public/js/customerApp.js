@@ -42,6 +42,9 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/customer_orders', {
                 templateUrl: 'amazon_orders.html',
                 controller: 'customer_ordersController'
+            }).when('/farmer/:puid', {
+                templateUrl: 'amazon_customer_farmer_view.html',
+                controller: 'customer_farmer_viewController'
             });
         $locationProvider.html5Mode(true);
     }
@@ -440,9 +443,10 @@ customerApp.controller('productController', function($scope, $http, $routeParams
 	//alert($routeParams.product_id);
 	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
 	get_product_response.success(function(data){
-		console.log(data.product[0].product_name);
+		console.log(data.product[0]);
 		$scope.product_name = data.product[0].product_name;
 		$scope.product_price = data.product[0].price;
+		$scope.puid = data.product[0].puid;
 		$scope.product_description = data.product[0].description;
 		var get_pictures = $http.get('/api/products/' + $routeParams.product_id + '/images');
         get_pictures.success(function(data) {
@@ -483,8 +487,8 @@ customerApp.controller('productController', function($scope, $http, $routeParams
     $scope.add_to_cart = function(){
     	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
     	get_product_response.success(function(data){
-    		console.log(data.product[0]);
-    		//alert($scope.prod_Quantity);
+    		console.log(data);
+    		alert($scope.prod_Quantity);
     		$scope.product_name = data.product[0].product_name;
     		$scope.product_price = data.product[0].price;
     		$scope.product_description = data.product[0].description;
@@ -730,11 +734,11 @@ customerApp.controller('cartController', function($scope, $http) {
         data.products.forEach(function(product) {
         	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
             get_pictures.success(function(data2) {
-            	console.log(data2);
+            	//console.log(data2);
             	product.imageUrls = "http://localhost:3000/" + data2.urls[0];
                 products.push(product);
                 $scope.products = products;
-                console.log($scope.products);
+                //console.log($scope.products);
             });
         });
         
@@ -797,4 +801,44 @@ customerApp.controller('cartController', function($scope, $http) {
             console.log(data);
         });
     };
+});
+customerApp.filter("trustUrl", ['$sce', function($sce) {
+    return function(recordingUrl) {
+        return $sce.trustAsResourceUrl(recordingUrl);
+    };
+}]);
+customerApp.controller('customer_farmer_viewController', function($scope, $http, $routeParams, $location) {
+	//alert("aaya");
+ console.log($routeParams.puid);
+	var farmer_details = $http.get('/api/farmers/'+ $routeParams.puid);
+    farmer_details.success(function(data) {
+    	console.log(data.farmers[0].first_name);
+        if (data.farmers) {
+            $scope.Loggedin = false;
+            $scope.Loggedoff = true;
+            $scope.first_name = data.farmers[0].first_name;
+            $scope.last_name = data.farmers[0].last_name;
+            $scope.birthday = data.farmers[0].birthday;
+            $scope.address = data.farmers[0].address;
+            $scope.location = data.farmers[0].location;
+            $scope.state = data.farmers[0].state;
+            $scope.zipcode = data.farmers[0].zipcode;
+            $scope.phone = data.farmers[0].phone;
+            $scope.status = data.farmers[0].status;
+            $scope.created_at = data.farmers[0].created_at;
+            $scope.updated = data.farmers[0].updated_at;
+            var puid = data.farmers[0].puid;
+            var get_pictures = $http.get('/api/farmers/' + puid + '/images');
+            get_pictures.success(function(data) {
+                var imageUrls = [];
+                for (i = 0; i < data.urls.length; i++) {
+                    imageUrls[i] = "http://localhost:3000/" + data.urls[i];
+                }
+                console.log(imageUrls);
+                $scope.imageUrls = imageUrls;
+            });
+            $scope.videoUrls = 'http://localhost:3000/api/farmers/' + puid + '/video';
+        }
+    });
+
 });
