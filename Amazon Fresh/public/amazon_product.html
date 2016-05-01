@@ -80,8 +80,7 @@
                <strong>Quantity:</strong>
                <div class="row">
                		<div class="col-sm-3">
-               			<select ng-model="prod_Quantity" class="form-control">
-				 			<option ng-repeat= "myoption in options" selected>{{myoption}}</option>
+               			<select class="form-control" ng-init="prod_Quantity = 1" ng-model="prod_Quantity" ng-options="myoption for myoption in options" >
 						</select>
                		</div>
                		<div class="col-sm-9">
