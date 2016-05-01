@@ -346,6 +346,58 @@ app.get('/api/admin/trips/getDeliverySlots',trips.getDeliverySlots);
 app.post('/api/billing/create', billing.createNewBill);
 app.get('/api/billing/getOrders',billing.getOrders);
 
+app.get('/api/admin/getMapData', function(request, response) {
+	var data = [[{"start_location": {
+        "lat": 37.333305,
+        "lng": -121.9134345
+      }, "end_location": {
+        "lat": 37.3323574,
+        "lng": -121.9122916
+      }},{"start_location": {
+        "lat": 37.3323574,
+        "lng": -121.9122916
+      },"end_location": {
+        "lat": 37.3364937,
+        "lng": -121.898496
+      }},{"start_location": {
+        "lat": 37.3364937,
+        "lng": -121.898496
+      },"end_location": {
+        "lat": 37.3334978,
+        "lng": -121.8971152
+      }},{"start_location": {
+        "lat": 37.3334978,
+        "lng": -121.8971152
+      }, "end_location": {
+        "lat": 37.3285631,
+        "lng": -121.8955404
+      }},{"start_location": {
+        "lat": 37.3285631,
+        "lng": -121.8955404
+      }, "end_location": {
+        "lat": 37.3247312,
+        "lng": -121.8870632
+      }},{"start_location": {
+        "lat": 37.3247312,
+        "lng": -121.8870632
+      }, "end_location": {
+        "lat": 37.3268266,
+        "lng": -121.8813867
+      }},{"start_location": {
+        "lat": 37.3268266,
+        "lng": -121.8813867
+      }, "end_location": {
+        "lat": 37.3263269,
+        "lng": -121.8767688
+      }},{"start_location": {
+        "lat": 37.3263269,
+        "lng": -121.8767688
+      }, "end_location": {
+        "lat": 37.3229926,
+        "lng": -121.8832
+      }}]];
+	response.send(data);
+});
 
 /*************** End Backend API *****************/
 
