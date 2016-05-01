@@ -3,7 +3,7 @@ CREATE DATABASE `amazondb`;
 
 USE `amazondb`;
 
-#DROP USER 'amazondbadmin'@'localhost';
+#DROP USER 'amazondbadmin'@'%';
 
 #CREATE USER 'amazondbadmin'@'%' IDENTIFIED BY 'marias@1234';
 #GRANT ALL PRIVILEGES on amazondb.* TO 'amazondbadmin'@'%';

@@ -29,26 +29,16 @@
    </nav>
    <br/><br/><br/>
    <div class="row">
+      <div class="col-sm-3">
+      </div>
       <div class="col-sm-9">
          <div class="row">
-            <div class="dropdown col-sm-3" style="padding-left:15px">
-               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#484848; margin-left:10px">Shop <span class="caret"></span></button>
-               <ul class="dropdown-menu">
-                  <li><a href="#"><strong>fruits</strong><br>Check out your fruits</a></li>
-                  <br>
-                  <li><a href="#"><strong>Vegetables</strong><br>Fresh Vegeies every day</a></li>
-                  <br>
-                  <li><a href="#"><strong>Dairy</strong><br>A healthy Dairy for healthy heart</a></li>
-                  <br>
-                  <li><a href="#"><strong>Meat</strong><br>Meats of all kinds</a></li>
-                  <br>
-                  <li><a href="#"><strong>Others</strong><br>We have a solution for you</a></li>
-               </ul>
-            </div>
+         	<br>
             <div class="input-group col-sm-9">
-               <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
-               <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
-               <button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
+               <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
+                  aria-describedby="basic-addon1"> 
+               <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
+               <span style="color:white; ">Go</span>
                </span>
             </div>
          </div>
@@ -62,76 +52,130 @@
       <div class="col-sm-6	" style="background-color:lavenderblush;">
          <br>
          <div style="margin-left:20px;">
-            <h3><strong>
+            <h3 align="center" style="color:blue;"><strong>
                New Product Details:	
                </strong>
             </h3>
             <br>
-            <label>Name:            </label>
-            <input type="text" ng-model="product_name" placeholder="product name" size="30" style="padding:5px"><br><br>
-            <label>Price:       </label>
-            <input type="number" ng-model="product_price" placeholder="product price" size="30" style="padding:5px"><br><br>
-            <label>Description: </label>
-            <br>
-            <textarea ng-model="message" rows="05" cols="50" placeholder="Descripe about the product" name="Description"></textarea>
-            <br><br>
-            <label>Category:</label>
-            <input list="CategoryList" ng-change="updateSubCategory()" ng-model="selectedCategory">
-            <datalist id="CategoryList" >
-               <option ng-repeat = "category in categories" value="{{category.category_id}}">{{category.name}}</option>
-            </datalist>
-            <br><br>
-            <label>Sub Category:</label>
-            <input list="Sub_Category" ng-model="selectedSubCategory">
-            <datalist id="Sub_Category">
-            	<option ng-repeat = "subCategory in subCategories" value="{{subCategory.subcategory_id}}">{{subCategory.name}}</option>
-            </datalist>
-            <br><br>
-            <label>Quantity:       </label>
-            <input type="number" ng-model="product_quantity" placeholder="product Quantity" size="30" style="padding:5px"><br><br>
-            <div class = "row">
-            <div class = "col-sm-6 col-md-3">
-            <div style="margin-left:85%"><button type="button" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove"></span></button>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Name:            </label>
+	            </div>
+	            <div class="col-sm-9">
+	            	<input type="text" ng-model="product_name" placeholder="product name" class="form-control">
+	            </div>
             </div>
-            <a href = "#" class = "thumbnail">
-            <img src = "https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/merch/2015/TCG/Q1/021015_TCG_ZipLaunch_Generic._V330194894_.jpg" alt = "Generic placeholder thumbnail">
-            </a>
+            <br>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Price:       </label>
+	            </div>
+	            <div class="col-sm-9">
+	            	<input type="number" ng-model="product_price" placeholder="product price" class="form-control">
+	            </div>
             </div>
+            <br>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Description: </label>
+	            </div>
+	            <div class="col-sm-9">
+	            	<textarea ng-model="message" rows="05" cols="50" placeholder="Describe your the product" name="Description" class="form-control">
+	            	</textarea>
+	            </div>
             </div>
-            <span class="btn btn-info btn-file">
-            <div style="font-size:15px;">
-            <span class="glyphicon glyphicon-plus"></span>
-            </div> Click here to upload pictures of farm	
-            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
-            </span>
-      <input type="file" name="file2" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-      <input type="file" name="file3" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-           
             <br>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Category:</label>
+	            </div>
+	            <div class="col-sm-9">
+	            	<select id="CategoryList" class="form-control" ng-model="selectedCategory" ng-change="updateSubCategory()">
+		               <option ng-repeat = "category in categories" value="{{category.category_id}}" class="form-control"><strong>{{category.name}}</strong></option>
+		            </select>
+	            </div>
+            </div>
             <br>
-            <button class="btn" style="color:white; background-color:#808080" ng-click="createNewProduct();" data-toggle="modal" data-target="#myModal">Create</button>
-            <div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog">
-			    
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Modal Header</h4>
-			        </div>
-			        <div class="modal-body">
-			          <p>Some text in the modal.</p>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="refreshPage()">Close</button>
-			        </div>
-			      </div>
-			      
-			    </div>
-			  </div>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Sub Category:</label>
+	            </div>
+	            <div class="col-sm-9">
+		            <select id="Sub_Category" class="form-control" ng-model="selectedSubCategory">
+		            	<option ng-repeat = "subCategory in subCategories" value="{{subCategory.subcategory_id}}" class="form-control">{{subCategory.name}}</option>
+		            </select>
+	            </div>
+            </div>
             <br>
-            <br><br>
+            <div class="row">
+	            <div class="col-sm-2">
+	            	<label>Quantity:       </label>
+	            </div>
+	            <div class="col-sm-9">
+	            	<input type="number" ng-model="product_quantity" placeholder="product Quantity" class="form-control">
+	            </div>
+            </div>
+            <br>
+            <div class="row">
+            	<div class="col-sm-12">
+            		<span style="color:green;"><strong>UPLOAD PICTURES FOR YOUR PRODUCT</strong></span>
+            	</div>
+            	<div class="col-sm-12"><p></p></div>
+	            <div class="col-sm-12">
+	            	<span class="btn btn-info btn-file">
+			            <div style="font-size:15px;">
+			            	<span class="glyphicon glyphicon-plus"></span>
+			            </div> Click here to upload
+			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
+		            </span>
+		            <span>fileName: {{myfiles1}}</span>
+	      		</div>
+	      		<div class="col-sm-12"><p></p></div>
+	      		<div class="col-sm-12">
+	            	<span class="btn btn-info btn-file">
+			            <div style="font-size:15px;">
+			            	<span class="glyphicon glyphicon-plus"></span>
+			            </div> Click here to upload
+			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
+		            </span>
+	      		</div>
+	      		<div class="col-sm-12"><p></p></div>	
+	      		<div class="col-sm-12">
+	            	<span class="btn btn-info btn-file">
+			            <div style="font-size:15px;">
+			            	<span class="glyphicon glyphicon-plus"></span>
+			            </div> Click here to upload
+			            <input type="file" name="file1" onchange="angular.element(this).scope().uploadFile(this.files)">
+		            </span>
+	      		</div>
+	      		<div class="col-sm-12"><p></p></div>
+	      		<div class="col-sm-12"><p></p></div>
+	      		<div class="col-sm-12"><p></p></div>
+	      		<div class="col-sm-12"><p></p></div>
+	      		<div class="col-sm-3"><p></p></div>
+	      		<div class="col-sm-6">
+	      			<button class="btn btn-success form-control"ng-click="createNewProduct();" data-toggle="modal" data-target="#myModal">Create</button>
+		            <div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">New Product</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>Congratulations!. Your product is created successfully. It will be visible to the customers
+					          after the admin approves it.</p>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="refreshPage()">Close</button>
+					        </div>
+					      </div>
+					    </div>
+					</div>
+				</div>
+				<div class="col-sm-12"><p></p></div>
+			</div>
          </div>
       </div>
       <div class="col-sm-3" ></div>

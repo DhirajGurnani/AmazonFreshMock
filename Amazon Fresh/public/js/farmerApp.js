@@ -69,7 +69,6 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
         }).error(function(data) {
             console.log("failure");
         });
-
     };
     $scope.upload_image = function() {
         var farmer_details = $http.get('/api/getsessioninfo');
@@ -89,8 +88,6 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
                 function(data) {
                     console.log(data);
                     alert(data);
-                    // console.log(data.buildInfo);
-                    // console.log(pack(data.buildInfo));
                 });
         });
     };
@@ -117,14 +114,12 @@ farmerApp.controller('newProductController', function($scope, $http, $location) 
             });
         }
     };
-
-
     
     var filesInfo = [];
     $scope.uploadFile = function(files) {
         filesInfo.push(files[0]);
-        //console.log(filesInfo);
-        //console.log(JSON.stringify(filesInfo));
+        $scope.myfiles = filesInfo;
+        $scope.myfiles1 = $scope.myfiles[0];
     };
 
     $scope.createNewProduct = function() {
