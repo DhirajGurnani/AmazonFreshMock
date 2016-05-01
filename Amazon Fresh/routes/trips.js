@@ -11,6 +11,10 @@ var sqlQueryList = require('./sqlQueries');
 var redis = require('redis');
 //var client = redis.createClient(); 
 
+exports.getBillsRedis = function(request,response){
+	
+}
+
 exports.createTrip = function(request,response){
 	try {
 		

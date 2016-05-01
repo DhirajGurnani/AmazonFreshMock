@@ -55,8 +55,8 @@ exports.approvefarmer = function(request, response) {
 
 exports.approveproduct = function(request, response) {
 	try {
-		if(request.session) {
-			if(request.session.profile) {
+		//if(request.session) {
+			//if(request.session.profile) {
 				//var puid = request.body.puid;
 				var product_id = request.body.product_id;
 				var price = request.body.price;
@@ -76,7 +76,7 @@ exports.approveproduct = function(request, response) {
 								"errmsg" : "Failed to Approve product!!" 
 							});
 						});
-			}
+			}/*
 			else {
 				response.send({
 	        		"status": 403,
@@ -90,7 +90,8 @@ exports.approveproduct = function(request, response) {
 	    		"message" : "Error: Cannot find session"
 	    	});
 		}
-	} catch (err) {
+	}*/ 
+	catch (err) {
 		response.send({
 			"status" : 500,
 			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err

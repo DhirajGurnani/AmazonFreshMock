@@ -247,7 +247,7 @@ exports.getRating = function(product_id) {
 	return "SELECT avg(rating) as average from Ratings where product_id ="+product_id+";";
 };
 exports.getReview = function(product_id) {
-	return "SELECT * from Ratings where product_id ="+product_id+";";
+	return "SELECT * from Ratings where product_id ="+product_id+" limit 5;";
 };
 exports.getQueryForUpdateBillingWithCurrentLocation = function(billing_id, current_location){
 	return "update Billing set current_location = '" + current_location + "' where billing_id = " + billing_id + "";
