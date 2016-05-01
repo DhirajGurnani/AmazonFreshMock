@@ -8,6 +8,8 @@
  */
 var dbHelper = require('./mysql-db-helper');
 var sqlQueryList = require('./sqlQueries');
+var redis = require('redis');
+var client = redis.createClient(); 
 
 exports.createTrip = function(request,response){
 	try {
@@ -580,48 +582,66 @@ exports.revenueStats = function(request,response){
 		});
 	}
 };
-exports.getBills = function(request,response){
-	try {		
-		//if(request.session) {
-			//if(request.session.profile) {
-				var sqlGetBills = sqlQueryList.sqlGetBills();
-				dbHelper.executeQuery(
-						sqlGetBills, 
-						function(success) {
-							response.send({ //or 201 for creation,
-								"message" : success // or id for creation and data for get
-							});
-						}, 
-						function(error){
-							//  failure callback
-							response.send({
-								"status" : 400, 
-								"errmsg" : error 
-							});
-						});
-			}/*
-			else {
-				response.send({
-	        		"status": 403,
-	        		"message": "Error: Cannot find user profile"
-	        	});
-			}
+/*
+exports.getBills = function(request,response){	
+	var bar = {"product_id":100,"redis":"OK"};	
+	client.set("foo", JSON.stringify(bar), redis.print);
+	client.get("voo", function (err, reply) {
+		var json = JSON.parse(reply);
+		if(json==={}){
+			console.log("Empty");
 		}
-		else {
-			response.send({
-	    		"status" : 401,
-	    		"message" : "Error: Cannot find session"
-	    	});
-		}
-		
-	} */
-		catch (err) {
-		response.send({
-			"status" : 500,
-			"errmsg" : "Error: Internal server error, Cannot connect to mysql server: " + err
-		});
-	}
+	    response.send(json);
+	});
+}
+*/
+exports.getBills = function(request, response) {
+    try {
+
+        //if(request.session) {
+        //if(request.session.profile) {
+        var sqlGetBills = sqlQueryList.sqlGetBills();
+        dbHelper.executeQuery(
+            sqlGetBills,
+            function(success) {
+                response.send({ //or 201 for creation,
+                    "message": success // or id for creation and data for get
+                });
+            },
+            function(error) {
+                //  failure callback
+                response.send({
+                    "status": 400,
+                    "errmsg": error
+                });
+            });
+
+    }
+    /*
+    			else {
+    				response.send({
+    	        		"status": 403,
+    	        		"message": "Error: Cannot find user profile"
+    	        	});
+    			}
+    		}
+    		else {
+    			response.send({
+    	    		"status" : 401,
+    	    		"message" : "Error: Cannot find session"
+    	    	});
+    		}
+    		
+    	} */
+    catch (err) {
+        response.send({
+            "status": 500,
+            "errmsg": "Error: Internal server error, Cannot connect to mysql server: " + err
+        });
+
+    }
 };
+
 exports.getFarmersPending = function(request,response){
 	try {		
 		//if(request.session) {
