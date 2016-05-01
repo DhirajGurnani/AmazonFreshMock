@@ -344,7 +344,7 @@ app.get('/api/admin/trips/getDeliverySlots',trips.getDeliverySlots);
 
 /*************** Billing API *****************/
 app.post('/api/billing/create', billing.createNewBill);
-app.post('/api/billing/getOrders',billing.getOrders);
+app.get('/api/billing/getOrders',billing.getOrders);
 
 
 /*************** End Backend API *****************/
