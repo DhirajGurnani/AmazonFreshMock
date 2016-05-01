@@ -492,10 +492,12 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
         data.products.forEach(function(product) {
         	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
             get_pictures.success(function(data2) {
-            	//console.log(data2);
-            	product.imageUrls = "http://localhost:3000/" + data2.urls[0];
-                products.push(product);
-                $scope.products = products;
+            	console.log(data2);
+            	if(data2.status == 200) {
+            		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+                    products.push(product);
+                    $scope.products = products;
+            	}
                 //console.log($scope.products);
             });
         });
@@ -563,12 +565,15 @@ customerApp.controller('productController', function($scope, $http, $routeParams
 		$scope.product_description = data.product[0].description;
 		var get_pictures = $http.get('/api/products/' + $routeParams.product_id + '/images');
         get_pictures.success(function(data) {
-            var imageUrls = [];
-            for (i = 0; i < data.urls.length; i++) {
-                imageUrls[i] = "http://localhost:3000/" + data.urls[i];
-            }
-            console.log($location.$$absUrl);
-            $scope.imageUrls = imageUrls;
+        	console.log(data);
+        	if(data.status == 200) {
+        		var imageUrls = [];
+                for (i = 0; i < data.urls.length; i++) {
+                    imageUrls[i] = "http://localhost:3000/" + data.urls[i];
+                }
+                console.log($location.$$absUrl);
+                $scope.imageUrls = imageUrls;
+        	}
         });
 	});
 	var sessioninfo = $http.get('/api/getsessioninfo');

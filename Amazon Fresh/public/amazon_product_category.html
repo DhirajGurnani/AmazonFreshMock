@@ -4,8 +4,8 @@
       <div class="container-fluid" style="color: white">
          <a href="" ng-click="go_to_homepage()"><img
             src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
-            alt="Amazon logo"> </a> <span ng-hide="loggedIn">Already an
-         AmazonFresh customer? <a href="#" ng-click="go_to_loginpage()"
+            alt="Amazon logo"> </a> 
+         <span ng-hide="loggedIn">Already an AmazonFresh customer? <a href="#" ng-click="go_to_loginpage()"
             style="color: white"><u>Sign in</u></a>
          </span>
          <ul class="nav navbar-nav pull-right">
@@ -41,7 +41,7 @@
             style="background-color: #484848; margin-left: 25px">
          Shop <span class="caret"></span>
          </button>
-         <ul class="dropdown-menu">
+         <ul class="dropdown-menu" style="margin-left: 25px">
             <li ng-repeat = "category in categories">
                <a href="/product_category/{{category.category_id}}"><strong>{{category.name}}</strong><br>{{category.description}}
                </a>
@@ -60,24 +60,22 @@
    <div class="row">
       <div class="col-sm-8" style="margin-left: 40px">
          <br/>
-         <h3>Category Description</h3>
          <img ng-src="/images/{{category_id}}.jpg" width="500" height="300">
          <br/><br/>
          <h3>Shop our best Products from here</h3>
          <br/>
          <div class="row">
             <div ng-repeat="subcategory in subcategories | orderBy : category.subcategory_id">
-            <div class="col-sm-3">
-               <div class="panel panel-default">
-                  <div class="panel-heading" style="background-image:url(/images/{{subcategory.category_id}}{{subcategory.subcategory_id}}.jpg); width:290px; height:180px">
-                     <br/><br/><br/><br/><br/><br>
-                     <div style="opacity:0.6; background-color:#ffffff"><a href="/product_category/{{subcategory.category_id}}/product_sub_category/{{subcategory.subcategory_id}}" style="color:black"><b>{{subcategory.name}} >></b></a></div>
+               <div class="col-sm-4">
+                  <div class="panel panel-default">
+                     <div class="panel-heading" style="background-image:url(/images/{{subcategory.category_id}}{{subcategory.subcategory_id}}.jpg); width:290px; height:180px">
+                        <br/><br/><br/><br/><br/><br>
+                        <div style="opacity:0.6; background-color:#ffffff"><a href="/product_category/{{subcategory.category_id}}/product_sub_category/{{subcategory.subcategory_id}}" style="color:black"><b>{{subcategory.name}} >></b></a></div>
+                     </div>
                   </div>
                </div>
             </div>
-            </div>
-              </div>
-       
+         </div>
       </div>
       <div class="col-sm-3">
          <br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>

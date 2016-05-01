@@ -41,10 +41,10 @@
       <div class="dropdown col-sm-3" style="padding-left: 15px">
          <button class="btn btn-primary dropdown-toggle" type="button"
             data-toggle="dropdown"
-            style="background-color: #484848; margin-left: 10px">
+            style="background-color: #484848; margin-left: 30px">
          Shop <span class="caret"></span>
          </button>
-         <ul class="dropdown-menu">
+         <ul class="dropdown-menu" style="margin-left: 30px">
             <li ng-repeat = "category in categories">
                <a href="/product_category/{{category.category_id}}"><strong>{{category.name}}</strong><br>{{category.description}}
                </a>
@@ -52,26 +52,36 @@
             <br>
          </ul>
       </div>
-      <div class="col-sm-7">
-         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
-            <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
-            <button type="button" class="btn btn-default" style="color:white;background-color:#484848">Go</button>
-            </span>
-         </div>
+      <div class="input-group col-sm-7">
+               <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
+                  aria-describedby="basic-addon1"> 
+               <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
+               <span style="color:white; ">Go</span>
+               </span>
+      </div>
+      <div class="row">
+      <div class="col-sm-1"><p></p></div>
+      	<div class="col-sm-7">
          <br/>
-         <div ng-repeat="product in products">
-         <div class="col-sm-4">
-            <div class="panel-body">
-                       <img ng-src="{{product.imageUrls}}" alt="image from DB" style="width:60px; height:80px">
-          <strong>$ {{product.price}}</strong><br/>
-               <p>{{product.product_name}}</p>
-               <br/><br/><br/>
-                    <a href="/product/{{product.product_id}}"><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png"></a>
-          </div>
+         <div class="row">
+	         <div ng-repeat="product in products">
+	        	<div class="col-sm-4">
+	  					<div class="panel panel-default">
+			              <div class="panel-body">
+			                 <img ng-src="/images/1.jpg" alt="image from DB" style="width:150px; height:150px"><br>
+			                 <div>
+				                 <a href="/product/{{product.product_id}}">{{product.product_name}}</a>
+				                 <br>
+				                 <strong>$ {{product.price}}</strong><br/>
+				                 <br/>
+				                 <a href="/product/{{product.product_id}}"><img src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/buttons/refresh/btn-atc-mini._V134697584_.png"></a>
+			                 </div>
+			              </div>
+			           	</div>
+	           </div>
+	         </div>
          </div>
-        </div>
-        </div>
+      </div>
       <div class="col-sm-3">
          <br/><span>You are browsing <a href="#" style="color:blue"><u>Northern California</u></a></span><br/><br/>
          <h4><strong>Great News, We deliver to your area</strong></h4>
@@ -80,6 +90,7 @@
          <br/>
          <button type="button" ng-click="go_to_loginpage()" ng-hide="loggedIn" class="form-control" style="background-color: green; color: white">Sign in with Amazon account</button><br/>
          <p>Not a Prime Fresh member?<a href="#" style="color:blue"><u>Start your 30-day FREE trial today</u></a></p>
+      </div>
       </div>
    </div>
    <br/>
