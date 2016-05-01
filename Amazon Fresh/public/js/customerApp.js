@@ -630,22 +630,23 @@ customerApp.controller('shippingController', function($scope, $http) {
         });
     };
     $scope.go_to_checkout = function(){
+    	var customer_id
     	sessioninfo.success(function(data) {
-            $scope.customer_id = data.profile[0].puid;
+            customer_id = data.profile[0].puid;
         });
     	$http({
             method: 'POST',
-            url: 'api/logout',
+            url: 'api/billing/create',
             data: {
-                "customer_id": $scope.customer_id,
+                "customer_id": customer_id,
                 "address": $scope.address1,
                 "location": $scope.city,
                 "state": $scope.state,
                 "zipcode": $scope.zip,
                 "phone": $scope.phone,
-                "total_price": $scope.email,
+                "total_price": "$10",
                 "delivery_date": $scope.date,
-                "delivery_id": $scope.time_slot.value,
+                "delivery_id": $scope.time_slot,
                 "phone": $scope.phone,
                 "status": "pending"
             },
