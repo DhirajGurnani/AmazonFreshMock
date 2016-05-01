@@ -55,7 +55,7 @@
          </select>
          <br/><br/>
          <b>Security access code:</b><input type="text" class="form-control" ng-model="access_code" placeholder="For buildings or gated communities"><br/><br/>
-         <button class="btn btn-primary" ng-click="go_to_checkout()" style="color:white; background-color:green">Continue</button>
+         <button type="button" class="btn btn-primary" ng-click="go_to_checkout()" style="color:white; background-color:green">Continue</button>
       </div>
       <div class="col-sm-2"></div>
       <div class="col-sm-5">
@@ -63,12 +63,7 @@
          <br/>
          <span>
             <b>Date:</b>
-            <select name="delivery_date" class="form-control">
-               <option value="2days">2 days from now</option>
-               <option value="3days">3 days from now</option>
-               <option value="4days">4 days from now</option>
-               <option value="5days">5 days from now</option>
-            </select>
+            <input type="date" class="form-control" ng-mode="date"><br/>
          </span>
          <br/><br/>
          <span>
