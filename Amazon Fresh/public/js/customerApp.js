@@ -48,6 +48,9 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/customer_order_confirmation', {
                 templateUrl: 'amazon_order_confirmation.html',
                 controller: 'customer_order_confirmationController'
+            }).when('/customer_edit_profile', {
+                templateUrl: 'amazon_customer_edit_profile.html',
+                controller: 'amazon_edit_customer_profileController'
             });
         $locationProvider.html5Mode(true);
     }
@@ -247,10 +250,10 @@ customerApp.controller('signupController', function($scope, $http) {
 				$scope.role == undefined ||
 				$scope.password == undefined ){
 		
-	alert("Error");
+//	alert("Error");
 		} else{
 
-			alert("aaya");
+	//		alert("aaya");
 			$http({
 				method : 'POST',
 				url : 'api/validEmail',
@@ -668,6 +671,10 @@ customerApp.controller('customer_profileController', function($scope, $http) {
         $scope.zipcode = data.profile[0].zipcode;
         $scope.phone = data.profile[0].phone;
     });
+    $scope.go_to_edit_customer_profile = function (){
+    	alert("gaya");
+    	window.location = "/customer_edit_profile";
+    }
     $scope.go_to_homepage = function() {
         window.location = "/home";
     };
@@ -958,4 +965,21 @@ customerApp.controller('customer_farmer_viewController', function($scope, $http,
         }
     });
 
+});
+
+customerApp.controller('amazon_edit_customer_profileController', function($scope, $http) {
+	//console.log("aaya");
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+        console.log(data.profile[0]);
+        $scope.profile = data.profile[0];
+    });
 });
