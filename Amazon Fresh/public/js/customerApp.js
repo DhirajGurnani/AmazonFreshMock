@@ -773,7 +773,7 @@ customerApp.controller('customer_profileController', function($scope, $http) {
         $scope.phone = data.profile[0].phone;
     });
     $scope.go_to_edit_customer_profile = function (){
-    	alert("gaya");
+    	//alert("gaya");
     	window.location = "/customer_edit_profile";
     }
     $scope.go_to_homepage = function() {
@@ -1088,16 +1088,16 @@ customerApp.controller('amazon_edit_customer_profileController', function($scope
     });
     
     $scope.go_to_update_operation = function(){
-    	alert($scope.profile.birthday);
+    	console.log($scope.profile);
     	var sessioninfo = $http.get('/api/getsessioninfo');
         sessioninfo.success(function(data) {
         	//
     	$http({
             method: 'POST',
-            url: '/api/customers/'+data.profile[0].puid+'/update',
+            url: '/api/customers/update',
             data:{
-            	"first_name":$scope.profile.firstname,
-            	"last_name":$scope.profile.lastname,
+            	"first_name":$scope.profile.first_name,
+            	"last_name":$scope.profile.last_name,
             	"birthday":$scope.profile.birthday,
             	"address":$scope.profile.address,
             	"location":$scope.profile.location,
