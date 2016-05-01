@@ -45,6 +45,9 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/farmer/:puid', {
                 templateUrl: 'amazon_customer_farmer_view.html',
                 controller: 'customer_farmer_viewController'
+            }).when('/customer_order_confirmation', {
+                templateUrl: 'amazon_order_confirmation.html',
+                controller: 'customer_order_confirmationController'
             });
         $locationProvider.html5Mode(true);
     }
@@ -310,7 +313,7 @@ customerApp.controller('signupController', function($scope, $http) {
 	}
 });
 
-customerApp.controller('customer_ordersController', function($scope, $http) {
+customerApp.controller('customer_order_confirmationController', function($scope, $http) {
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
@@ -351,6 +354,19 @@ customerApp.controller('customer_ordersController', function($scope, $http) {
             console.log(data);
         });
     };
+    var loadOrders = function(){
+    	sessioninfo.success(function(data) {
+    		$scope.order_price = parseInt(0);
+            $scope.products = data.products;
+            $scope.delivery_date = data.shipping.delivery_date;
+            for(var i=0;i<data.products.length;i++){
+            	$scope.order_price = $scope.order_price + parseInt(data.products[i].price)*parseInt(data.products[i].quantity);
+            }
+        });
+    	$http.get('/api/clearSessionData');
+    };
+    loadOrders();
+    
 });
 
 customerApp.controller('product_categoryController', function($scope, $http) {
@@ -647,7 +663,6 @@ customerApp.controller('shippingController', function($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).success(function(data) {
-        	window.alert("Successfully inserted into Session");
             window.location = "/checkout";
         }).error(function(data) {
             console.log("failure");
@@ -684,7 +699,7 @@ customerApp.controller('checkoutController', function($scope, $http) {
     	window.location = "/cart";
     };
     $scope.go_to_orders = function(){
-    	window.location = "/customer_orders";
+    	window.location = "/customer_order_confirmation";
     };
     $scope.logout_from_account = function() {
         $http({

@@ -38,7 +38,7 @@
    </nav>
    <br/><br/><br/><br/>
    <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm-8" style="margin-left:10px">
          <div class="row">
             <div class="dropdown col-sm-3" style="padding-left: 30px">
                <button class="btn btn-primary dropdown-toggle" type="button"
@@ -64,17 +64,14 @@
             </div>
          </div>
          <br/>
-         <div class="row">
+         <div class="row" style="padding-left:25px">
             <div class="col-sm-4" ng-repeat="imageUrl in imageUrls" style="text-align:center; padding-left:15px">
                <div>
                   <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
                   <br>
                </div>
-              </div>
-              </div>
-              <div class="row">
-              <div class="col-sm-1"></div>
-            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-8">
                <h3>{{product_name}}</h3>
                <p>other products by <a href="/farmer/{{puid}}"><u>Farmer_Details</u></a></p>
                <br/><br/>
@@ -82,12 +79,11 @@
                <br/><br/>
                <strong>Quantity:</strong>
                <select ng-model="prod_Quantity">
-  <option selected>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option value="4" selected>4</option>
-</select>
-               
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+               </select>
                <button type="button" class="btn btn-default" style="color:white; background-color:#aaa" ng-click="add_to_cart();">Add to Cart</button>
             </div>
             <div class="col-sm-7"></div>

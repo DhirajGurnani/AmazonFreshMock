@@ -1,0 +1,96 @@
+<div id="wrapper" class="row ng-scope">
+	<nav class="navbar navbar-default navbar-fixed-top"
+      style="background-color: #484848; padding: 4px">
+      <div class="container-fluid" style="color: white">
+         <a href="" ng-click="go_to_homepage()"><img
+            src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
+            alt="Amazon logo"> </a> <span ng-hide="loggedIn">Already an
+         AmazonFresh customer? <a href="#" ng-click="go_to_loginpage()"
+            style="color: white"><u>Sign in</u></a>
+         </span>
+         <ul class="nav navbar-nav pull-right">
+            <li class="nav-item">
+               <a class="dropdown-toggle" href="#"
+                  ng-hide="loggedOff" data-toggle="dropdown"
+                  style="background-color: #484848; color: white">Hi,
+               {{username}} <span class="caret"></span>
+               </a>
+               <ul class="dropdown-menu" style="background-color: #484848;">
+                  <li><a href="#" ng-click="go_to_customer_profile()"
+                     style="background-color: #484848; color: white">Profile</a></li>
+                  <br />
+                  <li><a href="#" ng-click="go_to_customer_orders()"
+                     style="background-color: #484848; color: white">Orders</a></li>
+                  <br />
+                  <li><a href="#" ng-click="logout_from_account()"
+                     style="background-color: #484848; color: white">Sign Out</a></li>
+                  <br />
+               </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#" ng-click="go_to_cart()"
+               style="color: white"><span
+               class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+         </ul>
+      </div>
+   </nav>
+	    <br/><br/></br>
+		<div class="row" style="margin-left:150px; margin-right:150px">
+			<h2>Your Orders</h2>
+				<div class="panel-body" style="background-color:#f2f2f2">
+					<div class="row" style="padding-left:15px; padding-right:15px">
+						<span><b>Order Id:</b> 1</span>
+						<span class="pull-right"><a href="#">Report a problem</a></span>
+					</div>
+					<div class="row" style="padding-left:15px; padding-right:15px">
+						<span><b>Payment Status:</b> Received</span>
+					</div>
+					<div class="row" style="padding-left:15px; padding-right:15px">
+						<span><b>Expected Delivery Date:</b> {{delivery_date}}</span>
+					</div>
+					
+					
+					
+					<div class="row" style="margin-left: 15px; margin-right: 15px">
+						<br />
+						<div>
+							<div class="col-sm-3" style="margin-right: 10px"><b>Product Name</b></div>
+							<div class="col-sm-2" style="margin-right: 10px"><b>Product Quantity</b></div>
+							<div class="col-sm-2" style="margin-right: 10px"><b>Unit Price</b></div>
+							<div class="col-sm-3" style="margin-right: 10px"><b>Sub-Total Price</b></div>
+						</div>
+						<br />
+						<div class="panel-body" ng-repeat="product in products" value="{{product.product_id}}" style="border-style: ridge">
+							<div class="col-sm-3" style="margin-right: 10px">
+								<span>{{product.product_name}}</span>
+							</div>
+							<div class="col-sm-2" style="margin-right: 10px">
+								<span>{{product.quantity}}</span>
+							</div>
+							<div class="col-sm-2" style="margin-right: 10px">
+								<span>$ {{(product.price)}}</span>
+							</div>
+							<div class="col-sm-3" style="margin-right: 10px">
+								<span>$ {{(product.price)*(product.quantity)}}</span>
+							</div>
+						</div>
+					</div>
+					<br/>
+					<div class="row" style="padding-left:15px; padding-right:15px">
+						<span><b>Total Order Price:</b> $ {{order_price}}</span>
+					</div>
+				</div>
+				<br/>
+		</div>
+		<br/><br/><br/><br/><br/><br/><br/>
+		<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+		</div>
+</div>
