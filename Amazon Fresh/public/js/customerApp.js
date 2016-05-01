@@ -21,6 +21,12 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/cart', {
                 templateUrl: 'amazon_cart.html',
                 controller: 'cartController'
+            }).when('/checkout', {
+                templateUrl: 'amazon_checkout.html',
+                controller: 'checkoutController'
+            }).when('/shipping', {
+                templateUrl: 'amazon_shippingdetails.html',
+                controller: 'shippingController'
             }).when('/product_category/:category_id', {
                 templateUrl: 'amazon_product_category.html',
                 controller: 'product_categoryController'
@@ -152,10 +158,10 @@ customerApp.controller('homeController', function($scope, $http) {
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.logout_from_account = function() {
         $http({
@@ -323,10 +329,10 @@ customerApp.controller('customer_ordersController', function($scope, $http) {
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.logout_from_account = function() {
         $http({
@@ -366,10 +372,10 @@ customerApp.controller('product_categoryController', function($scope, $http) {
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.logout_from_account = function() {
         $http({
@@ -409,10 +415,10 @@ customerApp.controller('product_sub_categoryController', function($scope, $http)
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.logout_from_account = function() {
         $http({
@@ -454,10 +460,10 @@ customerApp.controller('productController', function($scope, $http, $routeParams
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.add_to_cart = function(){
     	  $http({
@@ -520,10 +526,10 @@ customerApp.controller('customer_profileController', function($scope, $http) {
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
     };
     $scope.logout_from_account = function() {
         $http({
@@ -553,6 +559,98 @@ customerApp.controller('customer_profileController', function($scope, $http) {
     }
 });
 
+customerApp.controller('shippingController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.go_to_customer_orders = function(){
+    	window.location = "/customer_orders";
+    };
+    $scope.go_to_cart = function(){
+    	window.location = "/cart";
+    };
+    $scope.go_to_checkout = function(){
+    	window.location = "/checkout";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
+});
+
+customerApp.controller('checkoutController', function($scope, $http) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.go_to_customer_orders = function(){
+    	window.location = "/customer_orders";
+    };
+    $scope.go_to_cart = function(){
+    	window.location = "/cart";
+    };
+    $scope.go_to_orders = function(){
+    	window.location = "/customer_orders";
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+    };
+});
+
 customerApp.controller('cartController', function($scope, $http) {
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
@@ -575,10 +673,19 @@ customerApp.controller('cartController', function($scope, $http) {
         window.location = "/customer_profile";
     };
     $scope.go_to_customer_orders = function(){
-    	window.location = "/customer_orders"
+    	window.location = "/customer_orders";
     };
     $scope.go_to_cart = function(){
-    	window.location = "/cart"
+    	window.location = "/cart";
+    };
+    $scope.go_to_shipping = function(){
+    	sessioninfo.success(function(data){
+    		if(data.profile){
+    			window.location = "/shipping";
+    		}else{
+    			window.location = "/doLogin";
+    		}
+    	});
     };
     $scope.logout_from_account = function() {
         $http({
