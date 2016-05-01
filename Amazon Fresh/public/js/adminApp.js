@@ -319,11 +319,32 @@ adminApp.controller('approveProductController', function($scope, $http) {
 		});
 	};
 	getProductPending();
-	$scope.pApprove = function(id){
+	$scope.get_dynamic_prize = function(category_id,subcategory_id){
+			console.log(category_id);
+			console.log(subcategory_id);
+			$http({
+				method : 'GET',
+				url : '/dpa/category/category_id/subcategory/subcategory_id',
+				headers : {
+						'Content-Type' : 'application/json'
+				}
+			}).success(function(data) {
+				console.log(data);
+				$scope.averagePrice = data.averagePrice;
+				$scope.mxprice = data.maxprice;
+				$scope.minprice = data.minprice;
+				$scope.quantityPresent = data.quantityPresent;
+				$scope.quantitysold = data.quantitysold;
+			});
+	};
+	$scope.pApprove = function(id,price){
 		$http({
 			method : 'POST',
 			url : '/api/admin/approveProduct',
-			data : {"product_id" : id},
+			data : {
+				"product_id" : id,
+				"price" : price
+			},
 			headers : {
 					'Content-Type' : 'application/json'
 			}
@@ -333,7 +354,8 @@ adminApp.controller('approveProductController', function($scope, $http) {
 				console.log('Success');
 				window.location = '/productApproval';
 			}
-			else {				
+			else {	
+				console.log('error');
 			}
 		});
 	}
