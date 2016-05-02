@@ -196,6 +196,20 @@ customerApp.controller('homeController', function($scope, $http) {
 });
 
 customerApp.controller('loginController', function($scope, $http) {
+
+    var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+            window.location='/';
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+
     $scope.go_to_signup = function() {
         window.location = "/doSignup";
     };
