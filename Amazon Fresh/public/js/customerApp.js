@@ -1034,8 +1034,9 @@ customerApp.controller('cartController', function($scope, $http) {
         	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
             get_pictures.success(function(data2) {
             	//console.log(data2);
-            	product.imageUrls = "http://localhost:3000/" + data2.urls[0];
-                products.push(product);
+            	if(data2.urls) {
+             		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+             	}                products.push(product);
                 $scope.products = products;
                 //console.log($scope.products);
             });
