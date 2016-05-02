@@ -490,7 +490,10 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 		
 //		$scope.subcategories.category_id = $routeParams.category_id;
 	});
-	
+	$scope.go_to_search = function(){
+		//alert($scope.search);
+		window.location="/customer/"+$scope.search;
+	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);
@@ -541,6 +544,10 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 customerApp.controller('product_sub_categoryController', function($scope, $http, $routeParams) {
 	//alert($routeParams.category_id);
 	//alert($routeParams.sub_category_id);
+	$scope.go_to_search = function(){
+		//alert($scope.search);
+		window.location="/customer/"+$scope.search;
+	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
 	//	console.log(data);
@@ -611,7 +618,10 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 });
 
 customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
-	
+	$scope.go_to_search = function(){
+		//alert($scope.search);
+		window.location="/customer/"+$scope.search;
+	};
 	$scope.createReview = function(){
 		console.log({
 	        	"product_id" : $routeParams.product_id,
