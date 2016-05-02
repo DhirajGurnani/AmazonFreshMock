@@ -1,0 +1,74 @@
+<div id="wrapper" class="row ng-scope">
+	  <style>
+		#panel {background-color:#f2f2f2; margin-top:100px; margin-bottom:75px; padding-left:40px; padding-bottom:70px}
+	  	.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+	  </style>
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
+			<div class="container-fluid" style="color:white">
+               <a href=""><img ng-src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
+			</div>
+		</nav>
+		<br/><br/><br/>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="row">
+					</div>
+				
+					<br/>
+			
+			</div>
+		</div>
+		<br>
+		<br>
+<div class="row">
+    <div class="col-sm-1" ></div>
+    <div class="col-sm-10" style="background-color:lavenderblush;"><br>
+    <h2><strong>Products by Farmer:</strong></h2>
+    <div style="margin-left:20px;">
+    <div class="row">
+    <div ng-repeat="product in products">
+    <div class="col-sm-4">
+					<div class="panel-body">
+						<img ng-src="{{product.imageUrls}}" height="150" width="150"><br/>
+						<strong>$ {{product.price}}</strong><br/>
+						<p>{{product.product_name}}</p><br/><br/><br/>
+					</div>
+				</div>
+</div>
+</div>
+ </div>
+    </div>
+    <div class="col-sm-1" ></div>
+  </div>		
+<br/><br>
+<br>
+		<div class="row">
+			<div class="panel-body" style="background-color:#333333;padding-left:40px">
+				<div class="row">
+					<div class="col-sm-2" style="color:white">Help<br>Conditions of use<br>Privacy Policy</div>
+					<div class="col-sm-10" style="color:white"> About<br>Carriers</div>
+				</div>
+				<div style="color:white">
+				<br/> &copy 2007-2016 AmazonFresh, LLC or its affiliates   All items sold by and ship from AmazonFresh unless otherwise specified.<br/><br/>
+				</div>
+			</div>
+</div>
+		</div>

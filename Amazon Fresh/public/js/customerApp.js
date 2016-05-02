@@ -45,6 +45,9 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/farmer/:puid', {
                 templateUrl: 'amazon_customer_farmer_view.html',
                 controller: 'customer_farmer_viewController'
+            }).when('/farmer/product/:puid', {
+                templateUrl: 'amazon_customer_view_products_by_farmer.html',
+                controller: 'customer_product_view_by_farmerController'
             }).when('/customer_order_confirmation', {
                 templateUrl: 'amazon_order_confirmation.html',
                 controller: 'customer_order_confirmationController'
@@ -1128,3 +1131,40 @@ customerApp.controller('amazon_edit_customer_profileController', function($scope
         $scope.Editdboff = false;
     };
 });
+customerApp.controller('customer_product_view_by_farmerController', function($scope, $http, $location,  $routeParams) {
+	//var sessioninfo = $http.get('/api/getsessioninfo');
+	alert($routeParams.puid);
+    //sessioninfo.success(function(data){
+    	//data.profile[0].puid
+    $http({
+        method: 'POST',
+        url: '/api/product/farmer/getProductByFarmerId',
+        data:{
+        	"farmer_id":$routeParams.puid
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+        console.log(data.product);
+        $scope.product = data.product;
+        
+var products = [];
+        
+        data.product.forEach(function(product) {
+        	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+            get_pictures.success(function(data2) {
+            	//console.log(data2);
+            	if(data2.urls) {
+            		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+            	}
+                products.push(product);
+                $scope.products = products;
+                //console.log($scope.products);
+            });
+        });
+    }).error(function(data) {
+        console.log("failure");
+    });
+    });
+//    });
