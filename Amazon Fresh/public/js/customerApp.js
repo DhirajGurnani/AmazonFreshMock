@@ -979,6 +979,33 @@ customerApp.controller('checkoutController', function($scope, $http) {
     	window.location = "/cart";
     };
     $scope.go_to_orders = function(){
+    	sessioninfo.success(function(data){
+    		$http({
+                method: 'POST',
+                url: 'api/billing/create',
+                data: {
+                	"customer_id": data.profile[0].puid,
+                	"address": data.profile[0].address,
+                	"location": data.profile[0].location,
+                	"state": data.profile[0].state,
+                	"zipcode": data.profile[0].zipcode,
+                	"phone": data.profile[0].phone,
+                	"total_price": data.total_price,
+                	"delivery_date": data.shipping.delivery_date,
+                	"delivery_id": data.shipping.delivery_id,
+                	"products":data.products
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).success(function(data) {
+                window.location = "/doLogin";
+            }).error(function(data) {
+                console.log("failure");
+                console.log(data);
+            });
+    	});
+    	
     	window.location = "/customer_order_confirmation";
     };
     $scope.logout_from_account = function() {
