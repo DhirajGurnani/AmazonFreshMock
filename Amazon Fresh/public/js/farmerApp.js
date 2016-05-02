@@ -17,6 +17,9 @@ farmerApp.config(['$routeProvider', '$locationProvider',
         }).when('/farmer_edit_profile', {
             templateUrl: 'amazon_farmer_edit_profile.html',
             controller: 'amazon_edit_farmer_profileController'
+        }).when('/view_products_by_farmer', {
+            templateUrl: 'amazon_product_by_farmer.html',
+            controller: 'product_by_farmerController'
         });
         $locationProvider.html5Mode(true);
     }
@@ -87,7 +90,42 @@ farmerApp.controller('amazon_edit_farmer_profileController', function($scope, $h
         $scope.Editdboff = false;
     };
 });
-
+farmerApp.controller('product_by_farmerController', function($scope, $http, $location) {
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data){
+    	//data.profile[0].puid
+    $http({
+        method: 'POST',
+        url: '/api/product/farmer/getProductByFarmerId',
+        data:{
+        	"farmer_id":data.profile[0].puid
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+        console.log(data.product);
+        $scope.product = data.product;
+        
+var products = [];
+        
+        data.product.forEach(function(product) {
+        	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+            get_pictures.success(function(data2) {
+            	//console.log(data2);
+            	if(data2.urls) {
+            		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+            	}
+                products.push(product);
+                $scope.products = products;
+                //console.log($scope.products);
+            });
+        });
+    }).error(function(data) {
+        console.log("failure");
+    });
+    });
+    });
 farmerApp.controller('farmer_directionController', function($scope, $http, $location) {
 
     $scope.logout_from_farmer_account= function(){
@@ -109,6 +147,9 @@ farmerApp.controller('farmer_directionController', function($scope, $http, $loca
     }
     $scope.go_to_viewproduct = function() {
         window.location = "/view_profile_farmer";
+    }
+    $scope.go_to_viewproducts = function() {
+        window.location = "/view_products_by_farmer";
     }
     
     $scope.go_to_updateprofile = function() {
