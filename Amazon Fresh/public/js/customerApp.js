@@ -470,9 +470,7 @@ customerApp.controller('customer_order_confirmationController', function($scope,
     		$scope.order_price = parseInt(0);
             $scope.products = data.products;
             $scope.delivery_date = data.shipping.delivery_date;
-            for(var i=0;i<data.products.length;i++){
-            	$scope.order_price = $scope.order_price + parseInt(data.products[i].price)*parseInt(data.products[i].quantity);
-            }
+            $scope.order_price = data.total_price;
         });
     	$http.get('/api/clearSessionData');
     };
@@ -780,7 +778,6 @@ customerApp.controller('productController', function($scope, $http, $routeParams
     	var get_product_response = $http.get('/api/product/'+$routeParams.product_id);
     	get_product_response.success(function(data){
     		console.log(data);
-    		alert($scope.prod_Quantity);
     		$scope.product_name = data.product[0].product_name;
     		$scope.product_price = data.product[0].price;
     		$scope.product_description = data.product[0].description;
@@ -798,8 +795,8 @@ customerApp.controller('productController', function($scope, $http, $routeParams
                   'Content-Type': 'application/json'
               }
           }).success(function(data) {
-        	  alert("successful_insertion");
-              //window.location = "/doLogin";
+        	  $scope.cart = true;
+        	  $scope.message = "Succesfully Added to Cart";
           }).error(function(data) {
               console.log("failure");
               console.log(data);
@@ -1092,11 +1089,8 @@ customerApp.controller('cartController', function($scope, $http) {
     	console.log($scope.product_total_bill_amount);
     	if($scope.product_total_bill_amount !== undefined) {
     		$http({
-                method: 'POST',
-                url: 'api/addTotalPrize',
-                data: {
-                	"total_price": $scope.product_total_bill_amount
-                },
+                method: 'GET',
+                url: '/api/computeTotalPrice',
                 headers: {
                     'Content-Type': 'application/json'
                 }
