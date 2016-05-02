@@ -50,8 +50,7 @@ exports.createNewBill = function(request, response) {
 										  path: '/maps/api/geocode/json?address=' + 
 									  		encodeURIComponent(profile[0].address.trim()) +
 									  		encodeURIComponent(profile[0].location.trim()) +
-									  		encodeURIComponent(profile[0].state.trim()) +
-									  		'&key=AIzaSyAedFlNKrewiALWjKTQfNHB6Y7yjRbDaoU'
+									  		encodeURIComponent(profile[0].state.trim())
 										};
 										console.log(options.path);
 										https.get(options, function(res) {

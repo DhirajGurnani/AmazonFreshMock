@@ -139,8 +139,7 @@ app.post('/api/convertToLatLng', function(request, response) {
             encodeURIComponent(request.body.address.trim()) +
             encodeURIComponent(request.body.location.trim()) +
             encodeURIComponent(request.body.state.trim()) +
-            encodeURIComponent(request.body.zipcode.trim()) +
-            '&key=AIzaSyAedFlNKrewiALWjKTQfNHB6Y7yjRbDaoU'
+            encodeURIComponent(request.body.zipcode.trim())
     };
 
     https.get(options, function(res) {
