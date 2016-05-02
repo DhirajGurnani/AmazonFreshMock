@@ -241,6 +241,19 @@ app.post('/api/addTotalPrice',function(request,response){
 	console.log(request.session);
 	response.send(request.session);
 });
+app.get('/api/computeTotalPrice',function(request,response){
+	if(request.session.products){
+	if (request.session.products.length>0){
+		var total_price=6;
+		var count = request.session.products.length;
+		for (var i =0 ; i < count ; i++){
+			total_price = total_price + (request.session.products[i].price * request.session.products[i].quantity);
+		}
+		response.send({"total_price":total_price});
+	}else
+		response.send({"status":400});
+	}
+});
 app.get('/api/addToCart',function(request,response){
 	if (request.session.products=== undefined ){
 		request.session.products = [];
