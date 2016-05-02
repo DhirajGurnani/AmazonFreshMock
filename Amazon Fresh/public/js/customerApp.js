@@ -62,7 +62,7 @@ customerApp.config(['$routeProvider', '$locationProvider',
     }
 ]);
 customerApp.controller('amazon_customer_searchController', function($scope, $http, $routeParams) {
-	alert($routeParams.product_name);
+	//alert($routeParams.product_name);
 	$http({
         method: 'POST',
         url: '/api/product/search/getProductBySearch',
@@ -998,6 +998,10 @@ customerApp.controller('checkoutController', function($scope, $http) {
 });
 
 customerApp.controller('cartController', function($scope, $http) {
+	$scope.go_to_search = function(){
+		//alert($scope.search);
+		window.location="/customer/"+$scope.search;
+	};
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
@@ -1200,7 +1204,7 @@ customerApp.controller('amazon_edit_customer_profileController', function($scope
 });
 customerApp.controller('customer_product_view_by_farmerController', function($scope, $http, $location,  $routeParams) {
 	//var sessioninfo = $http.get('/api/getsessioninfo');
-	alert($routeParams.puid);
+	//alert($routeParams.puid);
     //sessioninfo.success(function(data){
     	//data.profile[0].puid
     $http({
