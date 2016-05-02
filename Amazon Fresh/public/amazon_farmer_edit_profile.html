@@ -42,7 +42,25 @@
 						<div class ="col-sm-9">
 						</div></div>
   
- 					<button ng-click="go_to_update_operation();"  class="btn" style="color:white; background-color:#808080">Continue</button>
+ 					<button ng-click="go_to_update_operation();"  class="btn" style="color:white; background-color:#808080" data-toggle="modal" data-target="#myModal">Continue</button>
+ 					<div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">New Product</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>Congratulations!. Your product is created successfully. It will be visible to the customers
+					          after the admin approves it.</p>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="refreshPage()">Close</button>
+					        </div>
+					      </div>
+					    </div>
+					</div>
    			 	</div>
 			</div>
 		</div>

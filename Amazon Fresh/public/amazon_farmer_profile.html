@@ -38,11 +38,6 @@
       <div class="dropdown col-sm-2" style="margin-left: 35px">
       </div>
       <div class="input-group col-sm-8">
-         <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search"
-            aria-describedby="basic-addon1"> 
-         <span class="input-group-addon btn btn-default" id="basic-addon1" ng-click="" style="background-color: #484848">
-         <span style="color:white; ">Go</span>
-         </span>
       </div>
    </div>
    <br/>
@@ -58,7 +53,6 @@
          <strong>Phone:</strong><br><br>
          <strong>Created at:</strong><br><br>
          <strong>Updated at:</strong><br><br>
-         <input type ="submit" value ="Edit">
       </div>
       <div class="col-sm-2">
          {{first_name}}<br><br>
@@ -77,8 +71,7 @@
          <div class = "row">
       		<div class = "col-sm-6" ng-repeat="imageUrl in imageUrls">
               <div>
-                 <div style="margin-left:92%"><button type="button" class="btn btn-danger" ng-click="remove_image();">
-                    <span class="glyphicon glyphicon-remove"></span></button>
+                 <div style="margin-left:92%">
                  </div>
                  <a href = "#" class = "thumbnail">
                  <img ng-src="{{imageUrl}}" alt = "Generic placeholder thumbnail">
