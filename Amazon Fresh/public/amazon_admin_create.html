@@ -11,9 +11,10 @@
 		<div class="col-sm-1"></div>
 		<div class="col-sm-4" style="margin-left:5px; text-align:left">
 			<h3>Select the billed orders</h3>
-			<div ng-repeat="bill in bills">
-				<input type="checkbox" ng-model="bill.checked" value="{{bill.billing_id}}">{{"Bill Id= "+bill.billing_id+"; Address= "+bill.address+"; Location= "+bill.location}}<br/>
-			</div>
+			<select ng-model="selectedBill">
+				<option value="">Select</option>
+    			<option ng-repeat="bill in bills" value="{{bill.billing_id}}">{{"Bill Id= "+bill.billing_id+"; Address= "+bill.address+"; Location= "+bill.location}}</option>
+			</select> <br />
 		</div>
 		<div class="col-sm-3">
 			<h3>Select the Driver</h3>
@@ -50,9 +51,5 @@
   			</div>
 		</div>
 	</div>
-	<br/><br/>
-	<div align="center">
-		<button class="btn btn-primary" ng-click="loadCustomerDataInMap()">Show Map</button>
-		<div id="googleMap" style="width: 1000px; height: 800px;"></div>
-	</div>
+	<br/><br/><br/><br/>
 </div>

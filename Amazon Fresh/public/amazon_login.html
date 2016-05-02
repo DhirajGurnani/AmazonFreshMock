@@ -17,14 +17,14 @@
          <b>Sign In</b><br />
          <br />
       </h4>
-      E-mail <input type="email" class="form-control" ng-model="email"> <br /> 
-      Password <input type="password" class="form-control" ng-model="password"> 
+      <form name="login">
+         E-mail <input type="email" name="email" class="form-control" ng-model="email" required> <br /> 
+         Password <input type="password" name="password" class="form-control" ng-model="password" required>
+      </form>
       <!--  <span class="pull-right"><a href="" style="color: #4d9900"><u><small>Forgot
-      password?</small></u></a></span>  --><br />
+         password?</small></u></a></span>  --><br />
       <br />
-      <button  class="form-control" ng-click="checklogin();"
-         style="background-color: rgb(204, 255, 153); color: black">Sign
-      In</button>
+      <button  class="form-control" ng-click="checklogin();" style="background-color: rgb(204, 255, 153); color: black">Sign In</button>
       </br>
       <p>
          New Amazon.com customer? <a href ng-click="go_to_signup();"><u>Create a new Amazon
@@ -44,5 +44,9 @@
       <br />
       <br />
    </div>
-   <div class="col-sm-5"></div>
+   <div class="col-sm-5">
+      <br/><br/><br/><br/><br/><br/>
+      <span ng-show="login.email.$touched && login.email.$invalid" style="color:red"><span class="glyphicon glyphicon-remove"></span> Email is required.</span><br/><br/><br/><br/>
+   	  <span ng-show="login.password.$touched && login.password.$invalid" style="color:red"><span class="glyphicon glyphicon-remove"></span> Password is required.</span>
+   </div>
 </div>

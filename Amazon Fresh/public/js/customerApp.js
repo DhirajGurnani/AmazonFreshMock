@@ -214,22 +214,26 @@ customerApp.controller('loginController', function($scope, $http) {
         window.location = "/doSignup";
     };
     $scope.checklogin = function() {
-        $http({
-            method: 'POST',
-            url: 'api/login',
-            data: {
-                "username": $scope.email,
-                "password": $scope.password
-            },
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).success(function(data) {
-            window.location = "/";
-        }).error(function(data) {
-            console.log("failure");
-            console.log(data);
-        });
+    	if($scope.email==undefined || $scope.password==undefined){
+    	}
+    	else{
+	        $http({
+	            method: 'POST',
+	            url: 'api/login',
+	            data: {
+	                "username": $scope.email,
+	                "password": $scope.password
+	            },
+	            headers: {
+	                'Content-Type': 'application/json'
+	            }
+	        }).success(function(data) {
+	            window.location = "/";
+	        }).error(function(data) {
+	            console.log("failure");
+	            console.log(data);
+	        });
+    	}    
     };
     $scope.go_to_homepage = function() {
         window.location = "/home";
