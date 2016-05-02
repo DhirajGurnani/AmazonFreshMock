@@ -54,11 +54,46 @@ customerApp.config(['$routeProvider', '$locationProvider',
             }).when('/customer_edit_profile', {
                 templateUrl: 'amazon_customer_edit_profile.html',
                 controller: 'amazon_edit_customer_profileController'
+            }).when('/customer/:product_name', {
+                templateUrl: 'amazon_customer_search.html',
+                controller: 'amazon_customer_searchController'
             });
         $locationProvider.html5Mode(true);
     }
 ]);
-
+customerApp.controller('amazon_customer_searchController', function($scope, $http, $routeParams) {
+	alert($routeParams.product_name);
+	$http({
+        method: 'POST',
+        url: '/api/product/search/getProductBySearch',
+        data :{
+        	"product_name":$routeParams.product_name
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+    	 $scope.product = data.product;
+         
+    	 var products = [];
+    	         
+    	         data.product.forEach(function(product) {
+    	         	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+    	             get_pictures.success(function(data2) {
+    	             	//console.log(data2);
+    	             	if(data2.urls) {
+    	             		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+    	             	}
+    	                 products.push(product);
+    	                 $scope.products = products;
+    	                 //console.log($scope.products);
+    	             });
+    	         });
+    	    }).error(function(data) {
+        console.log(data);
+    });
+	
+});
 customerApp.controller('mainController', function($scope, $http) {
     $scope.checkForZipCode = function() {
         var zipCodeResponse = $http.get('/api/zipcode/' + $scope.zipcode);
@@ -114,6 +149,10 @@ customerApp.controller('mainController', function($scope, $http) {
 });
 
 customerApp.controller('homeController', function($scope, $http) {
+	$scope.go_to_search = function(){
+		//alert($scope.search);
+		window.location="/customer/"+$scope.search;
+	};
 	var categoryResponse = $http.get('/api/product/category/get');
 	categoryResponse.success(function(categoryData) {
 		$scope.categories = categoryData.category;
