@@ -249,6 +249,7 @@ app.get('/api/computeTotalPrice',function(request,response){
 		for (var i =0 ; i < count ; i++){
 			total_price = total_price + (request.session.products[i].price * request.session.products[i].quantity);
 		}
+		request.session.total_price = total_price;
 		response.send({"total_price":total_price});
 	}else
 		response.send({"status":400});
