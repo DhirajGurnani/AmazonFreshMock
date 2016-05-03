@@ -13,7 +13,7 @@
 			<h3>Select the billed orders</h3>
 			<select ng-model="selectedBill">
 				<option value="">Select</option>
-    			<option ng-repeat="bill in bills" value="{{bill.billing_id}}">{{"Bill Id= "+bill.billing_id+"; Address= "+bill.address+"; Location= "+bill.location}}</option>
+    			<option ng-repeat="bill in bills" value="{{bill.billing_id}}">{{"Bill Id= "+bill.billing_id+"; Location= "+bill.location+"; Address= "+bill.address}}</option>
 			</select> <br />
 		</div>
 		<div class="col-sm-3">
@@ -33,8 +33,8 @@
 	</div>
 	<br/><br/><br/>
 	<div class="row" style="text-align:center">
-		<button type="button" class="btn btn-primary btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="tripCreate()">Submit</button>
-		<div id="myModal" class="modal fade" role="dialog">
+		<button type="button" class="btn btn-primary btn-info btn-lg" data-toggle="modal" data-target="#myModal">Submit</button>
+		<div id="myModal" class="modal fade" role="dialog" style="text-align:left">
   			<div class="modal-dialog">
     			<div class="modal-content">
       				<div class="modal-header">
@@ -45,7 +45,7 @@
         				<p>Trip Created Successfully</p>
       				</div>
      				 <div class="modal-footer">
-       					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       					 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="tripCreate()" style="background-color:#99cc00">Close</button>
       				</div>
     			</div>
   			</div>

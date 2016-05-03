@@ -437,6 +437,7 @@ adminApp.controller('approveFarmerController', function($scope, $http) {
 			else {				
 			}
 		});
+	}
 		$scope.doLogout = function(){
 			$http({
 	            method: 'POST',
@@ -451,7 +452,6 @@ adminApp.controller('approveFarmerController', function($scope, $http) {
 	            console.log(data);
 	        });
 		};
-	}
 });
 
 adminApp.controller('approveProductController', function($scope, $http) {

@@ -29,7 +29,7 @@
 				<span>{{pTrips.truck_id}}</span>
 			</div>
 			<div class="col-sm-3">
-				<button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#myModal" ng-click="tripDelete(pTrips.trip_id)">Cancel</button>
+				<button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#myModal">Cancel</button>
 				<div id="myModal" class="modal fade" role="dialog">
 		  			<div class="modal-dialog">
 		    			<div class="modal-content">
@@ -41,7 +41,7 @@
 		        				<p>Trip Deleted Successfully</p>
 		      				</div>
 		     				 <div class="modal-footer">
-		       					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		       					 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="tripDelete(pTrips.trip_id)" style="background-color:#99cc00">Close</button>
 		      				</div>
 		    			</div>
 		  			</div>

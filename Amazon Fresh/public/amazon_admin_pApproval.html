@@ -56,8 +56,8 @@
 				<span>{{product.puid}}</span>
 			</div>
 			<div class="col-sm-2" style="margin-right: 10px">
-				<button type="button" class="btn btn-primary btn-info" ng-click="pApprove(product.product_id,new_price)">Approve</button>
-				<div id="myModal" class="modal fade" role="dialog">
+				<button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#myModal_1">Approve</button>
+				<div id="myModal_1" class="modal fade" role="dialog">
 		  			<div class="modal-dialog">
 		    			<div class="modal-content">
 		      				<div class="modal-header">
@@ -68,7 +68,7 @@
 		        				<p>Product Approved Successfully</p>
 		      				</div>
 		     				 <div class="modal-footer">
-		       					 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		       					 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="pApprove(product.product_id,new_price)" style="background-color:#99cc00">Close</button>
 		      				</div>
 		    			</div>
 		  			</div>
