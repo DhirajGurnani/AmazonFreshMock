@@ -21,11 +21,48 @@
          E-mail <input type="email" name="email" class="form-control" ng-model="email" required> <br /> 
          Password <input type="password" name="password" class="form-control" ng-model="password" required>
       </form>
-      <!--  <span class="pull-right"><a href="" style="color: #4d9900"><u><small>Forgot
-         password?</small></u></a></span>  --><br />
+      <br />
       <br />
       <button  class="form-control" ng-click="checklogin();" style="background-color: rgb(204, 255, 153); color: black">Sign In</button>
       </br>
+      <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Login Failure</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Authentication failure: Please check your credentials. <br/>Server returned message:  {{errmsg}}</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  <div class="modal fade" id="myModal_1" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Information Missing</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Please fill all the information</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" style="background-color:#99cc00" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
       <p>
          New Amazon.com customer? <a href ng-click="go_to_signup();"><u>Create a new Amazon
          account</u></a>

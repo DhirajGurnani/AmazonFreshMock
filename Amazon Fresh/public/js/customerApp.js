@@ -193,7 +193,9 @@ customerApp.controller('homeController', function($scope, $http) {
 		if($scope.search != undefined){
 			window.location="/customer/"+$scope.search;
 		}
-		//alert($scope.search);
+		else{
+			$("#myModal_1").modal();
+		}
 	};
 	var categoryResponse = $http.get('/api/product/category/get');
 	categoryResponse.success(function(categoryData) {
@@ -296,6 +298,7 @@ customerApp.controller('loginController', function($scope, $http) {
     };
     $scope.checklogin = function() {
     	if($scope.email==undefined || $scope.password==undefined){
+    		$("#myModal_1").modal();
     	}
     	else{
 	        $http({
@@ -309,7 +312,14 @@ customerApp.controller('loginController', function($scope, $http) {
 	                'Content-Type': 'application/json'
 	            }
 	        }).success(function(data) {
-	            window.location = "/";
+	        	if(data.status == 401){
+	        		$scope.errmsg = data.errmsg;
+	        		$("#myModal").modal();
+	        	}
+	        	else{
+	        		window.location = "/";
+	        	}
+	            
 	        }).error(function(data) {
 	            console.log("failure");
 	            console.log(data);
@@ -338,8 +348,7 @@ customerApp.controller('signupController', function($scope, $http) {
 		var phone = $scope.phone;
 		var role = $scope.role;
 		var password = $scope.password;
-		console.log($scope.password);
-	//	alert($scope.password);	
+		console.log($scope.password);	
 		if($scope.firstname == undefined ||
 				$scope.lastname == undefined ||
 				$scope.email == undefined ||
@@ -351,11 +360,9 @@ customerApp.controller('signupController', function($scope, $http) {
 				$scope.phone == undefined ||
 				$scope.role == undefined ||
 				$scope.password == undefined ){
-		
-//	alert("Error");
+			$("#myModal_1").modal();
 		} else{
 
-	//		alert("aaya");
 			$http({
 				method : 'POST',
 				url : 'api/validEmail',
@@ -369,16 +376,11 @@ customerApp.controller('signupController', function($scope, $http) {
 				}
 		
 		}).success(function(data) {
-		//	console.log("success");
-			//alert(data + "success");
-			//console.log(data);
-//			alert(data);
-			//window.location = "/";
+			
 			if(data==true){
-				alert("user already exist");
+				$("#myModal").modal();
+				$scope.errmsg = "user already exist";
 			} else {
-		
-		//	alert("gaya");
 		
 		$http({
 			method : 'POST',
@@ -401,12 +403,9 @@ customerApp.controller('signupController', function($scope, $http) {
 				'Content-Type' : 'application/json'
 			}
 		}).success(function(data) {
-	//		console.log("success");
-		//	console.log(data + "success");
-//			alert(data);
+
 			window.location = "/doLogin";
-			
-			
+						
 		}).error(function(data) {
 			console.log("failure");
 			console.log(data);
@@ -534,7 +533,9 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 		if($scope.search != undefined){
 			window.location="/customer/"+$scope.search;
 		}
-		//alert($scope.search);
+		else {
+			$("#myModal_1").modal();
+		}
 	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
@@ -590,7 +591,9 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 		if($scope.search !=undefined){
 			window.location="/customer/"+$scope.search;
 		}
-		//alert($scope.search);
+		else{
+			$("#myModal_1").modal();
+		}
 	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
@@ -667,9 +670,8 @@ customerApp.controller('productController', function($scope, $http, $routeParams
 			window.location="/customer/"+$scope.search;
 		}
 		else{
-			window.loacation("")
+			$("#myModal_1").modal();
 		}
-		//alert($scope.search);
 	};
 	$scope.createReview = function(){
 		console.log({
@@ -1077,7 +1079,9 @@ customerApp.controller('cartController', function($scope, $http) {
 		if($scope.search != undefined){
 			window.location="/customer/"+$scope.search;
 		}
-		//alert($scope.search);
+		else{
+			$("#myModal_1").modal();
+		}
 	};
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {

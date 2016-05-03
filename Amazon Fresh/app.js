@@ -171,7 +171,10 @@ app.post('/api/login', function(req, res, next) {
 	    }
 
 	    if(!user) {
-	      return res.redirect('/');
+	      res.send({
+	    	  "status" :401,
+	    	  "errmsg" : "Unauthorized"
+	      });
 	    }
 
 	    req.logIn(user, {session:false}, function(err) {

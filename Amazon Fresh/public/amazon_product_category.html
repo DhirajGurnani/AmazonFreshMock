@@ -50,17 +50,12 @@
          </ul>
       </div>
       <div class="input-group col-sm-6">
-      	<form name="find">
-        	<div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search AmazonFresh" name="search" ng-model="search" aria-describedby="basic-addon1" style="height:50px" required>
-                  <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
-                  <button type="button" class="btn btn-default" style="color:white;background-color:#484848" ng-click="go_to_search();">Go</button>
-                  </span>
-         	</div>
-      	</form>
-      </div>
-      <div style="text-align:center">
-            <span ng-show="find.search.$touched && find.search.$invalid" style="color:red"><span class="glyphicon glyphicon-remove"></span> Search Parameter is required.</span>
+       	<div class="input-group">
+             <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
+             <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
+             <button type="button" class="btn btn-default" style="color:white;background-color:#484848" ng-click="go_to_search();">Go</button>
+             </span>
+    	</div>
       </div>
    </div>
    <div class="row">
@@ -94,6 +89,25 @@
       </div>
       <br/>
    </div>
+   <div class="modal fade" id="myModal_1" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Information Missing</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Please enter the search item</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" style="background-color:#99cc00" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
    <div class="row">
       <div class="panel-body" style="background-color:#333333;padding-left:40px">
          <div class="row">

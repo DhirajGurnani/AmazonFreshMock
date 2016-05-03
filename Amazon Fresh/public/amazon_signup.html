@@ -52,6 +52,44 @@
          		<span ng-show="signup.role.$touched && signup.role.$invalid" style="color:red"><span class="glyphicon glyphicon-remove"></span> Role is required.</span><br/><br/><br/>
          	</div>
          </div>
+         <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Signup Failure</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>SignUp failure: Server returned message: <br> <h4><mark>{{errmsg}}</mark></h4></p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  <div class="modal fade" id="myModal_1" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Information Missing</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Please fill all the information</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" style="background-color:#99cc00" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
       </div>
    </div>
    <div class="row">
