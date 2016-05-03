@@ -21,11 +21,40 @@
     display: block;
 }
 	  </style>
-		<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#484848; padding:10px">
-			<div class="container-fluid" style="color:white">
-               <a href=""><img ng-src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png" alt="Amazon logo"> </a>
-			</div>
-		</nav>
+		<nav class="navbar navbar-default navbar-fixed-top"
+      style="background-color: #484848; padding: 4px">
+      <div class="container-fluid" style="color: white">
+         <a href="" ng-click="go_to_homepage()"><img
+            src="https://images-na.ssl-images-amazon.com/images/G/01/omaha/images/ui/af-logo-white-trans3._CB377124652_.png"
+            alt="Amazon logo"> </a> <span ng-hide="loggedIn">Already an
+         AmazonFresh customer? <a href="#" ng-click="go_to_loginpage()"
+            style="color: white"><u>Sign in</u></a>
+         </span>
+         <ul class="nav navbar-nav pull-right">
+            <li class="nav-item">
+               <a class="dropdown-toggle" href="#"
+                  ng-hide="loggedOff" data-toggle="dropdown"
+                  style="background-color: #484848; color: white">Hi,
+               {{username}} <span class="caret"></span>
+               </a>
+               <ul class="dropdown-menu" style="background-color: #484848;">
+                  <li><a href="#" ng-click="go_to_customer_profile()"
+                     style="background-color: #484848; color: white">Profile</a></li>
+                  <br />
+                  <li><a href="#" ng-click="go_to_customer_orders()"
+                     style="background-color: #484848; color: white">Orders</a></li>
+                  <br />
+                  <li><a href="#" ng-click="logout_from_account()"
+                     style="background-color: #484848; color: white">Sign Out</a></li>
+                  <br />
+               </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#" ng-click="go_to_cart()"
+               style="color: white"><span
+               class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+         </ul>
+      </div>
+   </nav>
 		<br/><br/><br/>
 		<div class="row">
 			<div class="col-sm-9">

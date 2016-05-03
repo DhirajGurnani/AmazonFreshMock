@@ -57,12 +57,17 @@
                </div>
             </div>
             <div class="col-sm-6">
-               <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search AmazonFresh" ng-model="search" aria-describedby="basic-addon1" style="height:50px">
-                  <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
-                  <button type="button" class="btn btn-default" style="color:white;background-color:#484848" ng-click="go_to_search();">Go</button>
-                  </span>
-               </div>
+            	<form name="find">
+	               <div class="input-group">
+	                  <input type="text" class="form-control" placeholder="Search AmazonFresh" name="search" ng-model="search" aria-describedby="basic-addon1" style="height:50px" required>
+	                  <span class="input-group-addon" id="basic-addon1" style="background-color:#484848">
+	                  <button type="button" class="btn btn-default" style="color:white;background-color:#484848" ng-click="go_to_search();">Go</button>
+	                  </span>
+	               </div>
+               </form>
+            </div>
+            <div style="text-align:center">
+            	<br/><span ng-show="find.search.$touched && find.search.$invalid" style="color:red"><span class="glyphicon glyphicon-remove"></span> Search Parameter is required.</span>
             </div>
          </div>
          <br/>

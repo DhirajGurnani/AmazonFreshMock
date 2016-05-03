@@ -93,6 +93,46 @@ customerApp.controller('amazon_customer_searchController', function($scope, $htt
         console.log(data);
     });
 	
+	var sessioninfo = $http.get('/api/getsessioninfo');
+    sessioninfo.success(function(data) {
+        if (data.profile) {
+            $scope.loggedIn = true;
+            $scope.loggedOff = false;
+            $scope.username = data.profile[0].first_name;
+        } else {
+            $scope.loggedIn = false;
+            $scope.loggedOff = true;
+        }
+    });
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
+    $scope.go_to_loginpage = function() {
+        window.location = "/doLogin";
+    };
+    $scope.go_to_customer_profile = function() {
+        window.location = "/customer_profile";
+    };
+    $scope.go_to_customer_orders = function(){
+    	window.location = "/customer_orders"
+    };
+    $scope.go_to_cart = function(){
+    	window.location = "/cart"
+    };
+    $scope.logout_from_account = function() {
+        $http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log(data);
+        });
+    };
+	
 });
 customerApp.controller('mainController', function($scope, $http) {
     $scope.checkForZipCode = function() {
@@ -150,8 +190,10 @@ customerApp.controller('mainController', function($scope, $http) {
 
 customerApp.controller('homeController', function($scope, $http) {
 	$scope.go_to_search = function(){
+		if($scope.search != undefined){
+			window.location="/customer/"+$scope.search;
+		}
 		//alert($scope.search);
-		window.location="/customer/"+$scope.search;
 	};
 	var categoryResponse = $http.get('/api/product/category/get');
 	categoryResponse.success(function(categoryData) {
@@ -489,8 +531,10 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 //		$scope.subcategories.category_id = $routeParams.category_id;
 	});
 	$scope.go_to_search = function(){
+		if($scope.search != undefined){
+			window.location="/customer/"+$scope.search;
+		}
 		//alert($scope.search);
-		window.location="/customer/"+$scope.search;
 	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
@@ -543,8 +587,10 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 	//alert($routeParams.category_id);
 	//alert($routeParams.sub_category_id);
 	$scope.go_to_search = function(){
+		if($scope.search !=undefined){
+			window.location="/customer/"+$scope.search;
+		}
 		//alert($scope.search);
-		window.location="/customer/"+$scope.search;
 	};
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
@@ -617,8 +663,13 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 
 customerApp.controller('productController', function($scope, $http, $routeParams, $location) {
 	$scope.go_to_search = function(){
+		if($scope.search != undefined){
+			window.location="/customer/"+$scope.search;
+		}
+		else{
+			window.loacation("")
+		}
 		//alert($scope.search);
-		window.location="/customer/"+$scope.search;
 	};
 	$scope.createReview = function(){
 		console.log({
@@ -1023,8 +1074,10 @@ customerApp.controller('checkoutController', function($scope, $http) {
 
 customerApp.controller('cartController', function($scope, $http) {
 	$scope.go_to_search = function(){
+		if($scope.search != undefined){
+			window.location="/customer/"+$scope.search;
+		}
 		//alert($scope.search);
-		window.location="/customer/"+$scope.search;
 	};
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
