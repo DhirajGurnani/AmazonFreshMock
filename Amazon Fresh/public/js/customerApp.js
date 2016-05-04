@@ -1232,6 +1232,10 @@ customerApp.controller('customer_farmer_viewController', function($scope, $http,
 
 customerApp.controller('amazon_edit_customer_profileController', function($scope, $http) {
 	//console.log("aaya");
+
+    $scope.go_to_homepage = function() {
+        window.location = "/home";
+    };
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data) {
         if (data.profile) {
