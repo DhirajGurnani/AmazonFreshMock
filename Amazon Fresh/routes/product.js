@@ -508,9 +508,12 @@ exports.getProductsByCAtegoryIdAndSubCategoryId = function(request, response) {
 	try {
 		if(true) {
 			if(true) {
+				// value got from  api///product/:category_id/:subcategory_id:
 				var subcategory_id = request.params.subcategory_id;
-				var category_id = request.params.category_id;  // value got from  api///product/:category_id/:subcategory_id:
-				var sqlQuery = sqlQueryList.getQueryForProductsByCategoryAndSubCategoryId(category_id,subcategory_id);
+				var category_id = request.params.category_id;
+				var limit1 = request.query.limit1;
+				var limit2 = request.query.limit2;
+				var sqlQuery = sqlQueryList.getQueryForProductsByCategoryAndSubCategoryId(category_id, subcategory_id, limit1, limit2);
 				dbHelper.executeQuery(
 						sqlQuery, 
 						function(rows) {

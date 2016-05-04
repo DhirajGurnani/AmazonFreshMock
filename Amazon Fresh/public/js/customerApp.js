@@ -589,8 +589,6 @@ customerApp.controller('product_categoryController', function($scope, $http, $ro
 });
 
 customerApp.controller('product_sub_categoryController', function($scope, $http, $routeParams) {
-	//alert($routeParams.category_id);
-	//alert($routeParams.sub_category_id);
 	$scope.go_to_search = function(){
 		if($scope.search !=undefined){
 			window.location="/customer/"+$scope.search;
@@ -599,12 +597,41 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
 			$("#myModal_1").modal();
 		}
 	};
+
 	var category_info = $http.get('/api/product/category/get');
 	category_info.success(function(data){
-	//	console.log(data);
 		$scope.categories = data.category;
 	});
-	var product_get_info = $http.get('/api/product/category/'+$routeParams.category_id+'/subcategory/'+$routeParams.sub_category_id);
+
+	$scope.getProductsRange=  function(limit1, limit2) {
+		var product_get_info = $http.get('/api/product/category/'
+				+$routeParams.category_id+'/subcategory/'
+				+$routeParams.sub_category_id + '?limit1=' + limit1 + '&limit2=' + limit2);
+		product_get_info.success(function(data){
+			console.log(data.products);
+			$scope.products = data.products;
+	        var products = [];
+	        
+	        data.products.forEach(function(product) {
+	        	var get_pictures = $http.get('/api/products/' + product.product_id + '/images');
+	            get_pictures.success(function(data2) {
+	            	console.log(data2);
+	            	if(data2.status == 200) {
+	            		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
+	                    products.push(product);
+	                    console.log(products);
+	                    $scope.products = products;
+	            	}
+	                //console.log($scope.products);
+	            });
+	        });
+		//	$scope.categories = data.category;
+		});
+	};
+
+	var product_get_info = $http.get('/api/product/category/'
+			+$routeParams.category_id+'/subcategory/'
+			+$routeParams.sub_category_id + "?limit1=0&limit2=50");
 	product_get_info.success(function(data){
 		console.log(data.products);
 		$scope.products = data.products;
@@ -623,7 +650,6 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
                 //console.log($scope.products);
             });
         });
-		
 	//	$scope.categories = data.category;
 	});
 	

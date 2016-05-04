@@ -212,8 +212,8 @@ exports.getQueryForProductBySubcategoryId = function(subcategory_id) {
 	return "select * from Products where subcategory_id = '" + subcategory_id + "' and status = 'approved'";
 };
 
-exports.getQueryForProductsByCategoryAndSubCategoryId = function(category_id, subcategory_id) {
-	return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "' and status = 'approved'";
+exports.getQueryForProductsByCategoryAndSubCategoryId = function(category_id, subcategory_id, limit1, limit2) {
+	return "select * from Products where category_id = '" + category_id + "' and subcategory_id = '" + subcategory_id + "' and status = 'approved' LIMIT " + limit1 + ", " + limit2;
 };
 
 exports.deletecustomer = function(puid) {
