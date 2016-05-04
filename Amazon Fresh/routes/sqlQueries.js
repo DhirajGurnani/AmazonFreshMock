@@ -26,7 +26,7 @@ exports.sqllocationStats = function(tripId){
 };
 
 exports.sqlGetBills = function(){
-	return "SELECT * FROM amazondb.Billing order by billing_id desc;"
+	return "SELECT * FROM amazondb.Billing order by billing_id desc limit 30;"
 };
 
 exports.sqlValidEmail = function(email){
