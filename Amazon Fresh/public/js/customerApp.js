@@ -335,6 +335,7 @@ customerApp.controller('signupController', function($scope, $http) {
     $scope.go_to_loginpage = function() {
         window.location = "/doLogin";
     };
+    
     $scope.go_to_signup_operation = function() {
  
     	var firstname= $scope.firstname;

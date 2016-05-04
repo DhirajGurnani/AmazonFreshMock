@@ -23,17 +23,17 @@
 		            <input type="date" placeholder="Birthday" name="birthday" ng-model="birthday" size="30" style="padding:5px" required><br/></br>
 		            <input type="text" placeholder="address" name="address" ng-model="address" size="30" style="padding:5px" required><br/><br/>
 		            <input type="text" placeholder="location" name="location" ng-model="location" size="30" style="padding:5px" required><br/><br/>
-		            <input type="text" placeholder="state" name="state" ng-model="state" size="30" style="padding:5px" required><br/><br/>
-		            <input type="text" placeholder="zipcode" name="zipcode" ng-model="zipcode" size="30" style="padding:5px" required><br/><br/>
-		            <input type="number" placeholder="phone" name="phone" ng-model="phone" size="30" style="padding:5px" required><br/><br/>
-		            <input type="number" placeholder="SSN" name="ssn" ng-model="ssn" size="30" style="padding:5px" required><br/><br/>
+		            <input type="text" placeholder="state" name="state" ng-model="state" maxlength="10" style="padding:5px" required><br/><br/>
+		            <input type="number" placeholder="zipcode" name="zipcode" ng-model="zipcode" onKeyDown="if(this.value.length==5 && event.keyCode!=8) return false;" style="padding:5px" required><br/><br/>
+		            <input type="number" placeholder="phone" name="phone" ng-model="phone" onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;" style="padding:5px" required><br/><br/>
+		            <input type="number" pattern="\d{3}-?\d{2}-?\d{4}" placeholder="SSN" name="ssn" ng-model="ssn" onKeyDown="if(this.value.length==9 && event.keyCode!=8) return false;" style="padding:5px" required><br/><br/>
 		            <label>Role:</label>		
 		            <select name="role" ng-model="role">
 		               <option value="customer" selected>Customer</option>
 		               <option value="farmer">Farmer</option>
 		            </select>
 	            </form>
-	            <br><br>
+	            <br/><br/>
 	            <button ng-click="go_to_signup_operation();"  class="btn" style="color:white; background-color:#808080">Continue</button>
          	</div>
          	<div class="col-sm-3">
@@ -87,7 +87,6 @@
 	          <button type="button" class="btn btn-default" style="background-color:#99cc00" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>
-	      
 	    </div>
 	  </div>
       </div>
