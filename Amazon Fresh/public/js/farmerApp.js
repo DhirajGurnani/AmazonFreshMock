@@ -91,6 +91,21 @@ farmerApp.controller('amazon_edit_farmer_profileController', function($scope, $h
     };
 });
 farmerApp.controller('product_by_farmerController', function($scope, $http, $location) {
+
+    $scope.logout_from_farmer_account= function(){
+    	  //  	alert("aaya");
+    	        $http({
+    	            method: 'POST',
+    	            url: 'api/logout',
+    	            headers: {
+    	                'Content-Type': 'application/json'
+    	            }
+    	        }).success(function(data) {
+    	            window.location = "/doLogin";
+    	        }).error(function(data) {
+    	            console.log("failure");
+    	        });
+    	    };
 	var sessioninfo = $http.get('/api/getsessioninfo');
     sessioninfo.success(function(data){
     	//data.profile[0].puid
