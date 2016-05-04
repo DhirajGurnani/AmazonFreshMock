@@ -84,7 +84,7 @@ exports.sqlGetBills=function(){
 exports.getAllPendingTrips=function(){
 	return "select * from Trips LEFT JOIN Drivers on Drivers.driver_id=Trips.driver_id where Drivers.status = 'in_delivery';"
 };
-exports.sqlQueryRegister=function(puid,first_name,last_name,birthday,address,location,state,zipcode,ssn,phone,role,status){
+exports.sqlQueryRegister=function(puid,first_name,last_name,birthday,address,location,state,zipcode,phone,ssn,role,status){
 	
 	return "insert into User_profiles (puid,status,last_name,birthday,address,location,state,zipcode,phone,ssn,role,first_name) VALUES ('" +
 			+puid+"','"
