@@ -617,6 +617,7 @@ customerApp.controller('product_sub_categoryController', function($scope, $http,
             	if(data2.status == 200) {
             		product.imageUrls = "http://localhost:3000/" + data2.urls[0];
                     products.push(product);
+                    console.log(products);
                     $scope.products = products;
             	}
                 //console.log($scope.products);

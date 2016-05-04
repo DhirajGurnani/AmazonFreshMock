@@ -181,11 +181,11 @@ farmerApp.controller('mainController', function($scope, $http, $location) {
             get_pictures.success(function(data) {
                 var imageUrls = [];
                 for (i = 0; i < data.urls.length; i++) {
-                    imageUrls[i] = $location.$$absUrl + data.urls[i];
+                    imageUrls[i] = "http://localhost:3000/" + data.urls[i];
                 }
                 $scope.imageUrls = imageUrls;
             });
-            $scope.videoUrls = $location.$$absUrl + 'api/farmers/' + puid + '/video';
+            $scope.videoUrls = "http://localhost:3000/" + 'api/farmers/' + puid + '/video';
         }
     });
 
