@@ -1009,6 +1009,7 @@ customerApp.controller('shippingController', function($scope, $http) {
         });
     };
     $scope.go_to_checkout = function(){
+    	alert("alert");
     	$http({
             method: 'POST',
             url: 'api/addToShipping',
