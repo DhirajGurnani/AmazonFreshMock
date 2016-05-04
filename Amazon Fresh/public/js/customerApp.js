@@ -1148,7 +1148,7 @@ customerApp.controller('cartController', function($scope, $http) {
     };
     $scope.go_to_shipping = function(){
     	console.log($scope.product_total_bill_amount);
-    	if($scope.product_total_bill_amount !== undefined) {
+    	if($scope.product_total_bill_amount != undefined) {
     		$http({
                 method: 'GET',
                 url: '/api/computeTotalPrice',
@@ -1167,6 +1167,9 @@ customerApp.controller('cartController', function($scope, $http) {
                 console.log("failure");
                 console.log(data);
             });
+    	}
+    	else{
+    		$("#myModal_2").modal();
     	}
     };
     $scope.logout_from_account = function() {
