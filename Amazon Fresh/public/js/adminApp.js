@@ -33,10 +33,72 @@ adminApp.config([ '$routeProvider', '$locationProvider',
 			}).when('/openMaps', {
 				templateUrl: 'amazon_map.html',
 				controller: 'mapController'
+			}).when('/deleteCustomer', {
+				templateUrl: 'amazon_customer_delete.html',
+				controller: 'deleteCustomerController'
 			});
 			$locationProvider.html5Mode(true);
 		} 
 ]);
+
+adminApp.controller('deleteCustomerController', function($scope, $http) {
+	$scope.doLogout = function(){
+		$http({
+            method: 'POST',
+            url: 'api/logout',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function(data) {
+            window.location = "/doLogin";
+        }).error(function(data) {
+            console.log("failure");
+            console.log(data);
+        });
+	};
+	
+	var getDriverDetails = function() {
+		var getDriverDetailsResponse = $http.get('/api/admin/trips/availableDrivers');
+		getDriverDetailsResponse.success(function(driver){
+			$scope.drivers = driver.message;
+		});
+	};
+	var getTruckDetails = function() {
+		var getTruckDetailsResponse = $http.get('/api/admin/trips/availableTrucks');
+		getTruckDetailsResponse.success(function(truck){
+			$scope.trucks = truck.message;
+		});
+	};
+	var getBillDetails = function() {
+		var getBillDetailsResponse = $http.get('/api/admin/trips/getBills');
+		getBillDetailsResponse.success(function(bill){
+			$scope.bills = bill.message;
+		});
+	};
+	$scope.tripCreate = function(){
+		
+		$http({
+			method : 'POST',
+			url : '/api/admin/trips/createTrip',
+			data : {"billing_id" : $scope.selectedBill, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"100004", "comments":"Created trip"},
+			headers : {
+					'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			if(data.status === 200) {
+				window.location = '/';
+			}
+			else {				
+			}
+		});
+	};
+	$scope.remove = function(){
+		$scope.name= true;
+	};
+	getTruckDetails();
+	getDriverDetails();
+	getBillDetails();
+});
 
 adminApp.controller('mapController', function($scope, $http){
 	
