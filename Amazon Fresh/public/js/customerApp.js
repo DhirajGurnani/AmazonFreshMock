@@ -896,6 +896,7 @@ customerApp.controller('customer_profileController', function($scope, $http) {
         $scope.state = data.profile[0].state;
         $scope.zipcode = data.profile[0].zipcode;
         $scope.phone = data.profile[0].phone;
+        $scope.ssn = data.profile[0].ssn;
     });
     $scope.go_to_edit_customer_profile = function (){
     	//alert("gaya");
