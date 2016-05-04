@@ -27,7 +27,8 @@ exports.signup = function(request,response){
 				var zipcode = request.body.zipcode;
 				var phone = request.body.phone;
 				var role = request.body.role;
-				var status = request.body.status;				
+				var status = request.body.status;
+				var ssn = request.body.ssn;
 				var email = request.body.email;
 				var password = CryptoJS.AES.encrypt(request.body.password, 'AMAZONFRESH');
 				password = (password.toString());
@@ -37,7 +38,7 @@ exports.signup = function(request,response){
 						sqlUserRegister, 
 						function(success) {
 							var puid = success.insertId;
-							sqlQueryRegister = sqlQueryList.sqlQueryRegister(puid,first_name,last_name,birthday,address,location,state,zipcode,phone,role,status);
+							sqlQueryRegister = sqlQueryList.sqlQueryRegister(puid,first_name,last_name,birthday,address,location,state,zipcode,phone,ssn,role,status);
 							dbHelper.executeQuery(sqlQueryRegister,function(success){
 								response.send({
 									"status":200,

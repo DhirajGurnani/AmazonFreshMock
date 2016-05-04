@@ -345,6 +345,7 @@ customerApp.controller('signupController', function($scope, $http) {
 		var address = $scope.address;
 		var location = $scope.location;
 		var state = $scope.state;
+		var ssn = $scope.ssn
 		var zipcode =$scope.zipcode;
 		var phone = $scope.phone;
 		var role = $scope.role;
@@ -359,6 +360,7 @@ customerApp.controller('signupController', function($scope, $http) {
 				$scope.state == undefined ||
 				$scope.zipcode == undefined ||
 				$scope.phone == undefined ||
+				$scope.ssn == undefined ||
 				$scope.role == undefined ||
 				$scope.password == undefined ){
 			$("#myModal_1").modal();
@@ -396,6 +398,7 @@ customerApp.controller('signupController', function($scope, $http) {
 				"state" : $scope.state,
 				"zipcode" : $scope.zipcode,
 				"phone" : $scope.phone,
+				"ssn":$scope.ssn,
 				"role" : $scope.role,
 				"password" : $scope.password,
 				"status" : "pending"
