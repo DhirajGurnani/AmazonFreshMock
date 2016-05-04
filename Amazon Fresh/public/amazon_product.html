@@ -74,11 +74,11 @@
             <div class="col-sm-8">
                <h3>{{product_name}}</h3>
                <a href="/farmer/{{puid}}"><u>Farmer_Details</u></a>
-               <p><a href="/farmer/product/{{puid}}">other products by Farmer_Details</a></p>
+               <p><a href="/farmer/product/{{puid}}">other products by Farmer</a></p>
                <br/><br/>
                <p><strong>Cost: $ {{product_price}}</strong></p>
                <br/><br/>
-               <strong>Quantity:</strong>
+               <strong>Quantity:</strong><br><br>
                <div class="row">
                		<div class="col-sm-3">
                			<select class="form-control" ng-init="prod_Quantity = 1" ng-model="prod_Quantity" ng-options="myoption for myoption in options" >
