@@ -78,16 +78,10 @@ adminApp.controller('createController', function($scope, $http) {
 	};
 	$scope.tripCreate = function(){
 		
-		var billingIds = [];
-		for(var index = 0; index < $scope.bills.length; index++) {
-			if($scope.bills[index].checked) {
-				billingIds.push($scope.bills[index].billing_id)
-			}
-		}
 		$http({
 			method : 'POST',
 			url : '/api/admin/trips/createTrip',
-			data : {"billing_id" : billingIds, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"100001", "comments":"Created trip"},
+			data : {"billing_id" : $scope.selectedBill, "driverId" : $scope.selectedDriver, "truckId" : $scope.selectedTruck, "adminId":"100004", "comments":"Created trip"},
 			headers : {
 					'Content-Type' : 'application/json'
 			}
