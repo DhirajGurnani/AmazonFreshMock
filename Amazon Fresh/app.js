@@ -176,16 +176,25 @@ app.post('/api/login', function(req, res, next) {
 	    	  "errmsg" : "Unauthorized"
 	      });
 	    }
-
-	    req.logIn(user, {session:false}, function(err) {
-	      if(err) {
-	        return next(err);
-	      }
-	      console.log(req.session);
-	      req.session.profile=user;
-	      console.log("session initilized");
-	      return res.send({profile:user});
-	    })
+	    if(user[0]) {
+	    	if(user[0].status == 'active') {
+	    	req.logIn(user, {session:false}, function(err) {
+	  	      if(err) {
+	  	        return next(err);
+	  	      }
+	  	      console.log(req.session);
+	  	      req.session.profile=user;
+	  	      console.log("session initilized");
+	  	      return res.send({profile:user});
+	    });
+	    }}
+	    else {
+		      res.send({
+		    	  "status" :401,
+		    	  "errmsg" : "Unauthorized"
+		      });
+	    }
+	    
 	  })(req, res, next);
 	});
 

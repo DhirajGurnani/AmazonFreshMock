@@ -78,7 +78,7 @@ exports.getAllTrips=function(){
 };
 
 exports.sqlGetBills=function(){
-	return "select * from Billing where status = 'placed';"
+	return "select * from Billing where status = 'delivered';"
 };
 
 exports.getAllPendingTrips=function(){
